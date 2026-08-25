@@ -1,0 +1,44 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Form1.cs",
+              "RelativeDocumentMoniker": "Ingenieria.De.Software\\Form1.cs",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Ingenieria.De.Software\\Form1.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T21:40:21.768Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

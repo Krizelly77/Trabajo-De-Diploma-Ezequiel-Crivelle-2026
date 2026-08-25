@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Ingenieria.De.Software</RootNamespace>
+    <AssemblyName>Ingenieria.De.Software</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constantes.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAsignacionPermisos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAsignacionPermisos.Designer.cs">
+      <DependentUpon>FormAsignacionPermisos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBitacora.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBitacora.Designer.cs">
+      <DependentUpon>FormBitacora.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestionUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionUsuarios.Designer.cs">
+      <DependentUpon>FormGestionUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormHistorialUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHistorialUsuario.Designer.cs">
+      <DependentUpon>FormHistorialUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormIdioma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormIdioma.Designer.cs">
+      <DependentUpon>FormIdioma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPermisosRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPermisosRoles.Designer.cs">
+      <DependentUpon>FormPermisosRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormUsuarioABM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUsuarioABM.Designer.cs">
+      <DependentUpon>FormUsuarioABM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IColeccionable.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAsignacionPermisos.resx">
+      <DependentUpon>FormAsignacionPermisos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBitacora.resx">
+      <DependentUpon>FormBitacora.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionUsuarios.resx">
+      <DependentUpon>FormGestionUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHistorialUsuario.resx">
+      <DependentUpon>FormHistorialUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormIdioma.resx">
+      <DependentUpon>FormIdioma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPermisosRoles.resx">
+      <DependentUpon>FormPermisosRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUsuarioABM.resx">
+      <DependentUpon>FormUsuarioABM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Capa_de_Aplicación%28BLL%29\Capa_de_Aplicación%28BLL%29.csproj">
+      <Project>{1b8b5122-c102-42ba-b8c3-ed457f07a10f}</Project>
+      <Name>Capa_de_Aplicación%28BLL%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Capa_de_Dominio%28BE%29\Capa_de_Dominio%28BE%29.csproj">
+      <Project>{de101f63-1c88-4bbb-a68c-f0daa073e934}</Project>
+      <Name>Capa_de_Dominio%28BE%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Capa_de_Servicios%28SL%29\Capa_de_Servicios%28SL%29.csproj">
+      <Project>{3e48dfd3-b9c2-49e0-b09f-8455be14cce3}</Project>
+      <Name>Capa_de_Servicios%28SL%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
