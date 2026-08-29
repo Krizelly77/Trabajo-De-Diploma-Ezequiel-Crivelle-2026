@@ -25,7 +25,17 @@ namespace Ingenieria.De.Software
         {
             GestorDeIdioma.TraerInstancia().Suscribir(this);
             ActualizarIdioma(GestorDeIdioma.TraerInstancia().ObtenerTextos());
+            var usuarioActivo = SessionManager.TraerInstancia().usuarioINS;
+            AplicarPermisos(usuarioActivo);
             CargarGrilla();
+        }
+        private void AplicarPermisos(Usuario usuario)
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c.Tag != null)
+                    c.Enabled = usuario.TienePermiso(c.Tag.ToString());
+            }
         }
 
         public void ActualizarIdioma(Dictionary<string, string> textos)
@@ -141,6 +151,8 @@ namespace Ingenieria.De.Software
         {
             FormAsignacionPermisos mFormPer = new FormAsignacionPermisos();
             mFormPer.StartPosition = FormStartPosition.CenterParent;
+            int mId = int.Parse(DGVusuaios.SelectedRows[0].Cells[0].Value.ToString());
+            mFormPer.IdGestionUsuarios_824_ec = mId;
             mFormPer.ShowDialog(this);
         }
         #endregion formularios

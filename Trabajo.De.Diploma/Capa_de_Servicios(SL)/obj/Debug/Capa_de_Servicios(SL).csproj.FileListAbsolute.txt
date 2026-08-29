@@ -16,3 +16,12 @@ C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Ingenie
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Ingenieria.De.Software\Capa_de_Servicios(SL)\obj\Debug\Capa_de_.805A0882.Up2Date
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Ingenieria.De.Software\Capa_de_Servicios(SL)\obj\Debug\Capa_de_Servicios(SL).dll
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Ingenieria.De.Software\Capa_de_Servicios(SL)\obj\Debug\Capa_de_Servicios(SL).pdb
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\bin\Debug\Capa_de_Servicios(SL).dll
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\bin\Debug\Capa_de_Servicios(SL).pdb
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\bin\Debug\Capa_de_Dominio(BE).dll
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\bin\Debug\Capa_de_Dominio(BE).pdb
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\obj\Debug\Capa_de_Servicios(SL).csproj.AssemblyReference.cache
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\obj\Debug\Capa_de_Servicios(SL).csproj.CoreCompileInputs.cache
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\obj\Debug\Capa_de_.805A0882.Up2Date
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\obj\Debug\Capa_de_Servicios(SL).dll
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\obj\Debug\Capa_de_Servicios(SL).pdb

@@ -45,7 +45,7 @@ namespace Ingenieria.De.Software
         {
             foreach (Control c in panel1.Controls)
             {
-                if (c.Tag != null)
+                if (c.Tag != null && (string)c.Tag != "")
                     c.Enabled = usuario.TienePermiso(c.Tag.ToString());
             }
         }
@@ -89,7 +89,7 @@ namespace Ingenieria.De.Software
             {
                 FormGestionUsuarios Fgestusu = new FormGestionUsuarios();
                 Fgestusu.PadredelPadreLogin = this;
-                Fgestusu.Show();
+                Fgestusu.ShowDialog(this);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -109,7 +109,7 @@ namespace Ingenieria.De.Software
             try
             {
                 FormPermisosRoles Fperrol = new FormPermisosRoles();
-                Fperrol.Show();
+                Fperrol.ShowDialog(this);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -122,6 +122,16 @@ namespace Ingenieria.De.Software
                 fIdioma.ShowDialog(this);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        private void BTNopUsuario_Click(object sender, EventArgs e)
+        {
+            FormUsuarioABM fOpci = new FormUsuarioABM();
+            fOpci.StartPosition = FormStartPosition.CenterParent;
+            fOpci.TipoOperacion = Constantes.TiposOperacion.DeSesion;
+            fOpci.ShowDialog(this);
+
+            var usuarioActivo = SessionManager.TraerInstancia().usuarioINS;
+            LBLnombre.Text = usuarioActivo.NombreUsuario;
         }
         #endregion formularios
     }

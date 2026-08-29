@@ -23,7 +23,10 @@ namespace Capa_de_Aplicación_BLL_
             if (usa.Id == 0)
             {
                 ValidarCredenciales(usa.NombreUsuario, usa.Contraseña);
+            }
                 usa.Contraseña = crypton.Hash(usa.Contraseña);
+            if(usa.Id == 0) 
+            { 
                 UsuarioDAL.Guardar(usa);                  // INSERT — el DAL asigna usa.Id real
                 usa.DVH = validador.CalcularDVH(usa);     // DVH con el Id correcto
                 UsuarioDAL.Guardar(usa);                  // UPDATE — persiste el DVH

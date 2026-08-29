@@ -17,6 +17,7 @@ namespace Ingenieria.De.Software
         private UsuarioBLL Usuariobll = new UsuarioBLL();
         private PermisoBLL Permisobll = new PermisoBLL();
         private Usuario UsuarioSlec;
+        internal int IdGestionUsuarios_824_ec = 0;
         public FormAsignacionPermisos()
         {
             InitializeComponent();
@@ -26,6 +27,8 @@ namespace Ingenieria.De.Software
         {
             CargarUsuarios();
             CargarCatalogoPermisos();
+            if (IdGestionUsuarios_824_ec != 0)
+                CMBusuarios.SelectedValue = IdGestionUsuarios_824_ec;
         }
         private void CargarUsuarios()
         {
@@ -35,6 +38,7 @@ namespace Ingenieria.De.Software
                 CMBusuarios.DataSource = null;
                 CMBusuarios.DataSource = usuarios;
                 CMBusuarios.DisplayMember = "NombreUsuario";
+                CMBusuarios.ValueMember = "Id";
             }
             catch (Exception ex)
             {

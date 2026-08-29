@@ -62,7 +62,7 @@
             this.ArbolPermisosUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ArbolPermisosUsuario.Font = new System.Drawing.Font("Microsoft JhengHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ArbolPermisosUsuario.ForeColor = System.Drawing.SystemColors.Control;
-            this.ArbolPermisosUsuario.Location = new System.Drawing.Point(12, 93);
+            this.ArbolPermisosUsuario.Location = new System.Drawing.Point(523, 93);
             this.ArbolPermisosUsuario.Name = "ArbolPermisosUsuario";
             this.ArbolPermisosUsuario.Size = new System.Drawing.Size(364, 208);
             this.ArbolPermisosUsuario.TabIndex = 1;
@@ -73,7 +73,7 @@
             this.LBXrolesDisponibles.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LBXrolesDisponibles.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.LBXrolesDisponibles.FormattingEnabled = true;
-            this.LBXrolesDisponibles.Location = new System.Drawing.Point(523, 93);
+            this.LBXrolesDisponibles.Location = new System.Drawing.Point(12, 93);
             this.LBXrolesDisponibles.Name = "LBXrolesDisponibles";
             this.LBXrolesDisponibles.Size = new System.Drawing.Size(364, 208);
             this.LBXrolesDisponibles.TabIndex = 2;
@@ -83,7 +83,7 @@
             this.BTNasignar.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BTNasignar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNasignar.Font = new System.Drawing.Font("Microsoft JhengHei", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNasignar.ForeColor = System.Drawing.Color.Green;
+            this.BTNasignar.ForeColor = System.Drawing.Color.OliveDrab;
             this.BTNasignar.Location = new System.Drawing.Point(382, 93);
             this.BTNasignar.Name = "BTNasignar";
             this.BTNasignar.Size = new System.Drawing.Size(135, 54);
@@ -174,7 +174,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.BackColor = System.Drawing.Color.OliveDrab;
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.CMBusuarios);

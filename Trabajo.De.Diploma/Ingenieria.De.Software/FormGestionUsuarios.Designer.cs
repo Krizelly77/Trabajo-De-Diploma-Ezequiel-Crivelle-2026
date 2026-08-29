@@ -67,6 +67,7 @@
             this.BTNcrearUsu.Name = "BTNcrearUsu";
             this.BTNcrearUsu.Size = new System.Drawing.Size(121, 56);
             this.BTNcrearUsu.TabIndex = 1;
+            this.BTNcrearUsu.Tag = "Permiso_Alta_Usuario";
             this.BTNcrearUsu.Text = "Crear Nuevo Usuario";
             this.BTNcrearUsu.UseVisualStyleBackColor = false;
             this.BTNcrearUsu.Click += new System.EventHandler(this.BTNcrearUsu_Click);
@@ -82,6 +83,7 @@
             this.BTNmodUsu.Name = "BTNmodUsu";
             this.BTNmodUsu.Size = new System.Drawing.Size(121, 56);
             this.BTNmodUsu.TabIndex = 2;
+            this.BTNmodUsu.Tag = "Permiso_Modificar_Usuario";
             this.BTNmodUsu.Text = "Modificar Usuario";
             this.BTNmodUsu.UseVisualStyleBackColor = false;
             this.BTNmodUsu.Click += new System.EventHandler(this.BTNmodUsu_Click);
@@ -97,6 +99,7 @@
             this.BTNeliminarUsu.Name = "BTNeliminarUsu";
             this.BTNeliminarUsu.Size = new System.Drawing.Size(121, 56);
             this.BTNeliminarUsu.TabIndex = 4;
+            this.BTNeliminarUsu.Tag = "Permiso_Baja_Usuario";
             this.BTNeliminarUsu.Text = "Eliminar Usuario";
             this.BTNeliminarUsu.UseVisualStyleBackColor = false;
             this.BTNeliminarUsu.Click += new System.EventHandler(this.BTNeliminarUsu_Click);
@@ -167,7 +170,7 @@
             this.BTNvolver.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BTNvolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNvolver.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNvolver.ForeColor = System.Drawing.Color.Green;
+            this.BTNvolver.ForeColor = System.Drawing.Color.OliveDrab;
             this.BTNvolver.Location = new System.Drawing.Point(139, 351);
             this.BTNvolver.Name = "BTNvolver";
             this.BTNvolver.Size = new System.Drawing.Size(121, 56);
@@ -187,6 +190,7 @@
             this.BTNdesbloqueoDV.Name = "BTNdesbloqueoDV";
             this.BTNdesbloqueoDV.Size = new System.Drawing.Size(121, 56);
             this.BTNdesbloqueoDV.TabIndex = 13;
+            this.BTNdesbloqueoDV.Tag = "Permiso_Recalcular_DV";
             this.BTNdesbloqueoDV.Text = "Desbloqueo Masivo de DV";
             this.BTNdesbloqueoDV.UseVisualStyleBackColor = false;
             this.BTNdesbloqueoDV.Click += new System.EventHandler(this.BTNdesbloqueoDV_Click);
@@ -233,6 +237,7 @@
             this.BTNasignarRol.Name = "BTNasignarRol";
             this.BTNasignarRol.Size = new System.Drawing.Size(121, 56);
             this.BTNasignarRol.TabIndex = 16;
+            this.BTNasignarRol.Tag = "Permiso_Asignar_Roles";
             this.BTNasignarRol.Text = "Asignar Roles";
             this.BTNasignarRol.UseVisualStyleBackColor = false;
             this.BTNasignarRol.Click += new System.EventHandler(this.BTNasignarRol_Click);

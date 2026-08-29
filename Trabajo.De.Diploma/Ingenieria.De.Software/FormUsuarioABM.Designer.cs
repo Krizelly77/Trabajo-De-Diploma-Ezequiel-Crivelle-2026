@@ -39,7 +39,7 @@
             this.CHKcontra = new System.Windows.Forms.CheckBox();
             this.CHKmostrar = new System.Windows.Forms.CheckBox();
             this.CMBpermisos = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LBLpermisos = new System.Windows.Forms.Label();
             this.CHKbloqueoDV = new System.Windows.Forms.CheckBox();
             this.PNLtitulo.SuspendLayout();
             this.SuspendLayout();
@@ -108,7 +108,7 @@
             // 
             // PNLtitulo
             // 
-            this.PNLtitulo.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.PNLtitulo.BackColor = System.Drawing.Color.OliveDrab;
             this.PNLtitulo.Controls.Add(this.LBLusuario);
             this.PNLtitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.PNLtitulo.Location = new System.Drawing.Point(0, 0);
@@ -185,16 +185,16 @@
             this.CMBpermisos.Size = new System.Drawing.Size(391, 28);
             this.CMBpermisos.TabIndex = 11;
             // 
-            // label1
+            // LBLpermisos
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label1.Location = new System.Drawing.Point(17, 193);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(192, 27);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Nivel de Permisos:";
+            this.LBLpermisos.AutoSize = true;
+            this.LBLpermisos.Font = new System.Drawing.Font("Microsoft JhengHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLpermisos.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.LBLpermisos.Location = new System.Drawing.Point(17, 193);
+            this.LBLpermisos.Name = "LBLpermisos";
+            this.LBLpermisos.Size = new System.Drawing.Size(192, 27);
+            this.LBLpermisos.TabIndex = 12;
+            this.LBLpermisos.Text = "Nivel de Permisos:";
             // 
             // CHKbloqueoDV
             // 
@@ -216,7 +216,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(639, 315);
             this.Controls.Add(this.CHKbloqueoDV);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LBLpermisos);
             this.Controls.Add(this.CMBpermisos);
             this.Controls.Add(this.CHKmostrar);
             this.Controls.Add(this.CHKcontra);
@@ -250,7 +250,7 @@
         private System.Windows.Forms.CheckBox CHKcontra;
         private System.Windows.Forms.CheckBox CHKmostrar;
         private System.Windows.Forms.ComboBox CMBpermisos;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LBLpermisos;
         private System.Windows.Forms.CheckBox CHKbloqueoDV;
     }
 }

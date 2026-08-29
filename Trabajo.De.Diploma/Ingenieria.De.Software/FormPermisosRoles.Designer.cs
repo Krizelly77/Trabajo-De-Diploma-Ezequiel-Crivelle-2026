@@ -81,7 +81,7 @@
             this.BTNagregarAlRol.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BTNagregarAlRol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNagregarAlRol.Font = new System.Drawing.Font("Microsoft JhengHei", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNagregarAlRol.ForeColor = System.Drawing.Color.Green;
+            this.BTNagregarAlRol.ForeColor = System.Drawing.Color.OliveDrab;
             this.BTNagregarAlRol.Location = new System.Drawing.Point(414, 72);
             this.BTNagregarAlRol.Name = "BTNagregarAlRol";
             this.BTNagregarAlRol.Size = new System.Drawing.Size(140, 55);
@@ -106,7 +106,7 @@
             // 
             // BTNcrearRol
             // 
-            this.BTNcrearRol.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.BTNcrearRol.BackColor = System.Drawing.Color.YellowGreen;
             this.BTNcrearRol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNcrearRol.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNcrearRol.ForeColor = System.Drawing.SystemColors.Control;
@@ -169,7 +169,7 @@
             this.BTNvolver.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BTNvolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNvolver.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNvolver.ForeColor = System.Drawing.Color.Green;
+            this.BTNvolver.ForeColor = System.Drawing.Color.OliveDrab;
             this.BTNvolver.Location = new System.Drawing.Point(414, 280);
             this.BTNvolver.Name = "BTNvolver";
             this.BTNvolver.Size = new System.Drawing.Size(140, 54);
@@ -191,7 +191,7 @@
             // 
             // BTNmodRol
             // 
-            this.BTNmodRol.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.BTNmodRol.BackColor = System.Drawing.Color.YellowGreen;
             this.BTNmodRol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNmodRol.Font = new System.Drawing.Font("Microsoft JhengHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNmodRol.ForeColor = System.Drawing.SystemColors.Control;
@@ -265,7 +265,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.BackColor = System.Drawing.Color.OliveDrab;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.BTNelimRol);
             this.panel1.Controls.Add(this.label6);
@@ -280,7 +280,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel2.BackColor = System.Drawing.Color.OliveDrab;
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.LBXcomponentes);
             this.panel2.Controls.Add(this.label5);

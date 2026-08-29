@@ -10,6 +10,6 @@ namespace Ingenieria.De.Software
     {
         public enum EstadosColeccion { SinCambio, Agregado, Modificado, Eliminado, Quitado };
 
-        public enum TiposOperacion { Alta, Baja, Modificacion }
+        public enum TiposOperacion { Alta, Baja, Modificacion, DeSesion }
     }
 }

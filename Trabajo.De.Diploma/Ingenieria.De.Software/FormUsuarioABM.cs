@@ -62,6 +62,12 @@ namespace Ingenieria.De.Software
                     PNLtitulo.BackColor = Color.Red;
                     BTNconfirmar.Text = "Eliminar";
                     break;
+                case Constantes.TiposOperacion.DeSesion:
+                    UsuarioEditable = SessionManager.TraerInstancia().usuarioINS;
+                    CargarCampos(UsuarioEditable);
+                    LBLusuario.Text = "Mi usuario "+ UsuarioEditable.NombreUsuario;
+                    EliminarCamposProblematicos_824_ec();
+                    break;
             }
         }
 
@@ -69,6 +75,14 @@ namespace Ingenieria.De.Software
         {
             TXTnomcon.Text = "";
             TXTnomusu.Text = "";
+        }
+
+        private void EliminarCamposProblematicos_824_ec()
+        {
+            CMBpermisos.Visible = false;
+            LBLpermisos.Visible = false;
+            CHKactivo.Visible = false;
+            CHKbloqueoDV.Visible = false;
         }
 
         private void DeshabilitarCampos()
@@ -107,15 +121,18 @@ namespace Ingenieria.De.Software
             if (CHKcontra.Checked == true)
                 usua.Contraseña = TXTnomcon.Text;
 
-            switch (CMBpermisos.SelectedIndex)
+            if (TipoOperacion != Constantes.TiposOperacion.DeSesion)
             {
-                case 0: usua.NivelPermisos = 1; break;
-                case 1: usua.NivelPermisos = 2; break;
-                default: usua.NivelPermisos = 0; break;
-            }
+                switch (CMBpermisos.SelectedIndex)
+                {
+                    case 0: usua.NivelPermisos = 1; break;
+                    case 1: usua.NivelPermisos = 2; break;
+                    default: usua.NivelPermisos = 0; break;
+                }
 
-            usua.Activo = CHKactivo.Checked;
-            usua.BloqueoDV = CHKbloqueoDV.Checked;
+                usua.Activo = CHKactivo.Checked;
+                usua.BloqueoDV = CHKbloqueoDV.Checked;
+            }
         }
 
         private void BTNconfirmar_Click(object sender, EventArgs e)
@@ -138,6 +155,7 @@ namespace Ingenieria.De.Software
                         SessionManager.TraerInstancia().RegistrarActividad("Alta de usuario: " + UsuarioEditable.NombreUsuario);
                         this.Close();
                         break;
+                    case Constantes.TiposOperacion.DeSesion:
                     case Constantes.TiposOperacion.Modificacion:
                         ValorizarEntidad(UsuarioEditable);
                         persistidor.Guardar(UsuarioEditable);
@@ -208,6 +226,5 @@ namespace Ingenieria.De.Software
                 TXTnomcon.UseSystemPasswordChar = false;
         }
         #endregion eventos para controles
-
     }
 }

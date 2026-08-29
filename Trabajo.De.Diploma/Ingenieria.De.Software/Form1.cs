@@ -25,6 +25,7 @@ namespace Ingenieria.De.Software
         public Form1()
         {
             InitializeComponent();
+            this.AcceptButton = this.BTNingresar;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -50,7 +51,7 @@ namespace Ingenieria.De.Software
         #region eventos principales de los controles
         private void BTNingresar_Click(object sender, EventArgs e)
         {
-            //para hacer pruebas Juan66, 123456 (admin); Maria01, miPerro ; Carlos22, contrasenia ; Ana77, reina2001 ; PedroX, elmascapo67 (admin)
+            //para hacer pruebas Juan66, 123456 (admin); Maria01, miPerro ; Carlos22, contrasenia ; Ana77, reina2001 ; PedroX, elmascapo67 (observador)
             if (!bloqueo)
             {
                 UsuarioBLL usabll = new UsuarioBLL();

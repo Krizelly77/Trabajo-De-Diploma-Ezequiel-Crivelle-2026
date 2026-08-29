@@ -22,7 +22,7 @@ namespace Capa_de_Dominio_BE_
 
         public List<ComponentePermiso> Permisos { get; set; } = new List<ComponentePermiso>();
 
-        public bool TienePermiso(string nombreInterno)
+        public bool TienePermiso(string nombreInterno) // se le pone en el tag de los controles el permiso que los activa
         {
             //verificar si el usuario tiene un permiso especifico
             foreach (ComponentePermiso componente in Permisos)
