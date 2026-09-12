@@ -37,7 +37,9 @@
             this.BTNgestRolesPerm = new System.Windows.Forms.Button();
             this.BTNbitacora = new System.Windows.Forms.Button();
             this.BTNgestUsuarios = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -173,6 +175,17 @@
             this.BTNgestUsuarios.UseVisualStyleBackColor = false;
             this.BTNgestUsuarios.Click += new System.EventHandler(this.BTNgestUsuarios_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = global::Ingenieria.De.Software.Properties.Resources.Insoft_Logo;
+            this.pictureBox1.Location = new System.Drawing.Point(43, 157);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(460, 316);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,12 +193,14 @@
             this.ClientSize = new System.Drawing.Size(880, 431);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.LBLnombre);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Form2";
             this.Text = "Form2";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,5 +217,6 @@
         private System.Windows.Forms.Button BTNgestRolesPerm;
         private System.Windows.Forms.Button BTNidioma;
         private System.Windows.Forms.Button BTNopUsuario;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

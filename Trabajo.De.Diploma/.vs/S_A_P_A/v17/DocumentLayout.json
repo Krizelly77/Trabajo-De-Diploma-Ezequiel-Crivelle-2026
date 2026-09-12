@@ -3,24 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\ingenieria.de.software\\formusuarioabm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\formusuarioabm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\ingenieria.de.software\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1B8B5122-C102-42BA-B8C3-ED457F07A10F}|Capa_de_Aplicaci\u00F3n(BLL)\\Capa_de_Aplicaci\u00F3n(BLL).csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\capa_de_aplicaci\u00F3n(bll)\\usuariobll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1B8B5122-C102-42BA-B8C3-ED457F07A10F}|Capa_de_Aplicaci\u00F3n(BLL)\\Capa_de_Aplicaci\u00F3n(BLL).csproj|solutionrelative:capa_de_aplicaci\u00F3n(bll)\\usuariobll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\ingenieria.de.software\\formusuarioabm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\formusuarioabm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\ingenieria.de.software\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,33 +26,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UsuarioBLL.cs",
-              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Aplicaci\u00F3n(BLL)\\UsuarioBLL.cs",
-              "RelativeDocumentMoniker": "Capa_de_Aplicaci\u00F3n(BLL)\\UsuarioBLL.cs",
-              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Aplicaci\u00F3n(BLL)\\UsuarioBLL.cs",
-              "RelativeToolTip": "Capa_de_Aplicaci\u00F3n(BLL)\\UsuarioBLL.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAqwGMAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-29T02:54:13.092Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Form2.cs",
-              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Form2.cs",
-              "RelativeDocumentMoniker": "Ingenieria.De.Software\\Form2.cs",
-              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Form2.cs",
-              "RelativeToolTip": "Ingenieria.De.Software\\Form2.cs",
-              "ViewState": "AgIAAHgAAAAAAAAAAAAkwIIAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-29T02:11:55.741Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Form2.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Form2.cs",
               "RelativeDocumentMoniker": "Ingenieria.De.Software\\Form2.cs",
@@ -76,31 +34,6 @@
               "RelativeToolTip": "Ingenieria.De.Software\\Form2.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-29T02:11:53.986Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FormUsuarioABM.cs",
-              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\FormUsuarioABM.cs",
-              "RelativeDocumentMoniker": "Ingenieria.De.Software\\FormUsuarioABM.cs",
-              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\FormUsuarioABM.cs",
-              "RelativeToolTip": "Ingenieria.De.Software\\FormUsuarioABM.cs",
-              "ViewState": "AgIAAJUAAAAAAAAAAAAiwKAAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-29T02:07:51.093Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FormUsuarioABM.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\FormUsuarioABM.cs",
-              "RelativeDocumentMoniker": "Ingenieria.De.Software\\FormUsuarioABM.cs",
-              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\FormUsuarioABM.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Ingenieria.De.Software\\FormUsuarioABM.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-29T02:04:09.662Z",
               "EditorCaption": " [Dise\u00F1o]"
             }
           ]
