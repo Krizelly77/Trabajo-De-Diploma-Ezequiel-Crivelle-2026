@@ -133,6 +133,25 @@ namespace Ingenieria.De.Software
             var usuarioActivo = SessionManager.TraerInstancia().usuarioINS;
             LBLnombre.Text = usuarioActivo.NombreUsuario;
         }
+        private void BTNverActividades_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _824_ecFormActividadesDisponibles fActDis_824_ec = new _824_ecFormActividadesDisponibles();
+                fActDis_824_ec.ShowDialog(this);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        private void BTNmisActividades_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _824_ecFormMisActividades fMisAct_824_ec = new _824_ecFormMisActividades();
+                fMisAct_824_ec.ShowDialog(this);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
         #endregion formularios
+
     }
 }

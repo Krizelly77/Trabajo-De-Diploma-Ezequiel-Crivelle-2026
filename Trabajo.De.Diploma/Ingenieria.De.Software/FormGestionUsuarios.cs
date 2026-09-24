@@ -163,12 +163,10 @@ namespace Ingenieria.De.Software
         {
             llamarAMB(Constantes.TiposOperacion.Alta);
         }
-
         private void BTNmodUsu_Click(object sender, EventArgs e)
         {
             llamarAMB(Constantes.TiposOperacion.Modificacion);
         }
-
         private void BTNeliminarUsu_Click(object sender, EventArgs e)
         {
             llamarAMB(Constantes.TiposOperacion.Baja);
@@ -177,9 +175,6 @@ namespace Ingenieria.De.Software
         {
             this.Close();
         }
-
-
-
         #endregion botones
 
         private void BTNdesbloqueoDV_Click(object sender, EventArgs e)

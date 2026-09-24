@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="_824_ecActividadBLL.cs" />
     <Compile Include="BitacoraBLL.cs" />
     <Compile Include="BitacoraObserver.cs" />
     <Compile Include="DigitoVerificadorBLL.cs" />
@@ -48,6 +49,8 @@
     <Compile Include="GestorDeIdioma.cs" />
     <Compile Include="IObservadorDeIdioma.cs" />
     <Compile Include="PermisoBLL.cs" />
+    <Compile Include="_824_ecCategoriaBLL.cs" />
+    <Compile Include="_824_ecPostulacionBLL.cs" />
     <Compile Include="UsuarioBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

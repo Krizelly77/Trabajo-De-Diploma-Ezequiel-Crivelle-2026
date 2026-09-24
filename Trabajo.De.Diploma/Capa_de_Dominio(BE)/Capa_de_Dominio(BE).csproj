@@ -41,9 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="_824_ecActividad.cs" />
+    <Compile Include="_824_ecBE_Enums.cs" />
+    <Compile Include="_824_ecCategoria.cs" />
     <Compile Include="ComponentePermiso.cs" />
     <Compile Include="FiltrosBitacora.cs" />
     <Compile Include="IVerificable.cs" />
+    <Compile Include="_824_ecPostulacion.cs" />
     <Compile Include="RegistroBitacora.cs" />
     <Compile Include="RegistroCambio.cs" />
     <Compile Include="Usuario.cs" />

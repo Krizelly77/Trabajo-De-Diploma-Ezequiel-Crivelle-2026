@@ -12,6 +12,8 @@ namespace Capa_de_Dominio_BE_
         {
             Id = id;
         }
+
+        // Atributos de Infraestructura / Seguridad de ingenieria de soft
         public int Id { get; set; }
         public string NombreUsuario { get; set; }
         public string Contraseña { get; set; }
@@ -22,7 +24,15 @@ namespace Capa_de_Dominio_BE_
 
         public List<ComponentePermiso> Permisos { get; set; } = new List<ComponentePermiso>();
 
-        public bool TienePermiso(string nombreInterno) // se le pone en el tag de los controles el permiso que los activa
+        // Atributos de Negocio  de Trabajo de Diploma 
+        public string Experiencia_824_ec { get; set; } 
+        public double CalificacionPromedio_824_ec { get; set; } 
+        public int CantidadActividadesRealizadas_824_ec { get; set; }
+        public List<_824_ecPostulacion> HistorialParticipaciones { get; set; } = new List<_824_ecPostulacion>();
+
+
+        // se le pone en el tag de los controles el permiso que los activa
+        public bool TienePermiso(string nombreInterno) 
         {
             //verificar si el usuario tiene un permiso especifico
             foreach (ComponentePermiso componente in Permisos)

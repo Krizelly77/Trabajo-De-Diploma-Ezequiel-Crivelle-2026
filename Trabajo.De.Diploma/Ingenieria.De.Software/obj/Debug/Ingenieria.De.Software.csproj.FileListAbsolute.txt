@@ -82,3 +82,6 @@ C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenier.69495CCD.Up2Date
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software.exe
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software.pdb
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecFormABMactividad.resources
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecFormActividadesDisponibles.resources
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecFormMisActividades.resources

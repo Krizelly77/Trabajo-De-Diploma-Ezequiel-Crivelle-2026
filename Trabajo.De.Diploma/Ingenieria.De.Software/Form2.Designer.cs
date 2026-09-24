@@ -37,6 +37,8 @@
             this.BTNgestRolesPerm = new System.Windows.Forms.Button();
             this.BTNbitacora = new System.Windows.Forms.Button();
             this.BTNgestUsuarios = new System.Windows.Forms.Button();
+            this.BTNmisActividades = new System.Windows.Forms.Button();
+            this.BTNverActividades = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -175,13 +177,45 @@
             this.BTNgestUsuarios.UseVisualStyleBackColor = false;
             this.BTNgestUsuarios.Click += new System.EventHandler(this.BTNgestUsuarios_Click);
             // 
+            // BTNmisActividades
+            // 
+            this.BTNmisActividades.BackColor = System.Drawing.Color.YellowGreen;
+            this.BTNmisActividades.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNmisActividades.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNmisActividades.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNmisActividades.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTNmisActividades.Location = new System.Drawing.Point(212, 313);
+            this.BTNmisActividades.Name = "BTNmisActividades";
+            this.BTNmisActividades.Size = new System.Drawing.Size(300, 46);
+            this.BTNmisActividades.TabIndex = 6;
+            this.BTNmisActividades.Tag = "";
+            this.BTNmisActividades.Text = "Mis Actividades";
+            this.BTNmisActividades.UseVisualStyleBackColor = false;
+            this.BTNmisActividades.Click += new System.EventHandler(this.BTNmisActividades_Click);
+            // 
+            // BTNverActividades
+            // 
+            this.BTNverActividades.BackColor = System.Drawing.Color.YellowGreen;
+            this.BTNverActividades.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNverActividades.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNverActividades.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNverActividades.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTNverActividades.Location = new System.Drawing.Point(550, 313);
+            this.BTNverActividades.Name = "BTNverActividades";
+            this.BTNverActividades.Size = new System.Drawing.Size(300, 46);
+            this.BTNverActividades.TabIndex = 7;
+            this.BTNverActividades.Tag = "";
+            this.BTNverActividades.Text = "Actividades Disponibles";
+            this.BTNverActividades.UseVisualStyleBackColor = false;
+            this.BTNverActividades.Click += new System.EventHandler(this.BTNverActividades_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox1.Image = global::Ingenieria.De.Software.Properties.Resources.Insoft_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(43, 157);
+            this.pictureBox1.Location = new System.Drawing.Point(400, 105);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(460, 316);
+            this.pictureBox1.Size = new System.Drawing.Size(262, 191);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -191,6 +225,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(880, 431);
+            this.Controls.Add(this.BTNverActividades);
+            this.Controls.Add(this.BTNmisActividades);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.LBLnombre);
             this.Controls.Add(this.pictureBox1);
@@ -218,5 +254,7 @@
         private System.Windows.Forms.Button BTNidioma;
         private System.Windows.Forms.Button BTNopUsuario;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button BTNmisActividades;
+        private System.Windows.Forms.Button BTNverActividades;
     }
 }
