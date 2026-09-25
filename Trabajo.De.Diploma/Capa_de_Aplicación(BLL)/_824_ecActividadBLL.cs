@@ -13,13 +13,45 @@ namespace Capa_de_Aplicación_BLL_
     {
         public static int Guardar_824_ec(_824_ecActividad actividad_824_ec)
         {
+            ValidacionGuardarModificar(actividad_824_ec);
+
+            // Si es nueva, se establece el estado por defecto
+            if (actividad_824_ec.Id_824_ec == 0)
+            {
+                actividad_824_ec.Estado_824_ec = EstadoActividad_824_ec.Abierto;
+            }
+            else
+                throw new Exception("Algo salio mal, Para crear una nueva actividad esta tine que tener en un principo id = 0");
+
+
+            return _824_ecActividadDAL.Guardar_824_ec(actividad_824_ec);
+        }
+        public static int Modificar_824_ec(_824_ecActividad actividad_824_ec, EstadoActividad_824_ec estadoAnterior_824_ec)
+        {
+            ValidacionGuardarModificar(actividad_824_ec);
+
+            if (estadoAnterior_824_ec == EstadoActividad_824_ec.Completado || estadoAnterior_824_ec == EstadoActividad_824_ec.Caducado || estadoAnterior_824_ec == EstadoActividad_824_ec.Cancelado)
+                throw new Exception("No se puede modificar una actividad ya "+estadoAnterior_824_ec.ToString());
+
+            // para comprobar que se alcanzo la cantidad minima para confirmar 
+            List<_824_ecPostulacion> postulaciones_824_ec = _824_ecPostulacionDAL.ListarPorActividad_824_ec(actividad_824_ec.Id_824_ec);
+            int Cupos_824_ec = postulaciones_824_ec.Count(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado);
+            if (Cupos_824_ec < actividad_824_ec.CantidadMinima_824_ec && actividad_824_ec.Estado_824_ec == EstadoActividad_824_ec.Completado)
+                throw new Exception("Cupo minimo no alcanzado");
+
+
+            return _824_ecActividadDAL.Guardar_824_ec(actividad_824_ec);
+        }
+
+        private static void ValidacionGuardarModificar(_824_ecActividad actividad_824_ec)
+        {
             if (string.IsNullOrWhiteSpace(actividad_824_ec.Nombre_824_ec)) // validar nombre
                 throw new Exception("El nombre de la actividad es obligatorio");
 
             if (actividad_824_ec.Nombre_824_ec.Length > 30) // validar nombre
                 throw new Exception("Maximo 30 caracteres");
 
-            if (actividad_824_ec.Categoria_824_ec == null || actividad_824_ec.Categoria_824_ec.Id_824_ec == 0) 
+            if (actividad_824_ec.Categoria_824_ec == null || actividad_824_ec.Categoria_824_ec.Id_824_ec == 0)
                 throw new Exception("Debe seleccionar una categoria valida");
 
             if (actividad_824_ec.CantidadMinima_824_ec <= 0)
@@ -36,14 +68,6 @@ namespace Capa_de_Aplicación_BLL_
 
             if (actividad_824_ec.FechaHora_824_ec <= actividad_824_ec.FechaCaducidad_824_ec)
                 throw new Exception("La fecha de realización debe ser posterior o igual a la fecha de caducidad");
-
-            // Si es nueva, se establece el estado por defecto
-            if (actividad_824_ec.Id_824_ec == 0)
-            {
-                actividad_824_ec.Estado_824_ec = EstadoActividad_824_ec.Abierto;
-            }
-
-            return _824_ecActividadDAL.Guardar_824_ec(actividad_824_ec);
         }
 
         public static List<_824_ecActividad> ListarTodas_824_ec()

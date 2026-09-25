@@ -20,6 +20,7 @@ namespace Ingenieria.De.Software
         internal Constantes.TiposOperacion _824_ecTipoOperacion { get; set; }
         internal _824_ecActividad _824_ecActividadEditable { get; set; }
         internal List<_824_ecCategoria> _824_ecCats;
+        internal _824_ecBE_Enums.EstadoActividad_824_ec EstadoAnterior { get; set; }
 
         public _824_ecFormABMactividad()
         {
@@ -28,7 +29,7 @@ namespace Ingenieria.De.Software
         private void _824_ecFormABMactividad_Load(object sender, EventArgs e)
         {
             _824_ecCats = _824_ecCategoriaBLL.Listar_824_ec();
-            CMBcategoria.Items.Clear();
+            CMBcategoria.Items.Clear(); 
             if (_824_ecCats != null)
             {
                 foreach (var cat in _824_ecCats)
@@ -36,10 +37,13 @@ namespace Ingenieria.De.Software
                     CMBcategoria.Items.Add(cat.Nombre_824_ec);
                 }
             }
+            if(_824_ecTipoOperacion != TiposOperacion.Alta)
+                EstadoAnterior = _824_ecActividadEditable.Estado_824_ec;
             CMBestado.DataSource = Enum.GetValues(typeof(EstadoActividad_824_ec));
             CMBnivel.DataSource = Enum.GetValues(typeof(NivelRequerido_824_ec));
             _824_ecCargarABM();
         }
+
         // iniciar formulario en base al tipo de operacion
         #region cargar
         private void _824_ecCargarABM()
@@ -51,7 +55,12 @@ namespace Ingenieria.De.Software
                     LBLnombree.Text = "Crear Nueva Actividad";
                     BTNrestablecerCampos.Enabled = false;
                     BTNrestablecerCampos.Visible = false;
+                    CMBestado.Enabled = false;
+                    CMBestado.Visible = false;
+                    LBLestado.Visible = false;
+
                     break;
+
                 case Constantes.TiposOperacion.Modificacion:
                     if (_824_ecActividadEditable == null)
                     {
@@ -62,6 +71,7 @@ namespace Ingenieria.De.Software
                     _824_ecCargarCampos(_824_ecActividadEditable);
                     LBLnombree.Text = "Modificación de Actividad";
                     break;
+
                 case Constantes.TiposOperacion.Baja:
                     if (_824_ecActividadEditable == null)
                     {
@@ -79,14 +89,30 @@ namespace Ingenieria.De.Software
                     BTNrestablecerCampos.Enabled = false;
                     BTNrestablecerCampos.Visible = false;
                     break;
+
                 case Constantes.TiposOperacion.DeSesion:
+                    if (_824_ecActividadEditable == null)
+                    {
+                        MessageBox.Show("No se ha especificado la Actividad para Ver");
+                        this.Close();
+                        return;
+                    }
+                    _824_ecCargarCampos(_824_ecActividadEditable);
+                    _824_eDeshabilitarCampos();
+                    LBLnombree.Text = "Vista de Actividad ";
+                    panel1.BackColor = Color.DimGray;
+                    BTNrestablecerCampos.Enabled = false;
+                    BTNrestablecerCampos.Visible = false;
+                    BTNconfirmar.Enabled = false;
+                    BTNconfirmar.Visible = false;
+                    break;
+
                 default:
                     MessageBox.Show("Tipo de operacion invalido");
                     this.Close();
                     break;
             }
         }
-
         private void _824_eDeshabilitarCampos()
         {
             TXTnombre.Enabled = false;
@@ -100,7 +126,6 @@ namespace Ingenieria.De.Software
             CMBestado.Enabled = false;
             CMBnivel.Enabled = false;
         }
-
         private void _824_ecCargarCampos(_824_ecActividad _824_ecAct)
         {
             TXTnombre.Text = _824_ecAct.Nombre_824_ec;
@@ -115,7 +140,6 @@ namespace Ingenieria.De.Software
             CMBestado.SelectedItem = _824_ecAct.Estado_824_ec;
             CMBnivel.SelectedItem = _824_ecAct.NivelRequerido_824_ec;
         }
-
         private void _824_ecLimpiarCampos()
         {
             TXTnombre.Text = "";
@@ -220,7 +244,7 @@ namespace Ingenieria.De.Software
                         if (confirmacion2)
                         {
                             ValorizarEntidad(_824_ecActividadEditable);
-                            _824_ecActividadBLL.Guardar_824_ec(_824_ecActividadEditable);
+                            _824_ecActividadBLL.Modificar_824_ec(_824_ecActividadEditable, EstadoAnterior);
 
                             SessionManager.TraerInstancia().RegistrarActividad("Modificación de actividad: " + _824_ecActividadEditable.Nombre_824_ec);
                             MessageBox.Show("Actividad modificada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -270,7 +294,6 @@ namespace Ingenieria.De.Software
             else
                 return false;
         }
-
         private void BTNcancelar_Click(object sender, EventArgs e)
         {
             this.Close();

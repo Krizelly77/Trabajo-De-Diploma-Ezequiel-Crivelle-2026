@@ -17,6 +17,12 @@ namespace Ingenieria.De.Software
     public partial class _824_ecFormMisActividades : Form
     {
         private List<_824_ecActividad> MisAct_824_ec;
+        private _824_ecActividad ActividadActual;
+        private List<_824_ecPostulacion> PostAct_824_ec;
+        private List<_824_ecPostulacion> PartAct_824_ec; 
+        private bool _ejecutandoLimpieza = false; // Variable para evitar bucles infinitos de eventos
+        private bool _actualizandoGrilla = false; // bandera para evitar que se dispare el evento inesperadamente
+
         public _824_ecFormMisActividades()
         {
             InitializeComponent();
@@ -26,6 +32,8 @@ namespace Ingenieria.De.Software
         {
             ConfigurarFiltros_824_ec();
             CargarGrilla_824_ec();
+            CargarGrillaPostulados_824_ec();
+            CargarGrillaAceptados_824_ec();
         }
 
         private void ConfigurarFiltros_824_ec()
@@ -40,7 +48,6 @@ namespace Ingenieria.De.Software
             }
             CMBfiltroActividades.SelectedIndex = 0;
         }
-
         private void CargarListaDesdeBD_824_ec()
         {
             Usuario usuarioActual = SessionManager.TraerInstancia().usuarioINS;
@@ -69,8 +76,8 @@ namespace Ingenieria.De.Software
             DGVmisactividades.Columns.Add("Estado", "Estado");
             DGVmisactividades.Columns["Estado"].Width = 70;
 
-            DGVmisactividades.Columns.Add("Participantes", "Participantes");
-            DGVmisactividades.Columns["Participantes"].Width = 60;
+            DGVmisactividades.Columns.Add("Cupos", "Cupos");
+            DGVmisactividades.Columns["Cupos"].Width = 60;
 
             DGVmisactividades.AllowUserToAddRows = false;
             DGVmisactividades.AllowUserToDeleteRows = false;
@@ -80,13 +87,20 @@ namespace Ingenieria.De.Software
 
             Actualizar_824_ec();
         }
-
         private void Actualizar_824_ec()
         {
-            CargarListaDesdeBD_824_ec();
-            FiltrarGrilla_824_ec();
-        }
+            try
+            {
+                _actualizandoGrilla = true;
 
+                CargarListaDesdeBD_824_ec();
+                FiltrarGrilla_824_ec();
+            }
+            finally
+            {
+                _actualizandoGrilla = false;
+            }
+        }
         private void FiltrarGrilla_824_ec()
         {
             if (DGVmisactividades.Columns.Count == 0) return;
@@ -130,63 +144,204 @@ namespace Ingenieria.De.Software
             }
         }
 
-        private void CMBfiltroActividades_SelectedIndexChanged(object sender, EventArgs e)
+        private void SeleccionarActual()
         {
-            FiltrarGrilla_824_ec();
+            if (ActividadActual == null)
+                return;
+
+            int actividadId = ActividadActual.Id_824_ec;
+
+            foreach (DataGridViewRow fila in DGVmisactividades.Rows)
+            {
+                if (fila.IsNewRow)
+                    continue;
+
+                if (fila.Cells["Id"].Value == null)
+                    continue;
+
+                if (!int.TryParse(
+                    fila.Cells["Id"].Value.ToString(),
+                    out int id))
+                    continue;
+
+                if (id == actividadId)
+                {
+                    DGVmisactividades.CurrentCell = fila.Cells["Nombre"];
+
+                    if (fila.Index >= 0)
+                        DGVmisactividades.FirstDisplayedScrollingRowIndex = fila.Index;
+                    SelectionChangeDeslocalizado();
+                    return;
+                }
+            }
         }
 
-        private void FiltroFecha_ValueChanged(object sender, EventArgs e)
+        private void SelectionChangeDeslocalizado()
         {
-            FiltrarGrilla_824_ec();
-        }
-        private void DGVmisactividades_SelectionChanged(object sender, EventArgs e)
-        {
-            if (DGVmisactividades.CurrentRow != null && DGVmisactividades.CurrentRow.Cells["Id"].Value != null)
+            if (_actualizandoGrilla)
+                return;
+
+            if (DGVmisactividades.CurrentRow != null &&
+                DGVmisactividades.CurrentRow.Cells["Id"].Value != null)
             {
-                if (int.TryParse(DGVmisactividades.CurrentRow.Cells["Id"].Value.ToString(), out int actividadId))
+                if (int.TryParse(
+                    DGVmisactividades.CurrentRow.Cells["Id"].Value.ToString(),
+                    out int actividadId))
                 {
-                    _824_ecActividad act = MisAct_824_ec?.FirstOrDefault(a => a.Id_824_ec == actividadId);
+                    _824_ecActividad act = MisAct_824_ec?
+                        .FirstOrDefault(a => a.Id_824_ec == actividadId);
+
                     if (act != null)
                     {
-                        if (act.Estado_824_ec == EstadoActividad_824_ec.Cancelado)
+                        if (act.Estado_824_ec == EstadoActividad_824_ec.Cancelado || act.Estado_824_ec == EstadoActividad_824_ec.Caducado)
                         {
                             panel1.BackColor = Color.IndianRed;
                             BTNmodActividad.Enabled = false;
+                            BTNmodActividad.Visible = false;
+                        }
+                        else if (act.Estado_824_ec == EstadoActividad_824_ec.Completado)
+                        {
+                            panel1.BackColor = Color.Green;
+                            BTNmodActividad.Enabled = false;
+                            BTNmodActividad.Visible = false;
                         }
                         else
                         {
                             panel1.BackColor = Color.OliveDrab;
                             BTNmodActividad.Enabled = true;
+                            BTNmodActividad.Visible = true;
                         }
-                        CargarDetalleActividad_824_ec(act);
+
+                        ActividadActual = act;
+
+                        CargarDetalleActividad_824_ec();
+                        ActualizarPostulados_824_ec();
+                        ActualizarCargarGrillaAceptados_824_ec();
+
                         return;
                     }
                 }
             }
+
             LimpiarDetalle_824_ec();
         }
 
-        private void CargarDetalleActividad_824_ec(_824_ecActividad act)
+        private void DGVmisactividades_SelectionChanged(object sender, EventArgs e)
         {
-            LBLnombree.Text = act.Nombre_824_ec;
-            TXTcategoria.Text = act.Categoria_824_ec != null ? act.Categoria_824_ec.Nombre_824_ec : "";
-            TXTnivel.Text = act.NivelRequerido_824_ec.ToString();
-            TXTestado.Text = act.Estado_824_ec.ToString();
-            TXBdescripcion.Text = act.Descripcion_824_ec ?? "";
-            TXTdia.Text = act.FechaHora_824_ec.ToString("dd/MM/yyyy");
-            TXThora.Text = act.FechaHora_824_ec.ToString("HH:mm");
-            TXTlugar.Text = act.Ubicacion_824_ec ?? "";
+            SelectionChangeDeslocalizado();
+        }
 
-            var postulaciones = _824_ecPostulacionBLL.ListarCandidatosPorActividad_824_ec(act.Id_824_ec);
+        #endregion grilla
+        //Grilla de postulados
+        #region grillaPostulados
+        private void CargarGrillaPostulados_824_ec()
+        {
+            DGVpostulaciones.Columns.Add("Id", "Id");
+            DGVpostulaciones.Columns["Id"].Visible = false;
+
+            DGVpostulaciones.Columns.Add("Nombre", "Nombre");
+            DGVpostulaciones.Columns["Nombre"].Width = 100;
+
+            DGVpostulaciones.Columns.Add("Estado", "Estado");
+            DGVpostulaciones.Columns["Estado"].Width = 100;
+
+            DGVpostulaciones.AllowUserToAddRows = false;
+            DGVpostulaciones.AllowUserToDeleteRows = false;
+            DGVpostulaciones.EditMode = DataGridViewEditMode.EditProgrammatically;
+            DGVpostulaciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGVpostulaciones.MultiSelect = false;
+            DGVpostulaciones.RowHeadersVisible = false;
+
+            ActualizarPostulados_824_ec();
+        }
+        private void ActualizarPostulados_824_ec()
+        {
+            if (ActividadActual != null)
+            {
+                PostAct_824_ec = _824_ecPostulacionBLL.ListarCandidatosPorActividad_824_ec(ActividadActual.Id_824_ec).Where(p => p.Estado_824_ec != EstadoPostulacion_824_ec.Aceptado).ToList();
+                if (DGVpostulaciones.Columns.Count == 0) return;
+                DGVpostulaciones.Rows.Clear();
+                if (PostAct_824_ec != null)
+                {
+                    foreach (var pos in PostAct_824_ec)
+                    {
+                        DGVpostulaciones.Rows.Add(
+                            pos.Id_824_ec,
+                            pos.Candidato_824_ec.NombreUsuario,
+                            pos.Estado_824_ec.ToString()
+                        );
+                    }
+                }
+            }
+        }
+        #endregion grillaPostulados
+
+        //Grilla aceptados
+        #region grillaAceptados
+        private void CargarGrillaAceptados_824_ec()
+        {
+            DGVparticipantes.Columns.Add("Id", "Id");
+            DGVparticipantes.Columns["Id"].Visible = false;
+
+            DGVparticipantes.Columns.Add("Nombre", "Nombre");
+            DGVparticipantes.Columns["Nombre"].Width = 100;
+                
+            DGVparticipantes.Columns.Add("Estado", "Estado");
+            DGVparticipantes.Columns["Estado"].Width = 100;
+
+            DGVparticipantes.AllowUserToAddRows = false;
+            DGVparticipantes.AllowUserToDeleteRows = false;
+            DGVparticipantes.EditMode = DataGridViewEditMode.EditProgrammatically;
+            DGVparticipantes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGVparticipantes.MultiSelect = false;
+            DGVparticipantes.RowHeadersVisible = false;
+
+            ActualizarCargarGrillaAceptados_824_ec();
+        }
+        private void ActualizarCargarGrillaAceptados_824_ec()
+        {
+            if (ActividadActual != null)
+            {
+                PartAct_824_ec = _824_ecPostulacionBLL.ListarCandidatosPorActividad_824_ec(ActividadActual.Id_824_ec).Where(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado).ToList();
+                if (DGVparticipantes.Columns.Count == 0) return;
+                DGVparticipantes.Rows.Clear();
+                if (PartAct_824_ec != null)
+                {
+                    foreach (var pos in PartAct_824_ec)
+                    {
+                        DGVparticipantes.Rows.Add(
+                            pos.Id_824_ec,
+                            pos.Candidato_824_ec.NombreUsuario,
+                            pos.Estado_824_ec.ToString()
+                        );
+                    }
+                }
+            }
+        }
+        #endregion grillaAceptados
+
+        // Detalle de la actividad
+        #region Detalle
+        private void CargarDetalleActividad_824_ec()
+        {
+            LBLnombree.Text = ActividadActual.Nombre_824_ec;
+            TXTcategoria.Text = ActividadActual.Categoria_824_ec != null ? ActividadActual.Categoria_824_ec.Nombre_824_ec : "";
+            TXTnivel.Text = ActividadActual.NivelRequerido_824_ec.ToString();
+            TXTestado.Text = ActividadActual.Estado_824_ec.ToString();
+            TXBdescripcion.Text = ActividadActual.Descripcion_824_ec ?? "";
+            TXTdia.Text = ActividadActual.FechaHora_824_ec.ToString("dd/MM/yyyy");
+            TXThora.Text = ActividadActual.FechaHora_824_ec.ToString("HH:mm");
+            TXTlugar.Text = ActividadActual.Ubicacion_824_ec ?? "";
+
+            var postulaciones = _824_ecPostulacionBLL.ListarCandidatosPorActividad_824_ec(ActividadActual.Id_824_ec);
             int cantParticipantes = postulaciones != null
                 ? postulaciones.Count(p => p.Estado_824_ec == _824_ecBE_Enums.EstadoPostulacion_824_ec.Aceptado)
                 : 0;
 
-            TXTmaxmin.Text = $"{act.CantidadMinima_824_ec} ≤ {cantParticipantes} ≤ {act.CantidadMaxima_824_ec}";
-            TXTpublicacion.Text = act.FechaPublicacion_824_ec.ToString("dd/MM/yyyy");
-            TXTcaducacion.Text = act.FechaCaducidad_824_ec.ToString("dd/MM/yyyy");
+            TXTmaxmin.Text = $"{ActividadActual.CantidadMinima_824_ec} ≤ {cantParticipantes} ≤ {ActividadActual.CantidadMaxima_824_ec}";
+            TXTpublicacion.Text = ActividadActual.FechaPublicacion_824_ec.ToString("dd/MM/yyyy");
+            TXTcaducacion.Text = ActividadActual.FechaCaducidad_824_ec.ToString("dd/MM/yyyy");
         }
-
         private void LimpiarDetalle_824_ec()
         {
             LBLnombree.Text = "Nombre de actividad";
@@ -201,7 +356,8 @@ namespace Ingenieria.De.Software
             TXTpublicacion.Text = "";
             TXTcaducacion.Text = "";
         }
-        #endregion grilla
+        #endregion Detalle
+
 
         // METODOS DE BOTONES
         #region botonesABM 
@@ -241,6 +397,119 @@ namespace Ingenieria.De.Software
                 MessageBox.Show("Debe seleccionar una de sus actividades para realizar esta operacion de " + oper.ToString());
             }
         }
+        private void BTNverUsuario_Click(object sender, EventArgs e)
+        {
+            
+        }
+        private void BTNaceptarsolicitud_Click(object sender, EventArgs e)
+        {
+            if (DGVpostulaciones.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    int mId = int.Parse(DGVpostulaciones.SelectedRows[0].Cells[0].Value.ToString());
+                    _824_ecPostulacion viejaPost = _824_ecPostulacionBLL.BuscarPorID_824_ec(mId);
+                    bool AptoParaCompletar = _824_ecPostulacionBLL.EvaluarCandidatoAntesDeCambiarEstado_824_ec(viejaPost.Id_824_ec, viejaPost.Estado_824_ec, EstadoPostulacion_824_ec.Aceptado, viejaPost.Actividad_824_ec);
+
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Aceptado");
+                    MessageBox.Show("Postulacion Aceptada con éxito");
+                    if (AptoParaCompletar)
+                    {
+                        MessageBox.Show("Se alcanzo el cupo minimo, grupo ya puede completarce");
+                    }
+                }
+                catch (Exception ex)
+                { MessageBox.Show(ex.Message); }
+
+                Actualizar_824_ec();
+                ActualizarPostulados_824_ec();
+                ActualizarCargarGrillaAceptados_824_ec();
+                SeleccionarActual();
+            }
+            else
+                MessageBox.Show("Debe seleccionar un usuario de la grilla de postulaciones para aceptarlo");
+        }
+        private void BTNrevocarSolicitud_Click(object sender, EventArgs e)
+        {
+            if (DGVparticipantes.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    int mId = int.Parse(DGVparticipantes.SelectedRows[0].Cells[0].Value.ToString());
+                    _824_ecPostulacion viejaPost = _824_ecPostulacionBLL.BuscarPorID_824_ec(mId);
+                    _824_ecPostulacionBLL.EvaluarCandidatoAntesDeCambiarEstado_824_ec(viejaPost.Id_824_ec, viejaPost.Estado_824_ec, EstadoPostulacion_824_ec.Postulado, viejaPost.Actividad_824_ec);
+
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Postulado");
+                    MessageBox.Show("Postulación revocada del grupo con éxito");
+                }
+                catch (Exception ex)
+                { MessageBox.Show(ex.Message); }
+
+            }
+            else if(DGVpostulaciones.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    int mId2 = int.Parse(DGVpostulaciones.SelectedRows[0].Cells[0].Value.ToString());
+                    _824_ecPostulacion viejaPost2 = _824_ecPostulacionBLL.BuscarPorID_824_ec(mId2);
+                    _824_ecPostulacionBLL.EvaluarCandidatoAntesDeCambiarEstado_824_ec(viejaPost2.Id_824_ec, viejaPost2.Estado_824_ec, EstadoPostulacion_824_ec.Rechazado, viejaPost2.Actividad_824_ec);
+
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost2.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost2.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost2.Estado_824_ec} a:Rechazado");
+                    MessageBox.Show("Postulación rechazada con éxito");
+                }
+                catch (Exception ex2)
+                { MessageBox.Show(ex2.Message); }
+            }
+            else { MessageBox.Show("Para quitar aceptado seleccione un usuario de participantes o para rechazarlo de postulaciones"); }
+
+            Actualizar_824_ec();
+            ActualizarPostulados_824_ec();
+            ActualizarCargarGrillaAceptados_824_ec();
+            SeleccionarActual();
+        }
         #endregion botonesABM
+
+        // Eventos DE Controles
+        #region controles
+        private void CMBfiltroActividades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FiltrarGrilla_824_ec();
+        }
+        private void FiltroFecha_ValueChanged(object sender, EventArgs e)
+        {
+            FiltrarGrilla_824_ec();
+        }
+        private void DGVparticipantes_SelectionChanged(object sender, EventArgs e)
+        {
+            if (_ejecutandoLimpieza) return;
+
+            if (DGVparticipantes.SelectedRows.Count > 0 || DGVparticipantes.SelectedCells.Count > 0)
+            {
+                _ejecutandoLimpieza = true;
+                DGVpostulaciones.ClearSelection();
+                LBLrebocador.Text = "Rebocar del grupo";
+                _ejecutandoLimpieza = false;
+                BTNaceptarsolicitud.Enabled = false;
+                BTNaceptarsolicitud.Visible = false;
+                LBLaceptarsol.Visible = false;
+            }
+        }
+        private void DGVpostulaciones_SelectionChanged(object sender, EventArgs e)
+        {
+            if (_ejecutandoLimpieza) return;
+
+            if (DGVpostulaciones.SelectedRows.Count > 0 || DGVpostulaciones.SelectedCells.Count > 0)
+            {
+                _ejecutandoLimpieza = true;
+                DGVparticipantes.ClearSelection();
+                LBLrebocador.Text = "Rechazar Solicitud";
+                _ejecutandoLimpieza = false;
+                BTNaceptarsolicitud.Enabled = true;
+                BTNaceptarsolicitud.Visible = true;
+                LBLaceptarsol.Visible = true;
+            }
+        }
+        #endregion controles
+
     }
 }

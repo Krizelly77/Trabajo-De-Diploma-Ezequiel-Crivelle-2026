@@ -76,9 +76,6 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                                WHERE Actividad_Id = @actividadId";
 
             List<SqlParameter> parametros_824_ec = new List<SqlParameter> { new SqlParameter("@actividadId", actividadId_824_ec) };
-            DAO dao_824_ec = new DAO();
-            DataSet seta_824_ec = dao_824_ec.ObtenerDataSet(comando_824_ec, parametros_824_ec);
-            List<_824_ecPostulacion> lista_824_ec = new List<_824_ecPostulacion>();
 
             return buscarPor(comando_824_ec, parametros_824_ec);
         }
@@ -108,12 +105,25 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                         Id_824_ec = Convert.ToInt32(fila_824_ec["Postulacion_Id"]),
                         FechaPostulacion_824_ec = Convert.ToDateTime(fila_824_ec["Postulacion_Fecha"]),
                         Estado_824_ec = (EstadoPostulacion_824_ec)Convert.ToInt32(fila_824_ec["Postulacion_Estado"]),
-                        Candidato_824_ec = UsuarioDAL.ObtenerPorId(Convert.ToInt32(fila_824_ec["Usuario_CandidatoId"]))
+                        Candidato_824_ec = UsuarioDAL.ObtenerPorId(Convert.ToInt32(fila_824_ec["Usuario_CandidatoId"])),
+                        Actividad_824_ec = _824_ecActividadDAL.ObtenerPorId_824_ec(Convert.ToInt32(fila_824_ec["Actividad_Id"]))
                     };
                     lista_824_ec.Add(pos_824_ec);
                 }
             }
             return lista_824_ec;
         }
+        public static _824_ecPostulacion BuscarPorID_824_ec(int id_824_ec)
+        {
+            string comando_824_ec = @"SELECT Postulacion_Id, Actividad_Id, Usuario_CandidatoId, Postulacion_Fecha, Postulacion_Estado 
+                                FROM Postulacion 
+                                WHERE Postulacion_Id = @id";
+            List<SqlParameter> parametros_824_ec = new List<SqlParameter>{new SqlParameter("@id", id_824_ec)};
+            List<_824_ecPostulacion> lista_824_ec =
+                buscarPor(comando_824_ec, parametros_824_ec);
+
+            return lista_824_ec.FirstOrDefault();
+        }
+
     }
 }

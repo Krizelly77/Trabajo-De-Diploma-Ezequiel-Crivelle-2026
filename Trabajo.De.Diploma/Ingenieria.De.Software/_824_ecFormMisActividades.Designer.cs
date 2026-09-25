@@ -41,8 +41,8 @@ namespace Ingenieria.De.Software
             this.DGVpostulaciones = new System.Windows.Forms.DataGridView();
             this.BTNaceptarsolicitud = new System.Windows.Forms.Button();
             this.BTNrevocarSolicitud = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.LBLaceptarsol = new System.Windows.Forms.Label();
+            this.LBLrebocador = new System.Windows.Forms.Label();
             this.BTNverUsuario = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.LBLnombree = new System.Windows.Forms.Label();
@@ -169,6 +169,7 @@ namespace Ingenieria.De.Software
             this.DGVparticipantes.Name = "DGVparticipantes";
             this.DGVparticipantes.Size = new System.Drawing.Size(243, 286);
             this.DGVparticipantes.TabIndex = 1;
+            this.DGVparticipantes.SelectionChanged += new System.EventHandler(this.DGVparticipantes_SelectionChanged);
             // 
             // LBLnombre
             // 
@@ -199,6 +200,7 @@ namespace Ingenieria.De.Software
             this.DGVpostulaciones.Name = "DGVpostulaciones";
             this.DGVpostulaciones.Size = new System.Drawing.Size(243, 286);
             this.DGVpostulaciones.TabIndex = 5;
+            this.DGVpostulaciones.SelectionChanged += new System.EventHandler(this.DGVpostulaciones_SelectionChanged);
             // 
             // BTNaceptarsolicitud
             // 
@@ -212,6 +214,7 @@ namespace Ingenieria.De.Software
             this.BTNaceptarsolicitud.TabIndex = 7;
             this.BTNaceptarsolicitud.Text = "<<";
             this.BTNaceptarsolicitud.UseVisualStyleBackColor = false;
+            this.BTNaceptarsolicitud.Click += new System.EventHandler(this.BTNaceptarsolicitud_Click);
             // 
             // BTNrevocarSolicitud
             // 
@@ -225,28 +228,29 @@ namespace Ingenieria.De.Software
             this.BTNrevocarSolicitud.TabIndex = 8;
             this.BTNrevocarSolicitud.Text = ">>";
             this.BTNrevocarSolicitud.UseVisualStyleBackColor = false;
+            this.BTNrevocarSolicitud.Click += new System.EventHandler(this.BTNrevocarSolicitud_Click);
             // 
-            // label3
+            // LBLaceptarsol
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label3.Location = new System.Drawing.Point(566, 246);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(137, 20);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "Aceptar Solicitud";
+            this.LBLaceptarsol.AutoSize = true;
+            this.LBLaceptarsol.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLaceptarsol.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.LBLaceptarsol.Location = new System.Drawing.Point(566, 246);
+            this.LBLaceptarsol.Name = "LBLaceptarsol";
+            this.LBLaceptarsol.Size = new System.Drawing.Size(137, 20);
+            this.LBLaceptarsol.TabIndex = 21;
+            this.LBLaceptarsol.Text = "Aceptar Solicitud";
             // 
-            // label4
+            // LBLrebocador
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label4.Location = new System.Drawing.Point(562, 333);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(148, 20);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Rebocar del grupo";
+            this.LBLrebocador.AutoSize = true;
+            this.LBLrebocador.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLrebocador.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.LBLrebocador.Location = new System.Drawing.Point(562, 333);
+            this.LBLrebocador.Name = "LBLrebocador";
+            this.LBLrebocador.Size = new System.Drawing.Size(148, 20);
+            this.LBLrebocador.TabIndex = 22;
+            this.LBLrebocador.Text = "Rebocar del grupo";
             // 
             // BTNverUsuario
             // 
@@ -260,6 +264,7 @@ namespace Ingenieria.De.Software
             this.BTNverUsuario.TabIndex = 23;
             this.BTNverUsuario.Text = "Ver Usuario en Detalle ";
             this.BTNverUsuario.UseVisualStyleBackColor = false;
+            this.BTNverUsuario.Click += new System.EventHandler(this.BTNverUsuario_Click);
             // 
             // label5
             // 
@@ -549,8 +554,8 @@ namespace Ingenieria.De.Software
             this.Controls.Add(this.LBLnombree);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.BTNverUsuario);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.LBLrebocador);
+            this.Controls.Add(this.LBLaceptarsol);
             this.Controls.Add(this.BTNrevocarSolicitud);
             this.Controls.Add(this.BTNaceptarsolicitud);
             this.Controls.Add(this.DGVpostulaciones);
@@ -584,8 +589,8 @@ namespace Ingenieria.De.Software
         private System.Windows.Forms.DataGridView DGVpostulaciones;
         private System.Windows.Forms.Button BTNaceptarsolicitud;
         private System.Windows.Forms.Button BTNrevocarSolicitud;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label LBLaceptarsol;
+        private System.Windows.Forms.Label LBLrebocador;
         private System.Windows.Forms.Button BTNverUsuario;
         private System.Windows.Forms.Button BTNvolver;
         private System.Windows.Forms.Label label5;

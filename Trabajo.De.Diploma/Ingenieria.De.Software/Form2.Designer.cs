@@ -188,7 +188,7 @@
             this.BTNmisActividades.Name = "BTNmisActividades";
             this.BTNmisActividades.Size = new System.Drawing.Size(300, 46);
             this.BTNmisActividades.TabIndex = 6;
-            this.BTNmisActividades.Tag = "";
+            this.BTNmisActividades.Tag = "Permiso_Crear_Actividad_824_ec";
             this.BTNmisActividades.Text = "Mis Actividades";
             this.BTNmisActividades.UseVisualStyleBackColor = false;
             this.BTNmisActividades.Click += new System.EventHandler(this.BTNmisActividades_Click);
@@ -204,7 +204,7 @@
             this.BTNverActividades.Name = "BTNverActividades";
             this.BTNverActividades.Size = new System.Drawing.Size(300, 46);
             this.BTNverActividades.TabIndex = 7;
-            this.BTNverActividades.Tag = "";
+            this.BTNverActividades.Tag = "Permiso_Postularse_Actividad_824_ec";
             this.BTNverActividades.Text = "Actividades Disponibles";
             this.BTNverActividades.UseVisualStyleBackColor = false;
             this.BTNverActividades.Click += new System.EventHandler(this.BTNverActividades_Click);

@@ -57,7 +57,7 @@ namespace Ingenieria.De.Software
                 UsuarioBLL usabll = new UsuarioBLL();
                 try
                 {
-                    ValidarItegridadDeLosDatos();
+                    ValidarItegridadDeLosDatos();   //  cuando comento ValidarItegridadDeLosDatos, el error pasa a ser error desconocido
                     string devolucion = usabll.Login(TXTusua.Text, TXTcontra.Text);
                     switch (devolucion)
                     {
@@ -165,7 +165,7 @@ namespace Ingenieria.De.Software
             DigitoVerificadorBLL integridadBll = new DigitoVerificadorBLL();
             string TodoIntegro = integridadBll.ValidarIntegridadDelSistema();
 
-            if (TodoIntegro != "ok")
+            if (TodoIntegro != "ok")  
             {
                 int cantidad = integridadBll.BloquearUsuariosPorFallaIntegridad();
 
@@ -259,6 +259,5 @@ namespace Ingenieria.De.Software
         }
 
         #endregion diseño de botones
-
     }
 }

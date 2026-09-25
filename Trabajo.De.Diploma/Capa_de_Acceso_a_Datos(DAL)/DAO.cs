@@ -67,5 +67,42 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             }
             catch (Exception ex) { throw (ex); }
         }
+        public int EjecutarTransaccion(List<(string comando, List<SqlParameter> parametros)> comandos)
+        {
+            using (SqlConnection mCon = new SqlConnection(cadenaConexion))
+            {
+                mCon.Open();
+                using (SqlTransaction transaccion = mCon.BeginTransaction())
+                {
+                    try
+                    {
+                        int filasUltimoComando = 0;
+
+                        foreach (var item in comandos)
+                        {
+                            using (SqlCommand coma = new SqlCommand(
+                                item.comando,
+                                mCon,
+                                transaccion))
+                            {
+                                if (item.parametros != null)
+                                    coma.Parameters.AddRange(item.parametros.ToArray());
+
+                                filasUltimoComando = coma.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaccion.Commit();
+
+                        return filasUltimoComando;
+                    }
+                    catch
+                    {
+                        transaccion.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
     }
 }

@@ -35,7 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CMBcategoria = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.LBLestado = new System.Windows.Forms.Label();
             this.CMBestado = new System.Windows.Forms.ComboBox();
             this.CMBnivel = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,10 +53,10 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BTNrestablecerCampos = new System.Windows.Forms.Button();
             this.BTNconfirmar = new System.Windows.Forms.Button();
             this.BTNcancelar = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.BTNrestablecerCampos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.NUDmin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUDmax)).BeginInit();
             this.panel1.SuspendLayout();
@@ -93,7 +93,7 @@
             this.TXTnombre.Location = new System.Drawing.Point(138, 75);
             this.TXTnombre.Name = "TXTnombre";
             this.TXTnombre.Size = new System.Drawing.Size(401, 31);
-            this.TXTnombre.TabIndex = 41;
+            this.TXTnombre.TabIndex = 0;
             // 
             // TXBdescripcion
             // 
@@ -105,7 +105,7 @@
             this.TXBdescripcion.Multiline = true;
             this.TXBdescripcion.Name = "TXBdescripcion";
             this.TXBdescripcion.Size = new System.Drawing.Size(401, 89);
-            this.TXBdescripcion.TabIndex = 42;
+            this.TXBdescripcion.TabIndex = 1;
             this.TXBdescripcion.Text = "Descripcion";
             // 
             // label1
@@ -141,18 +141,18 @@
             this.CMBcategoria.Location = new System.Drawing.Point(138, 238);
             this.CMBcategoria.Name = "CMBcategoria";
             this.CMBcategoria.Size = new System.Drawing.Size(401, 28);
-            this.CMBcategoria.TabIndex = 45;
+            this.CMBcategoria.TabIndex = 2;
             // 
-            // label3
+            // LBLestado
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label3.Location = new System.Drawing.Point(15, 272);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 24);
-            this.label3.TabIndex = 46;
-            this.label3.Text = "Estado :";
+            this.LBLestado.AutoSize = true;
+            this.LBLestado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLestado.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.LBLestado.Location = new System.Drawing.Point(15, 272);
+            this.LBLestado.Name = "LBLestado";
+            this.LBLestado.Size = new System.Drawing.Size(78, 24);
+            this.LBLestado.TabIndex = 46;
+            this.LBLestado.Text = "Estado :";
             // 
             // CMBestado
             // 
@@ -165,7 +165,7 @@
             this.CMBestado.Location = new System.Drawing.Point(138, 272);
             this.CMBestado.Name = "CMBestado";
             this.CMBestado.Size = new System.Drawing.Size(401, 28);
-            this.CMBestado.TabIndex = 47;
+            this.CMBestado.TabIndex = 3;
             // 
             // CMBnivel
             // 
@@ -178,7 +178,7 @@
             this.CMBnivel.Location = new System.Drawing.Point(138, 306);
             this.CMBnivel.Name = "CMBnivel";
             this.CMBnivel.Size = new System.Drawing.Size(401, 28);
-            this.CMBnivel.TabIndex = 48;
+            this.CMBnivel.TabIndex = 4;
             // 
             // label4
             // 
@@ -234,7 +234,7 @@
             this.FechaActividad.Location = new System.Drawing.Point(216, 363);
             this.FechaActividad.Name = "FechaActividad";
             this.FechaActividad.Size = new System.Drawing.Size(323, 26);
-            this.FechaActividad.TabIndex = 53;
+            this.FechaActividad.TabIndex = 5;
             // 
             // FechaCaducidad
             // 
@@ -246,7 +246,7 @@
             this.FechaCaducidad.Location = new System.Drawing.Point(216, 403);
             this.FechaCaducidad.Name = "FechaCaducidad";
             this.FechaCaducidad.Size = new System.Drawing.Size(323, 26);
-            this.FechaCaducidad.TabIndex = 54;
+            this.FechaCaducidad.TabIndex = 6;
             // 
             // TXTlugar
             // 
@@ -257,7 +257,7 @@
             this.TXTlugar.Location = new System.Drawing.Point(193, 438);
             this.TXTlugar.Name = "TXTlugar";
             this.TXTlugar.Size = new System.Drawing.Size(346, 22);
-            this.TXTlugar.TabIndex = 55;
+            this.TXTlugar.TabIndex = 7;
             // 
             // label8
             // 
@@ -294,7 +294,7 @@
             0});
             this.NUDmin.Name = "NUDmin";
             this.NUDmin.Size = new System.Drawing.Size(299, 26);
-            this.NUDmin.TabIndex = 58;
+            this.NUDmin.TabIndex = 8;
             // 
             // NUDmax
             // 
@@ -309,7 +309,7 @@
             0});
             this.NUDmax.Name = "NUDmax";
             this.NUDmax.Size = new System.Drawing.Size(299, 26);
-            this.NUDmax.TabIndex = 59;
+            this.NUDmax.TabIndex = 9;
             // 
             // label10
             // 
@@ -358,6 +358,22 @@
             this.panel1.Size = new System.Drawing.Size(555, 60);
             this.panel1.TabIndex = 63;
             // 
+            // BTNrestablecerCampos
+            // 
+            this.BTNrestablecerCampos.BackColor = System.Drawing.Color.YellowGreen;
+            this.BTNrestablecerCampos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNrestablecerCampos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNrestablecerCampos.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNrestablecerCampos.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTNrestablecerCampos.Location = new System.Drawing.Point(430, 9);
+            this.BTNrestablecerCampos.Name = "BTNrestablecerCampos";
+            this.BTNrestablecerCampos.Size = new System.Drawing.Size(109, 46);
+            this.BTNrestablecerCampos.TabIndex = 0;
+            this.BTNrestablecerCampos.Tag = "Permiso_Asignar_Roles";
+            this.BTNrestablecerCampos.Text = "Restablecer";
+            this.BTNrestablecerCampos.UseVisualStyleBackColor = false;
+            this.BTNrestablecerCampos.Click += new System.EventHandler(this.BTNrestablecerCampos_Click);
+            // 
             // BTNconfirmar
             // 
             this.BTNconfirmar.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -367,7 +383,7 @@
             this.BTNconfirmar.Location = new System.Drawing.Point(216, 583);
             this.BTNconfirmar.Name = "BTNconfirmar";
             this.BTNconfirmar.Size = new System.Drawing.Size(155, 52);
-            this.BTNconfirmar.TabIndex = 28;
+            this.BTNconfirmar.TabIndex = 10;
             this.BTNconfirmar.Text = "Confirmar";
             this.BTNconfirmar.UseVisualStyleBackColor = false;
             this.BTNconfirmar.Click += new System.EventHandler(this.BTNconfirmar_Click);
@@ -381,7 +397,7 @@
             this.BTNcancelar.Location = new System.Drawing.Point(384, 583);
             this.BTNcancelar.Name = "BTNcancelar";
             this.BTNcancelar.Size = new System.Drawing.Size(155, 52);
-            this.BTNcancelar.TabIndex = 64;
+            this.BTNcancelar.TabIndex = 11;
             this.BTNcancelar.Text = "Cancelar";
             this.BTNcancelar.UseVisualStyleBackColor = false;
             this.BTNcancelar.Click += new System.EventHandler(this.BTNcancelar_Click);
@@ -397,22 +413,6 @@
             this.label14.TabIndex = 65;
             this.label14.Text = "---------------------------------------------------------------------------------" +
     "-------";
-            // 
-            // BTNrestablecerCampos
-            // 
-            this.BTNrestablecerCampos.BackColor = System.Drawing.Color.YellowGreen;
-            this.BTNrestablecerCampos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTNrestablecerCampos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTNrestablecerCampos.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNrestablecerCampos.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNrestablecerCampos.Location = new System.Drawing.Point(430, 9);
-            this.BTNrestablecerCampos.Name = "BTNrestablecerCampos";
-            this.BTNrestablecerCampos.Size = new System.Drawing.Size(109, 46);
-            this.BTNrestablecerCampos.TabIndex = 28;
-            this.BTNrestablecerCampos.Tag = "Permiso_Asignar_Roles";
-            this.BTNrestablecerCampos.Text = "Restablecer";
-            this.BTNrestablecerCampos.UseVisualStyleBackColor = false;
-            this.BTNrestablecerCampos.Click += new System.EventHandler(this.BTNrestablecerCampos_Click);
             // 
             // _824_ecFormABMactividad
             // 
@@ -439,7 +439,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.CMBnivel);
             this.Controls.Add(this.CMBestado);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.LBLestado);
             this.Controls.Add(this.CMBcategoria);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -467,7 +467,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox CMBcategoria;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label LBLestado;
         private System.Windows.Forms.ComboBox CMBestado;
         private System.Windows.Forms.ComboBox CMBnivel;
         private System.Windows.Forms.Label label4;

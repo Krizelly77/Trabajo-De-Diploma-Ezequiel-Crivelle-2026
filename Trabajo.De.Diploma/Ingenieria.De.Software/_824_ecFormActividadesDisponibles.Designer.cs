@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BTNretirar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.DGVpostulaciones = new System.Windows.Forms.DataGridView();
             this.BTNcvolver = new System.Windows.Forms.Button();
             this.BTNverDetalle = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -36,13 +39,10 @@
             this.DGVactividades = new System.Windows.Forms.DataGridView();
             this.LBLnombre = new System.Windows.Forms.Label();
             this.FiltroFecha = new System.Windows.Forms.DateTimePicker();
-            this.DGVpostulaciones = new System.Windows.Forms.DataGridView();
             this.BTNpostular = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.BTNretirar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVactividades)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVpostulaciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVactividades)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -57,6 +57,42 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(359, 388);
             this.panel1.TabIndex = 0;
+            // 
+            // BTNretirar
+            // 
+            this.BTNretirar.BackColor = System.Drawing.Color.YellowGreen;
+            this.BTNretirar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNretirar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNretirar.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNretirar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTNretirar.Location = new System.Drawing.Point(188, 330);
+            this.BTNretirar.Name = "BTNretirar";
+            this.BTNretirar.Size = new System.Drawing.Size(159, 46);
+            this.BTNretirar.TabIndex = 28;
+            this.BTNretirar.Tag = "";
+            this.BTNretirar.Text = "Retirar postulacion";
+            this.BTNretirar.UseVisualStyleBackColor = false;
+            this.BTNretirar.Click += new System.EventHandler(this.BTNretirar_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.Control;
+            this.label2.Location = new System.Drawing.Point(12, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(323, 55);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Postulaciones";
+            // 
+            // DGVpostulaciones
+            // 
+            this.DGVpostulaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVpostulaciones.Location = new System.Drawing.Point(12, 84);
+            this.DGVpostulaciones.Name = "DGVpostulaciones";
+            this.DGVpostulaciones.Size = new System.Drawing.Size(335, 240);
+            this.DGVpostulaciones.TabIndex = 28;
+            this.DGVpostulaciones.SelectionChanged += new System.EventHandler(this.DGVpostulaciones_SelectionChanged);
             // 
             // BTNcvolver
             // 
@@ -87,6 +123,7 @@
             this.BTNverDetalle.Tag = "";
             this.BTNverDetalle.Text = "Ver en detalle";
             this.BTNverDetalle.UseVisualStyleBackColor = false;
+            this.BTNverDetalle.Click += new System.EventHandler(this.BTNverDetalle_Click);
             // 
             // label1
             // 
@@ -121,6 +158,7 @@
             this.DGVactividades.Name = "DGVactividades";
             this.DGVactividades.Size = new System.Drawing.Size(580, 206);
             this.DGVactividades.TabIndex = 1;
+            this.DGVactividades.SelectionChanged += new System.EventHandler(this.DGVactividades_SelectionChanged);
             // 
             // LBLnombre
             // 
@@ -146,14 +184,6 @@
             this.FiltroFecha.TabIndex = 27;
             this.FiltroFecha.ValueChanged += new System.EventHandler(this.FiltroFecha_ValueChanged);
             // 
-            // DGVpostulaciones
-            // 
-            this.DGVpostulaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVpostulaciones.Location = new System.Drawing.Point(12, 84);
-            this.DGVpostulaciones.Name = "DGVpostulaciones";
-            this.DGVpostulaciones.Size = new System.Drawing.Size(335, 240);
-            this.DGVpostulaciones.TabIndex = 28;
-            // 
             // BTNpostular
             // 
             this.BTNpostular.BackColor = System.Drawing.Color.YellowGreen;
@@ -168,32 +198,7 @@
             this.BTNpostular.Tag = "";
             this.BTNpostular.Text = "Postularme";
             this.BTNpostular.UseVisualStyleBackColor = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(12, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(323, 55);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "Postulaciones";
-            // 
-            // BTNretirar
-            // 
-            this.BTNretirar.BackColor = System.Drawing.Color.YellowGreen;
-            this.BTNretirar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTNretirar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTNretirar.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNretirar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNretirar.Location = new System.Drawing.Point(188, 330);
-            this.BTNretirar.Name = "BTNretirar";
-            this.BTNretirar.Size = new System.Drawing.Size(159, 46);
-            this.BTNretirar.TabIndex = 28;
-            this.BTNretirar.Tag = "";
-            this.BTNretirar.Text = "Retirar postulacion";
-            this.BTNretirar.UseVisualStyleBackColor = false;
+            this.BTNpostular.Click += new System.EventHandler(this.BTNpostular_Click);
             // 
             // _824_ecFormActividadesDisponibles
             // 
@@ -213,8 +218,8 @@
             this.Load += new System.EventHandler(this._824_ecFormActividadesDisponibles_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVactividades)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVpostulaciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVactividades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -92,14 +92,20 @@ namespace Capa_de_Acceso_a_Datos_DAL_
 
         public static int Eliminar_824_ec(int actividadId_824_ec)
         {
-            string comando_824_ec = @"DELETE FROM Postulacion WHERE Actividad_Id = @id;
-                                      DELETE FROM Actividad WHERE Actividad_Id = @id;";
-            List<SqlParameter> parametros_824_ec = new List<SqlParameter>
-            {
-                new SqlParameter("@id", actividadId_824_ec)
-            };
             DAO dao_824_ec = new DAO();
-            return dao_824_ec.EjecutarNonQuery(comando_824_ec, parametros_824_ec);
+
+            string eliminarPostulaciones = @"DELETE FROM Postulacion WHERE Actividad_Id = @id";
+
+            string eliminarActividad = @"DELETE FROM Actividad WHERE Actividad_Id = @id";
+
+            var comandos = new List<(string comando, List<SqlParameter> parametros)>
+            {
+                (eliminarPostulaciones, new List<SqlParameter>{new SqlParameter("@id", actividadId_824_ec)}),
+
+                (eliminarActividad, new List<SqlParameter>{new SqlParameter("@id", actividadId_824_ec)})
+            };
+
+            return dao_824_ec.EjecutarTransaccion(comandos);
         }
 
         public static _824_ecActividad ObtenerPorId_824_ec(int pid_824_ec)
