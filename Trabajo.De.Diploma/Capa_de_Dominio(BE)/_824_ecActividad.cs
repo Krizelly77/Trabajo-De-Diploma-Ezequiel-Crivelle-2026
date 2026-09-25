@@ -7,7 +7,7 @@ using static Capa_de_Dominio_BE_._824_ecBE_Enums;
 
 namespace Capa_de_Dominio_BE_
 {
-    public class _824_ecActividad
+    public class _824_ecActividad : IVerificable
     {
         public int Id_824_ec { get; set; }
         public string Nombre_824_ec { get; set; } // nombre personalizado por el organizador
@@ -33,6 +33,25 @@ namespace Capa_de_Dominio_BE_
             Postulaciones_824_ec = new List<_824_ecPostulacion>();
             Estado_824_ec = EstadoActividad_824_ec.Cerrado;
             FechaPublicacion_824_ec = DateTime.Now;
+        }
+
+        public string DVH_824_ec { get; set; } // digito verificador
+        public List<string> ObtenerCamposParaDV()
+        {
+
+            return new List<string>
+            {
+                this.Id_824_ec.ToString(),
+                this.Nombre_824_ec ?? string.Empty,
+                (this.Categoria_824_ec?.Id_824_ec ?? 0).ToString(),
+                this.FechaHora_824_ec.ToString("yyyy-MM-dd HH:mm:ss"),
+                this.FechaCaducidad_824_ec.ToString("yyyy-MM-dd HH:mm:ss"),
+                this.CantidadMinima_824_ec.ToString(),
+                this.CantidadMaxima_824_ec.ToString(),
+                ((int)this.NivelRequerido_824_ec).ToString(),
+                ((int)this.Estado_824_ec).ToString(),
+                (this.Organizador_824_ec?.Id ?? 0).ToString(),
+            };
         }
     }
 }

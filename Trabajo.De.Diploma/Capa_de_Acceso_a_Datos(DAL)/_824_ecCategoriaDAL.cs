@@ -73,7 +73,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
 
         public static List<_824_ecCategoria> Listar_824_ec()
         {
-            string comando_824_ec = "SELECT Categoria_Id, Categoria_Nombre, Categoria_Descripcion FROM Categoria ORDER BY Categoria_Nombre";
+            string comando_824_ec = "SELECT Categoria_Id, Categoria_Nombre, Categoria_Descripcion, Categoria_DVH FROM Categoria ORDER BY Categoria_Nombre";
             DAO dao_824_ec = new DAO();
             DataSet seta_824_ec = dao_824_ec.ObtenerDataSet(comando_824_ec);
             List<_824_ecCategoria> lista_824_ec = new List<_824_ecCategoria>();
@@ -86,7 +86,8 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                     {
                         Id_824_ec = Convert.ToInt32(fila_824_ec["Categoria_Id"]),
                         Nombre_824_ec = fila_824_ec["Categoria_Nombre"].ToString(),
-                        Descripcion_824_ec = fila_824_ec["Categoria_Descripcion"].ToString()
+                        Descripcion_824_ec = fila_824_ec["Categoria_Descripcion"] != DBNull.Value ? fila_824_ec["Categoria_Descripcion"].ToString() : null,
+                        DVH_824_ec = fila_824_ec["Categoria_DVH"] != DBNull.Value ? fila_824_ec["Categoria_DVH"].ToString() : null
                     });
                 }
             }

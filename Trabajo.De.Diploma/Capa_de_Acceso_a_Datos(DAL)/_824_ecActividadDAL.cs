@@ -108,11 +108,12 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             return dao_824_ec.EjecutarTransaccion(comandos);
         }
 
+        // solo lectura 
         public static _824_ecActividad ObtenerPorId_824_ec(int pid_824_ec)
         {
             string comando_824_ec = @"SELECT Actividad_Id, Actividad_Nombre, Actividad_Descripcion, Categoria_Id, 
                                        Actividad_FechaHora, Actividad_FechaPublicacion, Actividad_FechaCaducidad, Actividad_Ubicacion, 
-                                       Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId 
+                                       Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId, Actividad_DVH
                                 FROM Actividad WHERE Actividad_Id = @id";
 
             List<SqlParameter> parametros_824_ec = new List<SqlParameter> { new SqlParameter("@id", pid_824_ec) };
@@ -133,7 +134,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
         {
             string comando_824_ec = @"SELECT Actividad_Id, Actividad_Nombre, Actividad_Descripcion, Categoria_Id, 
                                        Actividad_FechaHora, Actividad_FechaPublicacion, Actividad_FechaCaducidad, Actividad_Ubicacion, 
-                                       Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId 
+                                       Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId, Actividad_DVH 
                                 FROM Actividad ORDER BY Actividad_FechaPublicacion DESC";
 
             DAO dao_824_ec = new DAO();
@@ -165,7 +166,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             act_824_ec.CantidadMaxima_824_ec = Convert.ToInt32(fila_824_ec["Actividad_CantMaxima"]);
             act_824_ec.NivelRequerido_824_ec = (NivelRequerido_824_ec)Convert.ToInt32(fila_824_ec["Actividad_NivelRequerido"]);
             act_824_ec.Estado_824_ec = (EstadoActividad_824_ec)Convert.ToInt32(fila_824_ec["Actividad_Estado"]);
-
+            act_824_ec.DVH_824_ec = fila_824_ec["Actividad_DVH"] != DBNull.Value ? fila_824_ec["Actividad_DVH"].ToString() : null;
             // Cargar referencia a Usuario Organizador por Id
             act_824_ec.Organizador_824_ec = UsuarioDAL.ObtenerPorId(Convert.ToInt32(fila_824_ec["Usuario_OrganizadorId"]));
         }

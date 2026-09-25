@@ -15,7 +15,22 @@ namespace Capa_de_Aplicación_BLL_
             if (string.IsNullOrWhiteSpace(categoria_824_ec.Nombre_824_ec))
                 throw new Exception("El nombre de la categoría es obligatorio.");
 
-            return _824_ecCategoriaDAL.Guardar_824_ec(categoria_824_ec);
+            int resultado = _824_ecCategoriaDAL.Guardar_824_ec(categoria_824_ec);
+            LlamarAlDigitoVerificador(resultado);
+            
+
+            return resultado;
+        }
+
+        private static void LlamarAlDigitoVerificador(int resultado)
+        {
+            DigitoVerificadorBLL dvBLL = new DigitoVerificadorBLL();
+
+            if (resultado > 0)
+            {
+                dvBLL.RecalcularIntegridadTabla("Categoria", "Categoria_Id",_824_ecCategoriaDAL.Listar_824_ec,
+                    c => c.Id_824_ec,(c, dvh) => c.DVH_824_ec = dvh);
+            }
         }
 
         public static List<_824_ecCategoria> Listar_824_ec()

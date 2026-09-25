@@ -69,12 +69,25 @@ namespace Capa_de_Acceso_a_Datos_DAL_
         } 
         public static int Eliminar(Usuario usa)  
         {
-            string comando = "DELETE Usuario WHERE Usuario_Id = @id";
-            List<SqlParameter> parametros = new List<SqlParameter> { new SqlParameter("@id", usa.Id) };
-            DAO dao = new DAO();
-            return dao.EjecutarNonQuery(comando, parametros);
+            DAO dao_824_ec = new DAO();
+
+            string eliminarPostulaciones = @"DELETE FROM Postulacion WHERE Usuario_CandidatoId = @id";
+            string eliminarUsuario = @"DELETE FROM Usuario WHERE Usuario_Id = @id";
+            // se eliminan primero sus postulaciones que solo pueden existir si su actividad y organizador existen en BD
+            var comandos = new List<(string comando, List<SqlParameter> parametros)>
+            {
+                (eliminarPostulaciones, new List<SqlParameter> { new SqlParameter("@id", usa.Id) }),
+
+                (eliminarUsuario, new List<SqlParameter> { new SqlParameter("@id", usa.Id) })
+            };
+
+            int filasAfectadas = dao_824_ec.EjecutarTransaccion(comandos);
+
+            return filasAfectadas;
         }
 
+        // metodos relacionados a buscar usuarios
+        #region BuscarUsuarios
         public static Usuario ObtenerPorId(int pid)
         {
             string comando = "SELECT Usuario_NombreUsuario, Usuario_Contraseña, Usuario_Activo, Usuario_Permiso, Usuario_BloqueoDV, Usuario_DVH FROM Usuario WHERE Usuario_Id = @id";
@@ -109,18 +122,16 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             }
             else { return null; }
         }
-
         private static void valorizarentidad(Usuario usa, DataRow fila)
         {
             usa.NombreUsuario = fila["Usuario_NombreUsuario"].ToString();
-            usa.Contraseña = fila["Usuario_Contraseña"].ToString();
+            usa.Contraseña = fila["Usuario_Contraseña"].ToString().Trim();
             usa.Activo = Convert.ToBoolean(fila["Usuario_Activo"]);
             usa.NivelPermisos = Convert.ToInt32(fila["Usuario_Permiso"]);
             usa.BloqueoDV = Convert.ToBoolean(fila["Usuario_BloqueoDV"]);
             usa.DVH = fila["Usuario_DVH"].ToString();
 
         }
-
         public static Usuario ObtenerPorNombre(string username)
         {
             string comando = "SELECT Usuario_Id, Usuario_NombreUsuario, Usuario_Contraseña, Usuario_Activo, Usuario_Permiso, Usuario_BloqueoDV, Usuario_DVH FROM Usuario WHERE Usuario_NombreUsuario = @user";
@@ -138,6 +149,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             }
             return null;
         }
+        #endregion BuscarUsuarios
 
         // metodos relacionados al DV
         #region DigitoVerificador
@@ -163,6 +175,8 @@ namespace Capa_de_Acceso_a_Datos_DAL_
         }
         #endregion DigitoVerificador
 
+        // metodos relacionados con las relaciones del usuario
+        #region RelacionesDelUsuario
         private static void CargarPermisosDelUsuario(Usuario usuario)
         {
             // Buscamos los componentes asignados directamente al usuario
@@ -254,5 +268,6 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                 }
             }
         }
+        #endregion RelacionesDelUsuario
     }
 }

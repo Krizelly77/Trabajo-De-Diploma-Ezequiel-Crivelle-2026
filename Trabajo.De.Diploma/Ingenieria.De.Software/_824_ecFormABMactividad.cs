@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Capa_de_Dominio_BE_._824_ecBE_Enums;
 using static Ingenieria.De.Software.Constantes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Ingenieria.De.Software
 {
@@ -39,7 +40,9 @@ namespace Ingenieria.De.Software
             }
             if(_824_ecTipoOperacion != TiposOperacion.Alta)
                 EstadoAnterior = _824_ecActividadEditable.Estado_824_ec;
-            CMBestado.DataSource = Enum.GetValues(typeof(EstadoActividad_824_ec));
+
+            CMBestado.DataSource = Enum.GetValues(typeof(EstadoActividad_824_ec)).Cast<EstadoActividad_824_ec>()
+                           .Where(eA => eA.ToString() != "Caducado").ToList();
             CMBnivel.DataSource = Enum.GetValues(typeof(NivelRequerido_824_ec));
             _824_ecCargarABM();
         }

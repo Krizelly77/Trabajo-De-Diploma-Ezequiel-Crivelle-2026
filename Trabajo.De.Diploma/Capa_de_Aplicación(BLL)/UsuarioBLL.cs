@@ -12,7 +12,6 @@ namespace Capa_de_Aplicación_BLL_
     public class UsuarioBLL
     {
         private CryptoManager crypton = new CryptoManager();
-        private ValidadorDeIntegridad validador = new ValidadorDeIntegridad();
         private DigitoVerificadorBLL DVbll = new DigitoVerificadorBLL();
         private GestorDeAuditoria auditor = new GestorDeAuditoria();
         public int Guardar(Usuario usa)
@@ -25,24 +24,25 @@ namespace Capa_de_Aplicación_BLL_
                 ValidarCredenciales(usa.NombreUsuario, usa.Contraseña);
                 usa.Contraseña = crypton.Hash(usa.Contraseña);
 
-                UsuarioDAL.Guardar(usa);                  // INSERT — asigna usa.Id real
-                usa.DVH = validador.CalcularDVH(usa);     // DVH con Id real
-                UsuarioDAL.Guardar(usa);                  // UPDATE — guarda el DVH
-                DVbll.RecalcularUsuariosDVV();
+                // 1. INSERT inicial para que SQL Server le asigne su Id
+                UsuarioDAL.Guardar(usa);
+
+                // 2. Sincronizar DVH del usuario y DVV de la tabla Usuario
+                RecalcularIntegridadUsuario();
+
                 auditor.RegistrarAlta(usa);
                 return 1;
             }
             Usuario antes = UsuarioDAL.ObtenerPorId(usa.Id);
-
-            // Recalcular DVH e impactar cambios
-            usa.DVH = validador.CalcularDVH(usa);
+            // 1. Update de los datos del usuario
             int resultado = UsuarioDAL.Guardar(usa);
 
-            // Recalcular el DVV global de la tabla
-            DVbll.RecalcularUsuariosDVV();
-
+            // 2. Sincronizar DVH del usuario y DVV de la tabla Usuario
             if (resultado > 0)
+            {
+                RecalcularIntegridadUsuario();
                 auditor.RegistrarCambios(antes, usa);
+            }
 
             return resultado;
         }
@@ -51,10 +51,26 @@ namespace Capa_de_Aplicación_BLL_
         {
             auditor.RegistrarBaja(usa);
             int resultado = UsuarioDAL.Eliminar(usa);
-            DVbll.RecalcularUsuariosDVV();
+
+            // Re-calcular el DVV vertical de la tabla tras la eliminación
+            if (resultado > 0)
+                RecalcularIntegridadUsuario(true);
             return resultado;
         }
 
+        private void RecalcularIntegridadUsuario(bool post = false)
+        {
+            DVbll.RecalcularIntegridadTabla("Usuario","Usuario_Id",UsuarioDAL.Listar,
+                u => u.Id,(u, dvh) => u.DVH = dvh
+            );
+            if (post)
+            {
+                DVbll.RecalcularIntegridadTabla("Postulacion", "Postulacion_Id", _824_ecPostulacionDAL.ListarTodas_824_ec,
+                    p => p.Id_824_ec, (p, dvh) => p.DVH_824_ec = dvh);
+            }
+        }
+
+        // metodos de solo lectura 
         public static Usuario ObtenerPorId(int pid)
         {
             return UsuarioDAL.ObtenerPorId(pid);

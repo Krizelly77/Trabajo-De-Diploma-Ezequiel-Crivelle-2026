@@ -209,6 +209,10 @@ namespace Ingenieria.De.Software
                 e.Handled = true; 
             }
         }
+        private void LBLerrores_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(LBLerrores.Text);
+        }
         #endregion eventos para controles
 
         //diseño de botones
@@ -259,5 +263,6 @@ namespace Ingenieria.De.Software
         }
 
         #endregion diseño de botones
+
     }
 }

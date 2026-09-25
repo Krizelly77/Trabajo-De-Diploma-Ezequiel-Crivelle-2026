@@ -174,6 +174,7 @@
             this.LBLerrores.Size = new System.Drawing.Size(23, 17);
             this.LBLerrores.TabIndex = 11;
             this.LBLerrores.Text = ". . .";
+            this.LBLerrores.Click += new System.EventHandler(this.LBLerrores_Click);
             // 
             // Form1
             // 

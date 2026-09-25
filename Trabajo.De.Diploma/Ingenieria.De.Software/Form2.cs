@@ -45,7 +45,12 @@ namespace Ingenieria.De.Software
         {
             foreach (Control c in panel1.Controls)
             {
-                if (c.Tag != null && (string)c.Tag != "")
+                if (c.Tag != null && (string)c.Tag != "" && c is Button)
+                    c.Enabled = usuario.TienePermiso(c.Tag.ToString());
+            }
+            foreach (Control c in this.Controls)
+            {
+                if (c.Tag != null && (string)c.Tag != "" && c is Button)
                     c.Enabled = usuario.TienePermiso(c.Tag.ToString());
             }
         }

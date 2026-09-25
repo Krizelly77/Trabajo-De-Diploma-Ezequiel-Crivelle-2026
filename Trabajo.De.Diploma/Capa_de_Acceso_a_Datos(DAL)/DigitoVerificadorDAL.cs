@@ -11,7 +11,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
     public class DigitoVerificadorDAL
     {  //controla la tabla del digito verificador vertical en BD
         public static string ObtenerDVVPorTabla(string nombreTabla)
-        {   
+        {
             string comando = "SELECT DVV_Hash FROM DigitoVerificadorVertical WHERE DVV_Tabla = @tabla";
             List<SqlParameter> parametros = new List<SqlParameter> { new SqlParameter("@tabla", nombreTabla) };
             DAO dao = new DAO();
@@ -44,6 +44,19 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             }
 
             return filasAfectadas;
+        }
+
+        public static void ActualizarDVHTabla_824_ec(string nombreTabla, string nombreCampoId, int id, string dvh)
+        {// Método genérico para actualizar el DVH de cualquier tabla
+
+            string comando = $"UPDATE {nombreTabla} SET {nombreTabla}_DVH = @dvh WHERE {nombreCampoId} = @id";
+            List<SqlParameter> parametros = new List<SqlParameter>
+            {
+                new SqlParameter("@dvh", dvh ?? (object)DBNull.Value),
+                new SqlParameter("@id", id)
+            };
+            DAO dao = new DAO();
+            dao.EjecutarNonQuery(comando, parametros);
         }
     }
 }

@@ -33,7 +33,9 @@ namespace Capa_de_Aplicación_BLL_
             if (idPostulante == postulacion_824_ec.Actividad_824_ec.Organizador_824_ec.Id)
                 throw new Exception("Un organizador no se puede postular como participante en su propia actividad");
 
-            return _824_ecPostulacionDAL.Guardar_824_ec(postulacion_824_ec);
+            int resultado = _824_ecPostulacionDAL.Guardar_824_ec(postulacion_824_ec);
+            LlamarAlDigitoVerificador(resultado);
+            return resultado;
         }
 
         public static bool EvaluarCandidatoAntesDeCambiarEstado_824_ec(int postulacionId_824_ec, EstadoPostulacion_824_ec viejoEstado_824_ec,  EstadoPostulacion_824_ec nuevoEstado_824_ec, _824_ecActividad actividad_824_ec)
@@ -57,7 +59,8 @@ namespace Capa_de_Aplicación_BLL_
             if (Cupos_824_ec == actividad_824_ec.CantidadMaxima_824_ec)
                 throw new Exception("Cupo maximo alcanzado");
 
-            _824_ecPostulacionDAL.ModificarEstado_824_ec(postulacionId_824_ec, nuevoEstado_824_ec);
+            int resultado = _824_ecPostulacionDAL.ModificarEstado_824_ec(postulacionId_824_ec, nuevoEstado_824_ec);
+            LlamarAlDigitoVerificador(resultado);
 
             // Si se aceptó un candidato, verificamos el cupo del grupo
             if (nuevoEstado_824_ec == EstadoPostulacion_824_ec.Aceptado)
@@ -79,6 +82,16 @@ namespace Capa_de_Aplicación_BLL_
                 return true;
             }
             return false;
+        }
+
+        private static void LlamarAlDigitoVerificador(int resultado)
+        {
+            DigitoVerificadorBLL dvBLL = new DigitoVerificadorBLL();
+            if (resultado > 0)
+            {
+                dvBLL.RecalcularIntegridadTabla("Postulacion", "Postulacion_Id", _824_ecPostulacionDAL.ListarTodas_824_ec,
+                    p => p.Id_824_ec,(p, dvh) => p.DVH_824_ec = dvh);
+            }
         }
 
         public static List<_824_ecPostulacion> ListarCandidatosPorActividad_824_ec(int actividadId_824_ec)
