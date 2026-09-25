@@ -10,6 +10,7 @@ namespace Capa_de_Aplicación_BLL_
 {
     public class PermisoBLL
     {
+        private DigitoVerificadorBLL dvBLL = new DigitoVerificadorBLL();
         public bool ReferenciaCircular(ComponentePermiso padre, int hijoIdAMeter)
         {
             // Validar de forma recursiva si un rol contiene a otro, evitando ciclos infinitos
@@ -46,6 +47,7 @@ namespace Capa_de_Aplicación_BLL_
                 padre.QuitarHijo(hijo);
                 throw new Exception("Hubo un error al intentar persistir la relacion en la base de datos");
             }
+            dvBLL.RecalcularIntegridadGlobal();
         }
 
         public void QuitarComponenteDeRol(Rol padre, ComponentePermiso hijo)
@@ -53,6 +55,7 @@ namespace Capa_de_Aplicación_BLL_
             // Quitar un componente de un rol contenedor
             padre.QuitarHijo(hijo);
             PermisoDAL.QuitarHijo(padre.Id, hijo.Id);
+            dvBLL.RecalcularIntegridadGlobal();
         }
 
         public void GuardarComponente(ComponentePermiso componente)

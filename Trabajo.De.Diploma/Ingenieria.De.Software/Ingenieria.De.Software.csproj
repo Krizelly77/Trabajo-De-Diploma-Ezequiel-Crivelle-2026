@@ -122,6 +122,12 @@
     <Compile Include="_824_ecFormMisActividades.Designer.cs">
       <DependentUpon>_824_ecFormMisActividades.cs</DependentUpon>
     </Compile>
+    <Compile Include="_824_ecFormMostarListaActividades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_824_ecFormMostarListaActividades.Designer.cs">
+      <DependentUpon>_824_ecFormMostarListaActividades.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_824_ecFormMisActividades.resx">
       <DependentUpon>_824_ecFormMisActividades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_824_ecFormMostarListaActividades.resx">
+      <DependentUpon>_824_ecFormMostarListaActividades.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

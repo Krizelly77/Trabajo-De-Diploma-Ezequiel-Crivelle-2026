@@ -152,10 +152,9 @@ namespace Capa_de_Acceso_a_Datos_DAL_
         private static void LlenarHijosRecursivo(ComponentePermiso padre)
         {
             // llenar hijos de forma recursiva 
-            string comando = @"SELECT c.Componente_Id, c.Nombre, c.NombreInterno, c.EsFamilia 
-                               FROM Componente_Hijo ch 
+            string comando = @"SELECT c.Componente_Id, c.Nombre, c.NombreInterno, c.EsFamilia FROM Componente_Hijo ch 
                                INNER JOIN Componente c ON ch.Hijo_Id = c.Componente_Id 
-                               WHERE ch.Padre_Id = @padreId";
+                               WHERE ch.Padre_Id = @padreId ORDER BY c.Componente_Id ASC";
 
             List<SqlParameter> parametros = new List<SqlParameter> { new SqlParameter("@padreId", padre.Id) };
             DAO dao = new DAO();
@@ -189,6 +188,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                 }
             }
         }
+
 
     }
 }

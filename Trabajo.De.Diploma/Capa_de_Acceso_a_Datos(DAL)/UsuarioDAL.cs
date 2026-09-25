@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using static Capa_de_Dominio_BE_._824_ecBE_Enums;
 using static System.Net.WebRequestMethods;
 
 namespace Capa_de_Acceso_a_Datos_DAL_
@@ -29,27 +30,36 @@ namespace Capa_de_Acceso_a_Datos_DAL_
         public static int Guardar(Usuario usa)
         {
             DAO dao = new DAO();
-            List<SqlParameter> parametros = new List<SqlParameter>();
+            List<SqlParameter> parametros = new List<SqlParameter>
+            {
+                new SqlParameter("@nombre", usa.NombreUsuario),
+                new SqlParameter("@contra", usa.Contraseña),
+                new SqlParameter("@activo", usa.Activo),
+                new SqlParameter("@permiso", usa.NivelPermisos),
+                new SqlParameter("@bloqueoDV", usa.BloqueoDV),
+                new SqlParameter("@dvh", usa.DVH ?? (object)DBNull.Value), // para que acepte null
+            };
+
             string comando;
-
-            parametros.Add(new SqlParameter("@nombre", usa.NombreUsuario));
-            parametros.Add(new SqlParameter("@contra", usa.Contraseña));
-            parametros.Add(new SqlParameter("@activo", usa.Activo)); 
-            parametros.Add(new SqlParameter("@permiso", usa.NivelPermisos)); 
-            parametros.Add(new SqlParameter("@bloqueoDV", usa.BloqueoDV));
-            parametros.Add(new SqlParameter("@dvh", usa.DVH ?? (object)DBNull.Value)); // para que acepte null
-
-
             if (usa.Id == 0)
             {
                 usa.Id = SiguienteId();
                 parametros.Add(new SqlParameter("@id", usa.Id));
-                comando = "INSERT INTO Usuario (Usuario_Id, Usuario_NombreUsuario, Usuario_Contraseña, Usuario_Activo, Usuario_Permiso, Usuario_BloqueoDV, Usuario_DVH) VALUES (@id, @nombre, @contra, @activo, @permiso, @bloqueoDV, @dvh)";
+                comando = @"INSERT INTO Usuario 
+                            (Usuario_Id, Usuario_NombreUsuario, Usuario_Contraseña, Usuario_Activo, Usuario_Permiso, Usuario_BloqueoDV, Usuario_DVH) 
+                            VALUES (@id, @nombre, @contra, @activo, @permiso, @bloqueoDV, @dvh)";
             }
             else
             {
                 parametros.Add(new SqlParameter("@id", usa.Id));
-                comando = "UPDATE Usuario SET Usuario_NombreUsuario = @nombre, Usuario_Contraseña = @contra, Usuario_Activo = @activo, Usuario_Permiso = @permiso, Usuario_BloqueoDV = @bloqueoDV, Usuario_DVH = @dvh WHERE Usuario_Id = @id";
+                comando = @"UPDATE Usuario 
+                            SET Usuario_NombreUsuario = @nombre, 
+                                Usuario_Contraseña = @contra, 
+                                Usuario_Activo = @activo, 
+                                Usuario_Permiso = @permiso, 
+                                Usuario_BloqueoDV = @bloqueoDV, 
+                                Usuario_DVH = @dvh
+                            WHERE Usuario_Id = @id";
             }
             int cantidadFilas = dao.EjecutarNonQuery(comando, parametros);
             if (cantidadFilas > 0)
@@ -108,6 +118,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             usa.NivelPermisos = Convert.ToInt32(fila["Usuario_Permiso"]);
             usa.BloqueoDV = Convert.ToBoolean(fila["Usuario_BloqueoDV"]);
             usa.DVH = fila["Usuario_DVH"].ToString();
+
         }
 
         public static Usuario ObtenerPorNombre(string username)
@@ -127,21 +138,30 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             }
             return null;
         }
+
+        // metodos relacionados al DV
+        #region DigitoVerificador
         public static int BloquearUsuariosPorFalla()
         {
-            string comando = @"UPDATE Usuario 
-                       SET Usuario_BloqueoDV = 1  
-                       WHERE Usuario_Id <> 1 
-                         AND Usuario_Permiso <> 1
-                         AND Usuario_Id NOT IN (
-                             SELECT Usuario_Id 
-                             FROM Usuario_Componente 
-                             WHERE Componente_Id = 1 
-                         )";
+            string comando = @"UPDATE Usuario SET Usuario_BloqueoDV = 1 WHERE Usuario_Id <> 1 
+                         AND Usuario_Permiso <> 1 AND Usuario_Id NOT IN ( SELECT Usuario_Id FROM Usuario_Componente 
+                             WHERE Componente_Id = 1 )";
 
             DAO dao = new DAO();
             return dao.EjecutarNonQuery(comando, new List<SqlParameter>());
         }
+        public static void ActualizarDVH(int usuarioId, string nuevoDVH)
+        {
+            string comando = "UPDATE Usuario SET Usuario_DVH = @dvh WHERE Usuario_Id = @id";
+            List<SqlParameter> parametros = new List<SqlParameter>
+            {
+                new SqlParameter("@dvh", nuevoDVH ?? (object)DBNull.Value),
+                new SqlParameter("@id", usuarioId)
+            };
+            DAO dao = new DAO();
+            dao.EjecutarNonQuery(comando, parametros);
+        }
+        #endregion DigitoVerificador
 
         private static void CargarPermisosDelUsuario(Usuario usuario)
         {
@@ -198,6 +218,40 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                     new SqlParameter("@componenteId", componente.Id)
                 };
                 dao.EjecutarNonQuery(cmdInsert, pars);
+            }
+        }
+        public static void CargarHistorialParticipaciones(Usuario usuario)
+        {
+            if (usuario == null || usuario.Id == 0) return;
+            // para que se considere como participante, el estado de la postulacion tiene que ser aceptado y el de la actividad completado
+            string comando = @"SELECT p.Postulacion_Id, p.Actividad_Id, p.Postulacion_Fecha, p.Postulacion_Estado, a.Actividad_Estado
+                               FROM Postulacion p
+                               INNER JOIN Actividad a ON p.Actividad_Id = a.Actividad_Id
+                               WHERE p.Usuario_CandidatoId = @usuarioId 
+                                 AND p.Postulacion_Estado = 2 
+                                 AND a.Actividad_Estado = 4";
+
+            List<SqlParameter> parametros = new List<SqlParameter> { new SqlParameter("@usuarioId", usuario.Id) };
+            DAO dao = new DAO();
+            DataSet ds = dao.ObtenerDataSet(comando, parametros);
+
+            usuario.HistorialParticipaciones.Clear();
+
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow fila in ds.Tables[0].Rows)
+                {
+                    _824_ecPostulacion post = new _824_ecPostulacion
+                    {
+                        Id_824_ec = Convert.ToInt32(fila["Postulacion_Id"]),
+                        Candidato_824_ec = usuario,
+                        FechaPostulacion_824_ec = Convert.ToDateTime(fila["Postulacion_Fecha"]),
+                        Actividad_824_ec = _824_ecActividadDAL.ObtenerPorId_824_ec(Convert.ToInt32(fila["Actividad_Id"])),
+                        Estado_824_ec = (EstadoPostulacion_824_ec)Convert.ToInt32(fila["Postulacion_Estado"])
+                    };
+
+                    usuario.HistorialParticipaciones.Add(post);
+                }
             }
         }
     }

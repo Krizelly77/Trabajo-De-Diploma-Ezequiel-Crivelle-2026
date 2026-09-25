@@ -18,26 +18,27 @@ namespace Capa_de_Aplicación_BLL_
         public int Guardar(Usuario usa)
         {
             usa.NombreUsuario = usa.NombreUsuario.Trim();
-            usa.Contraseña = usa.Contraseña.Trim();
 
             if (usa.Id == 0)
             {
+                usa.Contraseña = usa.Contraseña.Trim();
                 ValidarCredenciales(usa.NombreUsuario, usa.Contraseña);
-            }
                 usa.Contraseña = crypton.Hash(usa.Contraseña);
-            if(usa.Id == 0) 
-            { 
-                UsuarioDAL.Guardar(usa);                  // INSERT — el DAL asigna usa.Id real
-                usa.DVH = validador.CalcularDVH(usa);     // DVH con el Id correcto
-                UsuarioDAL.Guardar(usa);                  // UPDATE — persiste el DVH
+
+                UsuarioDAL.Guardar(usa);                  // INSERT — asigna usa.Id real
+                usa.DVH = validador.CalcularDVH(usa);     // DVH con Id real
+                UsuarioDAL.Guardar(usa);                  // UPDATE — guarda el DVH
                 DVbll.RecalcularUsuariosDVV();
                 auditor.RegistrarAlta(usa);
                 return 1;
             }
-
             Usuario antes = UsuarioDAL.ObtenerPorId(usa.Id);
+
+            // Recalcular DVH e impactar cambios
             usa.DVH = validador.CalcularDVH(usa);
             int resultado = UsuarioDAL.Guardar(usa);
+
+            // Recalcular el DVV global de la tabla
             DVbll.RecalcularUsuariosDVV();
 
             if (resultado > 0)
@@ -97,6 +98,13 @@ namespace Capa_de_Aplicación_BLL_
 
             if (password.Length > 100)
                 throw new Exception("Contraseña demasiado larga");
+        }
+        public static void CargarHistorialParticipaciones(Usuario usuario)
+        {
+            if (usuario == null)
+                throw new Exception("El usuario provisto es nulo");
+
+            UsuarioDAL.CargarHistorialParticipaciones(usuario);
         }
     }
 }

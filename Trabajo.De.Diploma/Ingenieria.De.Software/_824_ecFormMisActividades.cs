@@ -1,16 +1,17 @@
 using Capa_de_Aplicación_BLL_;
 using Capa_de_Dominio_BE_;
 using Capa_de_Servicios_SL_;
-using static Capa_de_Dominio_BE_._824_ecBE_Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Capa_de_Dominio_BE_._824_ecBE_Enums;
 
 namespace Ingenieria.De.Software
 {
@@ -239,6 +240,9 @@ namespace Ingenieria.De.Software
             DGVpostulaciones.Columns.Add("Id", "Id");
             DGVpostulaciones.Columns["Id"].Visible = false;
 
+            DGVpostulaciones.Columns.Add("IdUsuario", "IdUsuario");
+            DGVpostulaciones.Columns["IdUsuario"].Visible = false;
+
             DGVpostulaciones.Columns.Add("Nombre", "Nombre");
             DGVpostulaciones.Columns["Nombre"].Width = 100;
 
@@ -267,6 +271,7 @@ namespace Ingenieria.De.Software
                     {
                         DGVpostulaciones.Rows.Add(
                             pos.Id_824_ec,
+                            pos.Candidato_824_ec.Id,
                             pos.Candidato_824_ec.NombreUsuario,
                             pos.Estado_824_ec.ToString()
                         );
@@ -282,6 +287,9 @@ namespace Ingenieria.De.Software
         {
             DGVparticipantes.Columns.Add("Id", "Id");
             DGVparticipantes.Columns["Id"].Visible = false;
+
+            DGVpostulaciones.Columns.Add("IdUsuario", "IdUsuario");
+            DGVpostulaciones.Columns["IdUsuario"].Visible = false;
 
             DGVparticipantes.Columns.Add("Nombre", "Nombre");
             DGVparticipantes.Columns["Nombre"].Width = 100;
@@ -311,6 +319,7 @@ namespace Ingenieria.De.Software
                     {
                         DGVparticipantes.Rows.Add(
                             pos.Id_824_ec,
+                            pos.Candidato_824_ec.Id,
                             pos.Candidato_824_ec.NombreUsuario,
                             pos.Estado_824_ec.ToString()
                         );
@@ -399,7 +408,29 @@ namespace Ingenieria.De.Software
         }
         private void BTNverUsuario_Click(object sender, EventArgs e)
         {
-            
+            try 
+            {
+                int mId = 0;
+                if (DGVparticipantes.SelectedRows.Count > 0)
+                {
+                    mId = int.Parse(DGVparticipantes.SelectedRows[0].Cells[1].Value.ToString());
+                }
+                else if (DGVpostulaciones.SelectedRows.Count > 0)
+                {
+                    mId = int.Parse(DGVpostulaciones.SelectedRows[0].Cells[1].Value.ToString());
+                }
+                else { MessageBox.Show("Para ver un usuario primero debes seleccionarlo en la grilla de postulaciones o participantes"); }
+
+
+                Usuario us = UsuarioBLL.ObtenerPorId(mId);
+                UsuarioBLL.CargarHistorialParticipaciones(us);
+
+                _824_ecFormMostarListaActividades fVerUsu = new _824_ecFormMostarListaActividades();
+                fVerUsu.UsuarioAnalizado = us;
+                fVerUsu.ShowDialog(this);
+            }
+            catch (Exception ex)
+                { MessageBox.Show(ex.Message); }
         }
         private void BTNaceptarsolicitud_Click(object sender, EventArgs e)
         {
@@ -510,6 +541,5 @@ namespace Ingenieria.De.Software
             }
         }
         #endregion controles
-
     }
 }

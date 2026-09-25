@@ -12,9 +12,11 @@ namespace Capa_de_Aplicación_BLL_
     public class DigitoVerificadorBLL
     {
         private ValidadorDeIntegridad validador = new ValidadorDeIntegridad();
-
+        public static bool ValidacionHabilitada { get; set; } = true; // Para desabilitar DV de forma ordenada
         public string ValidarIntegridadDelSistema()
         {   //Escanea las tablas críticas del sistema antes de habilitar el Login
+
+            if (!ValidacionHabilitada) return "ok";
 
             // traemos a los usuarios de BD con sus DVHs respectivos
             List<Usuario> listaUsuarios = UsuarioDAL.Listar();
@@ -51,6 +53,24 @@ namespace Capa_de_Aplicación_BLL_
 
             return "ok"; // devuelve true si todo esta integro
         }
+        public void RecalcularIntegridadGlobal()
+        {// Recalcula y re-persiste la integridad completa del sistema
+
+            List<Usuario> listaUsuarios = UsuarioDAL.Listar();
+            if (listaUsuarios != null)
+            {
+                foreach (var usu in listaUsuarios)
+                {
+                    // Re-calcula DVH con el estado actual
+                    usu.DVH = validador.CalcularDVH(usu);
+
+                    // Guarda el nuevo DVH del usuario sin alterar otros campos
+                    UsuarioDAL.ActualizarDVH(usu.Id, usu.DVH);
+                }
+            }
+            RecalcularUsuariosDVV();
+        }
+
         public void RecalcularUsuariosDVV()
         {   //recalcula en nuevo DVV y lo guarda
             List<Usuario> usuariosActuales = UsuarioDAL.Listar();

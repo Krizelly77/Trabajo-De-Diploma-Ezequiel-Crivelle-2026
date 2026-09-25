@@ -25,9 +25,6 @@ namespace Capa_de_Dominio_BE_
         public List<ComponentePermiso> Permisos { get; set; } = new List<ComponentePermiso>();
 
         // Atributos de Negocio  de Trabajo de Diploma 
-        public string Experiencia_824_ec { get; set; } 
-        public double CalificacionPromedio_824_ec { get; set; } 
-        public int CantidadActividadesRealizadas_824_ec { get; set; }
         public List<_824_ecPostulacion> HistorialParticipaciones { get; set; } = new List<_824_ecPostulacion>();
 
 
@@ -58,8 +55,7 @@ namespace Capa_de_Dominio_BE_
 
         public List<string> ObtenerCamposParaDV()
         {
-            string permisosConcatenados = "";
-            foreach (var p in Permisos) permisosConcatenados += p.Id.ToString() + "-";
+            string permisosConcatenados = string.Join("-", Permisos.OrderBy(p => p.Id).Select(p => p.Id.ToString())) + "-";
 
             return new List<string>
             {
@@ -67,8 +63,8 @@ namespace Capa_de_Dominio_BE_
                 this.NombreUsuario,
                 this.Contraseña,
                 this.Activo.ToString(),
-                permisosConcatenados, 
-                this.BloqueoDV.ToString()
+                permisosConcatenados,
+                this.BloqueoDV.ToString(),
             };
         }
     }

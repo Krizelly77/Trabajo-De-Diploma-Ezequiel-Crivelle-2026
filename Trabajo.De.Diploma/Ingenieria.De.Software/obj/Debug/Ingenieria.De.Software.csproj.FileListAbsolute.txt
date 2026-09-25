@@ -85,3 +85,4 @@ C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecFormABMactividad.resources
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecFormActividadesDisponibles.resources
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecFormMisActividades.resources
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecFormMostarListaActividades.resources
