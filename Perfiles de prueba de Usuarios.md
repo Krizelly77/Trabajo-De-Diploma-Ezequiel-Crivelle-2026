@@ -6,7 +6,7 @@ Nombre de Usuario: Juan66/  Contraseña: 123456 / Permisos: Rescate de BD, Admin
 
 Nombre de Usuario: Maria01/  Contraseña: miPerro / Permisos: Administrador general
 
-Nombre de Usuario: Carlos22/  Contraseña: contrasenia / Permisos:
+Nombre de Usuario: Carlos22/  Contraseña: contrasenia / Permisos:(esta desactivado)
 
 Nombre de Usuario: Ana77/  Contraseña: reina2001 / Permisos: N
 
