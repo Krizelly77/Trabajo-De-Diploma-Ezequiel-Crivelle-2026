@@ -44,6 +44,7 @@
     <Compile Include="CryptoManager.cs" />
     <Compile Include="ISessionObserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_824_ecSerializadorXml.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="ValidadorDeIntegridad.cs" />
   </ItemGroup>

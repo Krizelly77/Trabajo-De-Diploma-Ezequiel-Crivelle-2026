@@ -47,12 +47,21 @@ namespace Ingenieria.De.Software
             BTNvolver.Text     = textos["gestusu_volver"];
             BTNhistorial.Text  = textos["gestusu_historial"];
 
+            if (textos.ContainsKey("gestusu_btn_serializar")) BTNserializar.Text = textos["gestusu_btn_serializar"];
+            if (textos.ContainsKey("gestusu_btn_deserializar")) BTNdeserializar.Text = textos["gestusu_btn_deserializar"];
+            if (textos.ContainsKey("gestusu_btn_limpiar")) BTNlimpiar.Text = textos["gestusu_btn_limpiar"];
+
+            ToolTip toolTip = new ToolTip();
+            if (textos.ContainsKey("gestusu_tt_limpiar")) toolTip.SetToolTip(BTNlimpiar, textos["gestusu_tt_limpiar"]);
+            if (textos.ContainsKey("gestusu_tt_actualizar")) toolTip.SetToolTip(BTNcargar, textos["gestusu_tt_actualizar"]);
+
             if (DGVusuaios.Columns["Nombre"] != null)
                 DGVusuaios.Columns["Nombre"].HeaderText = textos["gestusu_col_nombre"];
             if (DGVusuaios.Columns["Contraseña"] != null)
                 DGVusuaios.Columns["Contraseña"].HeaderText = textos["gestusu_col_contra"];
             if (DGVusuaios.Columns["Activo"] != null)
                 DGVusuaios.Columns["Activo"].HeaderText = textos["gestusu_col_activo"];
+
         }
 
 
@@ -95,12 +104,17 @@ namespace Ingenieria.De.Software
         private void Actualizar()
         {
             DGVusuaios.Rows.Clear();
-
             List<Usuario> usuarios = UsuarioBLL.Listar();
+            PoblarGrilla(usuarios);
+        }
+        private void PoblarGrilla(List<Usuario> usuarios)
+        {
+            DGVusuaios.Rows.Clear();
+            if (usuarios == null) return;
 
             foreach (var usu in usuarios)
             {
-                DGVusuaios.Rows.Add(usu.Id, usu.NombreUsuario, usu.Contraseña, usu.Activo.ToString(), usu.NivelPermisos.ToString(), usu.BloqueoDV.ToString());
+                DGVusuaios.Rows.Add(usu.Id, usu.NombreUsuario, usu.Contraseña, usu.Activo, usu.NivelPermisos, usu.BloqueoDV);
             }
         }
         private void DGVusuaios_SelectionChanged(object sender, EventArgs e)
@@ -114,6 +128,72 @@ namespace Ingenieria.De.Software
             }
         }
         #endregion grilla
+
+        // metodos de serializacion
+        #region Serializacion XML
+
+        private void BTNserializar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<Usuario> listaUsuarios = UsuarioBLL.Listar();
+
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "Archivos XML (*.xml)|*.xml";
+                    saveFileDialog.Title = "Guardar archivo XML de Usuarios";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        _824_ecSerializadorBLL.SerializarUsuariosXML(saveFileDialog.FileName, listaUsuarios);
+                        MessageBox.Show("Datos serializados exitosamente en XML", "Todo OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al serializar: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BTNdeserializar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Archivos XML (*.xml)|*.xml";
+                    openFileDialog.Title = "Seleccionar archivo XML de Usuarios";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        List<Usuario> listaDeserializada = _824_ecSerializadorBLL.DeserializarUsuariosXML(openFileDialog.FileName);
+                        PoblarGrilla(listaDeserializada);
+                        MessageBox.Show("Datos deserializados y cargados en la grilla correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al deserializar: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BTNlimpiar_Click(object sender, EventArgs e)
+        {
+            DGVusuaios.Rows.Clear();
+            TXTnom.Clear();
+            TXTcon.Clear();
+            CHKactivo.Checked = false;
+            CHKbloqueado.Checked = false;
+        }
+
+        private void BTNcargar_Click(object sender, EventArgs e)
+        {
+            Actualizar();
+        }
+
+        #endregion Serializacion XML
 
         // abrir y cerrar formularios
         #region formularios

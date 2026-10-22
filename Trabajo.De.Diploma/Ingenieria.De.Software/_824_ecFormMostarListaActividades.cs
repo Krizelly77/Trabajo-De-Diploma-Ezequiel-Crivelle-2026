@@ -101,20 +101,21 @@ namespace Ingenieria.De.Software
 
             DateTime fechaLimite = FiltroFecha.Value.Date;
 
-            var filtradas = pos.Where(p =>
-                p.Actividad_824_ec.FechaHora_824_ec.Date <= fechaLimite);
+            var filtradas = pos.Where(p => p.Actividad_824_ec.FechaHora_824_ec.Date <= fechaLimite);
+
+
 
             foreach (var post in filtradas)
-            {
-                DGVactividades.Rows.Add(
-                    post.Id_824_ec,
-                    post.Actividad_824_ec.Nombre_824_ec,
-                    post.Actividad_824_ec.Estado_824_ec,
-                    post.Actividad_824_ec.NivelRequerido_824_ec,
-                    post.FechaPostulacion_824_ec,
-                    post.Actividad_824_ec.FechaHora_824_ec
-                );
-            }
+                {
+                    DGVactividades.Rows.Add(
+                        post.Id_824_ec,
+                        post.Actividad_824_ec.Nombre_824_ec,
+                        post.Actividad_824_ec.Estado_824_ec,
+                        post.Actividad_824_ec.NivelRequerido_824_ec,
+                        post.FechaPostulacion_824_ec,
+                        post.Actividad_824_ec.FechaHora_824_ec
+                    );
+                }
 
         }
 

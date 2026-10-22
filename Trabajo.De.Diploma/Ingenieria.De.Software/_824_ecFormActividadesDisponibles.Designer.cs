@@ -40,6 +40,7 @@
             this.LBLnombre = new System.Windows.Forms.Label();
             this.FiltroFecha = new System.Windows.Forms.DateTimePicker();
             this.BTNpostular = new System.Windows.Forms.Button();
+            this.CMDdirecciondeFecha = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVpostulaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVactividades)).BeginInit();
@@ -131,7 +132,7 @@
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label1.Location = new System.Drawing.Point(365, 80);
+            this.label1.Location = new System.Drawing.Point(365, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 29);
             this.label1.TabIndex = 3;
@@ -142,12 +143,12 @@
             this.CMBfiltroActividades.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.CMBfiltroActividades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CMBfiltroActividades.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CMBfiltroActividades.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CMBfiltroActividades.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CMBfiltroActividades.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.CMBfiltroActividades.FormattingEnabled = true;
-            this.CMBfiltroActividades.Location = new System.Drawing.Point(477, 80);
+            this.CMBfiltroActividades.Location = new System.Drawing.Point(464, 80);
             this.CMBfiltroActividades.Name = "CMBfiltroActividades";
-            this.CMBfiltroActividades.Size = new System.Drawing.Size(179, 32);
+            this.CMBfiltroActividades.Size = new System.Drawing.Size(149, 28);
             this.CMBfiltroActividades.TabIndex = 24;
             this.CMBfiltroActividades.SelectedIndexChanged += new System.EventHandler(this.CMBfiltroActividades_SelectedIndexChanged);
             // 
@@ -178,9 +179,9 @@
             this.FiltroFecha.CalendarTitleBackColor = System.Drawing.Color.OliveDrab;
             this.FiltroFecha.CalendarTrailingForeColor = System.Drawing.SystemColors.WindowFrame;
             this.FiltroFecha.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FiltroFecha.Location = new System.Drawing.Point(662, 84);
+            this.FiltroFecha.Location = new System.Drawing.Point(734, 84);
             this.FiltroFecha.Name = "FiltroFecha";
-            this.FiltroFecha.Size = new System.Drawing.Size(288, 25);
+            this.FiltroFecha.Size = new System.Drawing.Size(216, 25);
             this.FiltroFecha.TabIndex = 27;
             this.FiltroFecha.ValueChanged += new System.EventHandler(this.FiltroFecha_ValueChanged);
             // 
@@ -200,11 +201,26 @@
             this.BTNpostular.UseVisualStyleBackColor = false;
             this.BTNpostular.Click += new System.EventHandler(this.BTNpostular_Click);
             // 
+            // CMDdirecciondeFecha
+            // 
+            this.CMDdirecciondeFecha.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.CMDdirecciondeFecha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CMDdirecciondeFecha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CMDdirecciondeFecha.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CMDdirecciondeFecha.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.CMDdirecciondeFecha.FormattingEnabled = true;
+            this.CMDdirecciondeFecha.Location = new System.Drawing.Point(619, 80);
+            this.CMDdirecciondeFecha.Name = "CMDdirecciondeFecha";
+            this.CMDdirecciondeFecha.Size = new System.Drawing.Size(109, 28);
+            this.CMDdirecciondeFecha.TabIndex = 29;
+            this.CMDdirecciondeFecha.SelectedIndexChanged += new System.EventHandler(this.CMDdirecciondeFecha_SelectedIndexChanged);
+            // 
             // _824_ecFormActividadesDisponibles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 388);
+            this.Controls.Add(this.CMDdirecciondeFecha);
             this.Controls.Add(this.BTNpostular);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BTNverDetalle);
@@ -239,5 +255,6 @@
         private System.Windows.Forms.Button BTNpostular;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BTNretirar;
+        private System.Windows.Forms.ComboBox CMDdirecciondeFecha;
     }
 }

@@ -66,6 +66,7 @@ namespace Ingenieria.De.Software
             this.TXTestado = new System.Windows.Forms.TextBox();
             this.BTNmodActividad = new System.Windows.Forms.Button();
             this.BTNbajaActividad = new System.Windows.Forms.Button();
+            this.CMDdirecciondeFecha = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVmisactividades)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVparticipantes)).BeginInit();
@@ -75,6 +76,7 @@ namespace Ingenieria.De.Software
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.OliveDrab;
+            this.panel1.Controls.Add(this.CMDdirecciondeFecha);
             this.panel1.Controls.Add(this.BTNnuevaActividad);
             this.panel1.Controls.Add(this.FiltroFecha);
             this.panel1.Controls.Add(this.CMBfiltroActividades);
@@ -124,7 +126,7 @@ namespace Ingenieria.De.Software
             this.CMBfiltroActividades.FormattingEnabled = true;
             this.CMBfiltroActividades.Location = new System.Drawing.Point(12, 55);
             this.CMBfiltroActividades.Name = "CMBfiltroActividades";
-            this.CMBfiltroActividades.Size = new System.Drawing.Size(274, 28);
+            this.CMBfiltroActividades.Size = new System.Drawing.Size(159, 28);
             this.CMBfiltroActividades.TabIndex = 25;
             this.CMBfiltroActividades.SelectedIndexChanged += new System.EventHandler(this.CMBfiltroActividades_SelectedIndexChanged);
             // 
@@ -526,6 +528,20 @@ namespace Ingenieria.De.Software
             this.BTNbajaActividad.UseVisualStyleBackColor = false;
             this.BTNbajaActividad.Click += new System.EventHandler(this.BTNbajaActividad_Click);
             // 
+            // CMDdirecciondeFecha
+            // 
+            this.CMDdirecciondeFecha.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.CMDdirecciondeFecha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CMDdirecciondeFecha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CMDdirecciondeFecha.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CMDdirecciondeFecha.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.CMDdirecciondeFecha.FormattingEnabled = true;
+            this.CMDdirecciondeFecha.Location = new System.Drawing.Point(177, 55);
+            this.CMDdirecciondeFecha.Name = "CMDdirecciondeFecha";
+            this.CMDdirecciondeFecha.Size = new System.Drawing.Size(109, 28);
+            this.CMDdirecciondeFecha.TabIndex = 28;
+            this.CMDdirecciondeFecha.SelectedIndexChanged += new System.EventHandler(this.CMDdirecciondeFecha_SelectedIndexChanged);
+            // 
             // _824_ecFormMisActividades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -616,5 +632,6 @@ namespace Ingenieria.De.Software
         private System.Windows.Forms.Button BTNnuevaActividad;
         private System.Windows.Forms.Button BTNmodActividad;
         private System.Windows.Forms.Button BTNbajaActividad;
+        private System.Windows.Forms.ComboBox CMDdirecciondeFecha;
     }
 }

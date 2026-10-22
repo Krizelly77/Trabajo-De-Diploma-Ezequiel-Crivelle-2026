@@ -48,6 +48,11 @@ namespace Ingenieria.De.Software
                 CMBfiltroActividades.Items.Add(estado.ToString());
             }
             CMBfiltroActividades.SelectedIndex = 0;
+            CMDdirecciondeFecha.Items.Clear();
+            CMDdirecciondeFecha.Items.Add("Antes del:");
+            CMDdirecciondeFecha.Items.Add("Despues del:");
+            CMDdirecciondeFecha.SelectedIndex = 0;
+
         }
         private void CargarListaDesdeBD_824_ec()
         {
@@ -121,14 +126,17 @@ namespace Ingenieria.De.Software
 
                 // Filtro por Fecha de Publicación (anteriores o iguales a la fecha seleccionada)
                 DateTime fechaLimite = FiltroFecha.Value.Date;
-                filtradas = filtradas.Where(a => a.FechaPublicacion_824_ec.Date <= fechaLimite);
+                if (CMDdirecciondeFecha.SelectedIndex == 0)
+                    filtradas = filtradas.Where(a => a.FechaHora_824_ec.Date <= fechaLimite);
+                else if (CMDdirecciondeFecha.SelectedIndex == 1)
+                    filtradas = filtradas.Where(a => a.FechaHora_824_ec.Date >= fechaLimite);
 
                 foreach (var act in filtradas)
                 {
                     var postulaciones = _824_ecPostulacionBLL.ListarCandidatosPorActividad_824_ec(act.Id_824_ec);
                     int cantParticipantes = postulaciones != null
-                        ? postulaciones.Count(p => p.Estado_824_ec == _824_ecBE_Enums.EstadoPostulacion_824_ec.Aceptado)
-                        : 0;
+                            ? postulaciones.Count(p => p.Estado_824_ec == _824_ecBE_Enums.EstadoPostulacion_824_ec.Aceptado)
+                            : 0;
 
                     DGVmisactividades.Rows.Add(
                         act.Id_824_ec,
@@ -233,6 +241,7 @@ namespace Ingenieria.De.Software
         }
 
         #endregion grilla
+
         //Grilla de postulados
         #region grillaPostulados
         private void CargarGrillaPostulados_824_ec()
@@ -510,6 +519,10 @@ namespace Ingenieria.De.Software
         {
             FiltrarGrilla_824_ec();
         }
+        private void CMDdirecciondeFecha_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FiltrarGrilla_824_ec();
+        }
         private void DGVparticipantes_SelectionChanged(object sender, EventArgs e)
         {
             if (_ejecutandoLimpieza) return;
@@ -541,5 +554,6 @@ namespace Ingenieria.De.Software
             }
         }
         #endregion controles
+
     }
 }

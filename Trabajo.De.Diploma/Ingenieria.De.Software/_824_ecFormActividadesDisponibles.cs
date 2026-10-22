@@ -45,6 +45,10 @@ namespace Ingenieria.De.Software
                 CMBfiltroActividades.Items.Add(estado.ToString());
             }
             CMBfiltroActividades.SelectedIndex = 0;
+            CMDdirecciondeFecha.Items.Clear();
+            CMDdirecciondeFecha.Items.Add("Antes del:");
+            CMDdirecciondeFecha.Items.Add("Despues del:");
+            CMDdirecciondeFecha.SelectedIndex = 0;
         }
 
         // cargar la grillas de las postulaciones
@@ -156,7 +160,10 @@ namespace Ingenieria.De.Software
 
                 // Filtro por Fecha de Publicación (anteriores o iguales a la fecha seleccionada)
                 DateTime fechaLimite = FiltroFecha.Value.Date;
-                filtradas = filtradas.Where(a => a.FechaPublicacion_824_ec.Date <= fechaLimite);
+                if (CMDdirecciondeFecha.SelectedIndex == 0)
+                    filtradas = filtradas.Where(a => a.FechaHora_824_ec.Date <= fechaLimite);
+                else if (CMDdirecciondeFecha.SelectedIndex == 1)
+                    filtradas = filtradas.Where(a => a.FechaHora_824_ec.Date >= fechaLimite);
 
                 foreach (var act in filtradas)
                 {
@@ -259,6 +266,10 @@ namespace Ingenieria.De.Software
         // eventos de Controles
         #region Controles
         private void CMBfiltroActividades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FiltrarGrilla_824_ec();
+        }
+        private void CMDdirecciondeFecha_SelectedIndexChanged(object sender, EventArgs e)
         {
             FiltrarGrilla_824_ec();
         }

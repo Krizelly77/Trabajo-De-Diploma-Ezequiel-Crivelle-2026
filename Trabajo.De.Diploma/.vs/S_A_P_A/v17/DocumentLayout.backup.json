@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1B8B5122-C102-42BA-B8C3-ED457F07A10F}|Capa_de_Aplicaci\u00F3n(BLL)\\Capa_de_Aplicaci\u00F3n(BLL).csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\capa_de_aplicaci\u00F3n(bll)\\_824_ecserializadorbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1B8B5122-C102-42BA-B8C3-ED457F07A10F}|Capa_de_Aplicaci\u00F3n(BLL)\\Capa_de_Aplicaci\u00F3n(BLL).csproj|solutionrelative:capa_de_aplicaci\u00F3n(bll)\\_824_ecserializadorbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{3E48DFD3-B9C2-49E0-B09F-8455BE14CCE3}|Capa_de_Servicios(SL)\\Capa_de_Servicios(SL).csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\capa_de_servicios(sl)\\_824_ecserializadorxml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E48DFD3-B9C2-49E0-B09F-8455BE14CCE3}|Capa_de_Servicios(SL)\\Capa_de_Servicios(SL).csproj|solutionrelative:capa_de_servicios(sl)\\_824_ecserializadorxml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\formgestionusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\formgestionusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1B8B5122-C102-42BA-B8C3-ED457F07A10F}|Capa_de_Aplicaci\u00F3n(BLL)\\Capa_de_Aplicaci\u00F3n(BLL).csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\capa_de_aplicaci\u00F3n(bll)\\usuariobll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1B8B5122-C102-42BA-B8C3-ED457F07A10F}|Capa_de_Aplicaci\u00F3n(BLL)\\Capa_de_Aplicaci\u00F3n(BLL).csproj|solutionrelative:capa_de_aplicaci\u00F3n(bll)\\usuariobll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\formgestionusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\formgestionusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,26 +43,65 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Form1.cs",
-              "RelativeDocumentMoniker": "Ingenieria.De.Software\\Form1.cs",
-              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Form1.cs",
-              "RelativeToolTip": "Ingenieria.De.Software\\Form1.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAwwDsAAAAUAAAAAAAAAA==",
+              "Title": "_824_ecSerializadorBLL.cs",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Aplicaci\u00F3n(BLL)\\_824_ecSerializadorBLL.cs",
+              "RelativeDocumentMoniker": "Capa_de_Aplicaci\u00F3n(BLL)\\_824_ecSerializadorBLL.cs",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Aplicaci\u00F3n(BLL)\\_824_ecSerializadorBLL.cs",
+              "RelativeToolTip": "Capa_de_Aplicaci\u00F3n(BLL)\\_824_ecSerializadorBLL.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-26T11:11:32.225Z",
+              "WhenOpened": "2026-10-21T15:34:05.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UsuarioBLL.cs",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Aplicaci\u00F3n(BLL)\\UsuarioBLL.cs",
+              "RelativeDocumentMoniker": "Capa_de_Aplicaci\u00F3n(BLL)\\UsuarioBLL.cs",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Aplicaci\u00F3n(BLL)\\UsuarioBLL.cs",
+              "RelativeToolTip": "Capa_de_Aplicaci\u00F3n(BLL)\\UsuarioBLL.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAkwGYAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T14:50:28.401Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Form1.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Form1.cs",
-              "RelativeDocumentMoniker": "Ingenieria.De.Software\\Form1.cs",
-              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Form1.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Ingenieria.De.Software\\Form1.cs [Dise\u00F1o]",
+              "Title": "_824_ecSerializadorXml.cs",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Servicios(SL)\\_824_ecSerializadorXml.cs",
+              "RelativeDocumentMoniker": "Capa_de_Servicios(SL)\\_824_ecSerializadorXml.cs",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Servicios(SL)\\_824_ecSerializadorXml.cs",
+              "RelativeToolTip": "Capa_de_Servicios(SL)\\_824_ecSerializadorXml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-26T11:11:30.355Z",
+              "WhenOpened": "2026-10-21T14:43:26.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FormGestionUsuarios.cs",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\FormGestionUsuarios.cs",
+              "RelativeDocumentMoniker": "Ingenieria.De.Software\\FormGestionUsuarios.cs",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\FormGestionUsuarios.cs",
+              "RelativeToolTip": "Ingenieria.De.Software\\FormGestionUsuarios.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAwwJcAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T14:38:15.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FormGestionUsuarios.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\FormGestionUsuarios.cs",
+              "RelativeDocumentMoniker": "Ingenieria.De.Software\\FormGestionUsuarios.cs",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\FormGestionUsuarios.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Ingenieria.De.Software\\FormGestionUsuarios.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T14:33:11.89Z",
               "EditorCaption": " [Dise\u00F1o]"
             }
           ]

@@ -99,6 +99,7 @@ namespace Capa_de_Aplicación_BLL_
             }
             return "Contraseña invalida";
         }
+
         //metodos de soporte
         public void ValidarCredenciales(string usuario, string password)
         {

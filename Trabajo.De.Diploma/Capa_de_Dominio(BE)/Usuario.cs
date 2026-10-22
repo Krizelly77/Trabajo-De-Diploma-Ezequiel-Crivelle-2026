@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Capa_de_Dominio_BE_
 {
@@ -12,7 +13,8 @@ namespace Capa_de_Dominio_BE_
         {
             Id = id;
         }
-
+        // constructor vacio para el serializador
+        public Usuario() {}
         // Atributos de Infraestructura / Seguridad de ingenieria de soft
         public int Id { get; set; }
         public string NombreUsuario { get; set; }
@@ -22,9 +24,11 @@ namespace Capa_de_Dominio_BE_
         public bool BloqueoDV { get; set; }
         public string DVH { get; set; }
 
+        [XmlIgnore]
         public List<ComponentePermiso> Permisos { get; set; } = new List<ComponentePermiso>();
 
         // Atributos de Negocio  de Trabajo de Diploma 
+        [XmlIgnore]
         public List<_824_ecPostulacion> HistorialParticipaciones { get; set; } = new List<_824_ecPostulacion>();
 
 

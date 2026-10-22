@@ -57,6 +57,8 @@
             this.BTNconfirmar = new System.Windows.Forms.Button();
             this.BTNcancelar = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
+            this.HoraActividad = new System.Windows.Forms.DateTimePicker();
+            this.HoraCaducidad = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.NUDmin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUDmax)).BeginInit();
             this.panel1.SuspendLayout();
@@ -231,9 +233,10 @@
             this.FechaActividad.CalendarTitleBackColor = System.Drawing.Color.OliveDrab;
             this.FechaActividad.CalendarTrailingForeColor = System.Drawing.SystemColors.WindowFrame;
             this.FechaActividad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FechaActividad.Location = new System.Drawing.Point(216, 363);
+            this.FechaActividad.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.FechaActividad.Location = new System.Drawing.Point(216, 364);
             this.FechaActividad.Name = "FechaActividad";
-            this.FechaActividad.Size = new System.Drawing.Size(323, 26);
+            this.FechaActividad.Size = new System.Drawing.Size(195, 26);
             this.FechaActividad.TabIndex = 5;
             // 
             // FechaCaducidad
@@ -243,9 +246,10 @@
             this.FechaCaducidad.CalendarTitleBackColor = System.Drawing.Color.OliveDrab;
             this.FechaCaducidad.CalendarTrailingForeColor = System.Drawing.SystemColors.WindowFrame;
             this.FechaCaducidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FechaCaducidad.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.FechaCaducidad.Location = new System.Drawing.Point(216, 403);
             this.FechaCaducidad.Name = "FechaCaducidad";
-            this.FechaCaducidad.Size = new System.Drawing.Size(323, 26);
+            this.FechaCaducidad.Size = new System.Drawing.Size(195, 26);
             this.FechaCaducidad.TabIndex = 6;
             // 
             // TXTlugar
@@ -414,11 +418,41 @@
             this.label14.Text = "---------------------------------------------------------------------------------" +
     "-------";
             // 
+            // HoraActividad
+            // 
+            this.HoraActividad.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HoraActividad.CalendarMonthBackground = System.Drawing.SystemColors.Control;
+            this.HoraActividad.CalendarTitleBackColor = System.Drawing.Color.OliveDrab;
+            this.HoraActividad.CalendarTrailingForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.HoraActividad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HoraActividad.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.HoraActividad.Location = new System.Drawing.Point(417, 366);
+            this.HoraActividad.Name = "HoraActividad";
+            this.HoraActividad.ShowUpDown = true;
+            this.HoraActividad.Size = new System.Drawing.Size(122, 26);
+            this.HoraActividad.TabIndex = 66;
+            // 
+            // HoraCaducidad
+            // 
+            this.HoraCaducidad.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HoraCaducidad.CalendarMonthBackground = System.Drawing.SystemColors.Control;
+            this.HoraCaducidad.CalendarTitleBackColor = System.Drawing.Color.OliveDrab;
+            this.HoraCaducidad.CalendarTrailingForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.HoraCaducidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HoraCaducidad.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.HoraCaducidad.Location = new System.Drawing.Point(417, 401);
+            this.HoraCaducidad.Name = "HoraCaducidad";
+            this.HoraCaducidad.ShowUpDown = true;
+            this.HoraCaducidad.Size = new System.Drawing.Size(122, 26);
+            this.HoraCaducidad.TabIndex = 67;
+            // 
             // _824_ecFormABMactividad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 642);
+            this.Controls.Add(this.HoraCaducidad);
+            this.Controls.Add(this.HoraActividad);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.BTNcancelar);
             this.Controls.Add(this.BTNconfirmar);
@@ -489,5 +523,7 @@
         private System.Windows.Forms.Button BTNcancelar;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button BTNrestablecerCampos;
+        private System.Windows.Forms.DateTimePicker HoraActividad;
+        private System.Windows.Forms.DateTimePicker HoraCaducidad;
     }
 }

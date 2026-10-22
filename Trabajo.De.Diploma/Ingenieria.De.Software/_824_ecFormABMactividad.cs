@@ -125,6 +125,8 @@ namespace Ingenieria.De.Software
             NUDmin.Enabled = false;
             FechaActividad.Enabled = false;
             FechaCaducidad.Enabled = false;
+            HoraActividad.Enabled = false;
+            HoraCaducidad.Enabled = false;
             CMBcategoria.Enabled = false;
             CMBestado.Enabled = false;
             CMBnivel.Enabled = false;
@@ -137,7 +139,9 @@ namespace Ingenieria.De.Software
             NUDmax.Value = _824_ecAct.CantidadMaxima_824_ec;
             NUDmin.Value = _824_ecAct.CantidadMinima_824_ec;
             FechaActividad.Value = _824_ecAct.FechaHora_824_ec;
+            HoraActividad.Value = _824_ecAct.FechaHora_824_ec;
             FechaCaducidad.Value = _824_ecAct.FechaCaducidad_824_ec;
+            HoraCaducidad.Value = _824_ecAct.FechaCaducidad_824_ec;
             if (_824_ecAct.Categoria_824_ec != null)
                 CMBcategoria.SelectedItem = _824_ecAct.Categoria_824_ec.Nombre_824_ec;
             CMBestado.SelectedItem = _824_ecAct.Estado_824_ec;
@@ -204,8 +208,13 @@ namespace Ingenieria.De.Software
             act.CantidadMaxima_824_ec = (int)NUDmax.Value;
 
             // Fechas
-            act.FechaHora_824_ec = FechaActividad.Value;
-            act.FechaCaducidad_824_ec = FechaCaducidad.Value;
+            DateTime fechaSeleccionada = FechaActividad.Value.Date;
+            TimeSpan horaSeleccionada = HoraActividad.Value.TimeOfDay;
+            act.FechaHora_824_ec = fechaSeleccionada.Add(horaSeleccionada);
+
+            DateTime fechaSeleccionada2 = FechaCaducidad.Value.Date;
+            TimeSpan horaSeleccionada2 = HoraCaducidad.Value.TimeOfDay;
+            act.FechaCaducidad_824_ec = fechaSeleccionada2.Add(horaSeleccionada2);
 
             // Organizador
             if (act.Organizador_824_ec == null)
