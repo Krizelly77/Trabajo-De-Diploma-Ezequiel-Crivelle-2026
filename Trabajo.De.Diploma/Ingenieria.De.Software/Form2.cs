@@ -16,6 +16,7 @@ namespace Ingenieria.De.Software
     public partial class Form2 : Form, IObservadorDeIdioma
     {
         public Form PadreLogin { get; set; }
+        private Usuario usuarioActivo { get; set; }
         public Form2()
         {
             InitializeComponent();
@@ -25,9 +26,24 @@ namespace Ingenieria.De.Software
             GestorDeIdioma.TraerInstancia().Suscribir(this);
             ActualizarIdioma(GestorDeIdioma.TraerInstancia().ObtenerTextos());
 
-            var usuarioActivo = SessionManager.TraerInstancia().usuarioINS;
+            usuarioActivo = SessionManager.TraerInstancia().usuarioINS;
             LBLnombre.Text = usuarioActivo.NombreUsuario;
             AplicarPermisos(usuarioActivo);
+            CargarNotificaciones();
+        }
+        // En la carga
+        #region carga
+        private void CargarNotificaciones()
+        {
+            int not = _824_ecNotificacionBLL.ListarPorDestinatario_824_ec(usuarioActivo.Id).Where(c => !c.Leida_824_ec).Count();
+            if (not < 1)
+                LBLnotificaciones.Visible = false;
+            else
+            {
+                LBLnotificaciones.Visible = true;
+                LBLnotificaciones.Text = not.ToString();
+            }
+
         }
 
         public void ActualizarIdioma(Dictionary<string, string> textos)
@@ -54,6 +70,8 @@ namespace Ingenieria.De.Software
                     c.Enabled = usuario.TienePermiso(c.Tag.ToString());
             }
         }
+        #endregion carga
+
         //botones
         #region botones
         private void BTNcerrar_Click(object sender, EventArgs e)
@@ -155,6 +173,17 @@ namespace Ingenieria.De.Software
                 fMisAct_824_ec.ShowDialog(this);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        private void BTNnotificaciones_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _824_ecFormNotificaciones fNots_824_ec = new _824_ecFormNotificaciones();
+                fNots_824_ec.UsuarioAnalizado = usuarioActivo;
+                fNots_824_ec.ShowDialog(this);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            CargarNotificaciones();
         }
         #endregion formularios
 

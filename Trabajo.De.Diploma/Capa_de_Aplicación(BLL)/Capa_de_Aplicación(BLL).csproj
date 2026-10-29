@@ -50,6 +50,7 @@
     <Compile Include="IObservadorDeIdioma.cs" />
     <Compile Include="PermisoBLL.cs" />
     <Compile Include="_824_ecCategoriaBLL.cs" />
+    <Compile Include="_824_ecNotificacionBLL.cs" />
     <Compile Include="_824_ecPostulacionBLL.cs" />
     <Compile Include="UsuarioBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

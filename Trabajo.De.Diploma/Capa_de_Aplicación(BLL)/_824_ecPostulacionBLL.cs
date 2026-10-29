@@ -24,19 +24,46 @@ namespace Capa_de_Aplicación_BLL_
                 throw new Exception("La actividad ha caducado.");
             }
 
-            // Validar duplicados
-            List<_824_ecPostulacion> existentes_824_ec = _824_ecPostulacionDAL.ListarPorActividad_824_ec(postulacion_824_ec.Actividad_824_ec.Id_824_ec);
-            if (existentes_824_ec.Any(p => p.Candidato_824_ec.Id == postulacion_824_ec.Candidato_824_ec.Id))
-                throw new Exception("El usuario ya cuenta con una postulación registrada para esta actividad.");
 
             // Validar Organizador participando en su propia actividad
             if (idPostulante == postulacion_824_ec.Actividad_824_ec.Organizador_824_ec.Id)
                 throw new Exception("Un organizador no se puede postular como participante en su propia actividad");
 
+            // Validar postulaciones existentes
+            List<_824_ecPostulacion> existentes_824_ec = _824_ecPostulacionDAL.ListarPorActividad_824_ec(postulacion_824_ec.Actividad_824_ec.Id_824_ec);
+            var existente = existentes_824_ec.FirstOrDefault(p => p.Candidato_824_ec.Id == postulacion_824_ec.Candidato_824_ec.Id);
+
+            if (existente != null)
+            {
+                switch (existente.Estado_824_ec)
+                {
+                    case EstadoPostulacion_824_ec.Postulado:
+                    case EstadoPostulacion_824_ec.Aceptado:
+                        throw new Exception(
+                            "El usuario ya cuenta con una postulación registrada para esta actividad.");
+
+                    case EstadoPostulacion_824_ec.Rechazado:
+                        throw new Exception(
+                            "El usuario no se puede postular a una actividad en la que fue rechazado.");
+
+                    case EstadoPostulacion_824_ec.Retirado:
+
+                        // Reutilizar el registro existente
+                        postulacion_824_ec.Id_824_ec = existente.Id_824_ec;
+
+                        // Reactivar la postulación
+                        postulacion_824_ec.Estado_824_ec =
+                            EstadoPostulacion_824_ec.Postulado;
+
+                        break;
+                }
+            }
+
             int resultado = _824_ecPostulacionDAL.Guardar_824_ec(postulacion_824_ec);
             LlamarAlDigitoVerificador(resultado);
             return resultado;
         }
+
 
         public static bool EvaluarCandidatoAntesDeCambiarEstado_824_ec(int postulacionId_824_ec, EstadoPostulacion_824_ec viejoEstado_824_ec,  EstadoPostulacion_824_ec nuevoEstado_824_ec, _824_ecActividad actividad_824_ec)
         {
@@ -56,7 +83,7 @@ namespace Capa_de_Aplicación_BLL_
             // para comprobar que no se alcanzo el cupo maximo 
             List<_824_ecPostulacion> postulaciones_824_ec = _824_ecPostulacionDAL.ListarPorActividad_824_ec(actividad_824_ec.Id_824_ec);
             int Cupos_824_ec = postulaciones_824_ec.Count(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado);
-            if (Cupos_824_ec == actividad_824_ec.CantidadMaxima_824_ec)
+            if (Cupos_824_ec >= actividad_824_ec.CantidadMaxima_824_ec)
                 throw new Exception("Cupo maximo alcanzado");
 
             int resultado = _824_ecPostulacionDAL.ModificarEstado_824_ec(postulacionId_824_ec, nuevoEstado_824_ec);

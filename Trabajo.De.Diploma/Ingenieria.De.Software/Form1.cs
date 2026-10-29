@@ -263,6 +263,5 @@ namespace Ingenieria.De.Software
         }
 
         #endregion diseño de botones
-
     }
 }

@@ -101,7 +101,7 @@ namespace Ingenieria.De.Software
 
             DateTime fechaLimite = FiltroFecha.Value.Date;
 
-            var filtradas = pos.Where(p => p.Actividad_824_ec.FechaHora_824_ec.Date <= fechaLimite);
+            var filtradas = pos.Where(p => p.Actividad_824_ec.FechaHora_824_ec.Date >= fechaLimite);
 
 
 

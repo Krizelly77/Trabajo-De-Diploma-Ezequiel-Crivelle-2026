@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.LBLnombre = new System.Windows.Forms.Label();
             this.BTNcerrar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -42,31 +41,22 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.BTNnotificaciones = new System.Windows.Forms.Button();
+            this.LBLnotificaciones = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(7, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 44);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Usuario:";
-            // 
             // LBLnombre
             // 
             this.LBLnombre.AutoSize = true;
-            this.LBLnombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBLnombre.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.LBLnombre.Location = new System.Drawing.Point(169, 51);
+            this.LBLnombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLnombre.ForeColor = System.Drawing.SystemColors.Control;
+            this.LBLnombre.Location = new System.Drawing.Point(12, 31);
             this.LBLnombre.Name = "LBLnombre";
-            this.LBLnombre.Size = new System.Drawing.Size(39, 33);
+            this.LBLnombre.Size = new System.Drawing.Size(137, 39);
             this.LBLnombre.TabIndex = 1;
-            this.LBLnombre.Text = "...";
+            this.LBLnombre.Text = "Usuario";
             // 
             // BTNcerrar
             // 
@@ -92,7 +82,7 @@
             this.panel1.Controls.Add(this.BTNbitacora);
             this.panel1.Controls.Add(this.BTNgestUsuarios);
             this.panel1.Controls.Add(this.BTNcerrar);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.LBLnombre);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -238,23 +228,52 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label2.Location = new System.Drawing.Point(269, 9);
+            this.label2.Location = new System.Drawing.Point(263, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(514, 29);
             this.label2.TabIndex = 41;
             this.label2.Text = "Sistema Para Armar y Participar de Actividades";
+            // 
+            // BTNnotificaciones
+            // 
+            this.BTNnotificaciones.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.BTNnotificaciones.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNnotificaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNnotificaciones.Font = new System.Drawing.Font("Microsoft JhengHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNnotificaciones.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTNnotificaciones.Location = new System.Drawing.Point(783, 27);
+            this.BTNnotificaciones.Name = "BTNnotificaciones";
+            this.BTNnotificaciones.Size = new System.Drawing.Size(76, 33);
+            this.BTNnotificaciones.TabIndex = 6;
+            this.BTNnotificaciones.Tag = "";
+            this.BTNnotificaciones.Text = "Campana";
+            this.BTNnotificaciones.UseVisualStyleBackColor = false;
+            this.BTNnotificaciones.Click += new System.EventHandler(this.BTNnotificaciones_Click);
+            // 
+            // LBLnotificaciones
+            // 
+            this.LBLnotificaciones.AutoSize = true;
+            this.LBLnotificaciones.BackColor = System.Drawing.Color.IndianRed;
+            this.LBLnotificaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLnotificaciones.ForeColor = System.Drawing.SystemColors.Control;
+            this.LBLnotificaciones.Location = new System.Drawing.Point(837, 54);
+            this.LBLnotificaciones.Name = "LBLnotificaciones";
+            this.LBLnotificaciones.Size = new System.Drawing.Size(14, 16);
+            this.LBLnotificaciones.TabIndex = 42;
+            this.LBLnotificaciones.Text = "1";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(880, 431);
+            this.Controls.Add(this.LBLnotificaciones);
+            this.Controls.Add(this.BTNnotificaciones);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.BTNverActividades);
             this.Controls.Add(this.BTNmisActividades);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.LBLnombre);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form2";
             this.Text = "Form2";
@@ -269,8 +288,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LBLnombre;
         private System.Windows.Forms.Button BTNcerrar;
         private System.Windows.Forms.Panel panel1;
@@ -284,5 +301,7 @@
         private System.Windows.Forms.Button BTNverActividades;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button BTNnotificaciones;
+        private System.Windows.Forms.Label LBLnotificaciones;
     }
 }

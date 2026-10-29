@@ -34,6 +34,9 @@ namespace Capa_de_Aplicación_BLL_
             string resPostulacion = ValidarTabla<_824_ecPostulacion>("Postulacion", "Postulacion_DVH", () => _824_ecPostulacionDAL.ListarTodas_824_ec().Cast<IVerificable>().ToList());
             if (resPostulacion != "ok") return resPostulacion;
 
+            // 5. Validar Notificacion
+            string resNotificacion = ValidarTabla<_824_ecNotificacion>("Notificacion", "Notificacion_DVH", () => _824_ecNotificacionDAL.Listar_824_ec().Cast<IVerificable>().ToList());
+            if (resNotificacion != "ok") return resNotificacion;
             return "ok";
         }
 
@@ -107,6 +110,8 @@ namespace Capa_de_Aplicación_BLL_
             RecalcularIntegridadTabla("Categoria", "Categoria_Id", _824_ecCategoriaDAL.Listar_824_ec, c => c.Id_824_ec, (c, dvh) => c.DVH_824_ec = dvh);
             RecalcularIntegridadTabla("Actividad", "Actividad_Id", _824_ecActividadDAL.ListarTodas_824_ec, a => a.Id_824_ec, (a, dvh) => a.DVH_824_ec = dvh);
             RecalcularIntegridadTabla("Postulacion", "Postulacion_Id", _824_ecPostulacionDAL.ListarTodas_824_ec, p => p.Id_824_ec, (p, dvh) => p.DVH_824_ec = dvh);
+            RecalcularIntegridadTabla("Notificacion", "Notificacion_Id", _824_ecNotificacionDAL.Listar_824_ec, n => n.Id_824_ec, (n, dvh) => n.DVH_824_ec = dvh);
+
         }
 
         private string GetDVHFromEntidad(IVerificable entidad)
@@ -115,6 +120,8 @@ namespace Capa_de_Aplicación_BLL_
             if (entidad is _824_ecCategoria c) return c.DVH_824_ec;
             if (entidad is _824_ecActividad a) return a.DVH_824_ec;
             if (entidad is _824_ecPostulacion p) return p.DVH_824_ec;
+            if (entidad is _824_ecNotificacion n) return n.DVH_824_ec;
+
             return null;
         }
 

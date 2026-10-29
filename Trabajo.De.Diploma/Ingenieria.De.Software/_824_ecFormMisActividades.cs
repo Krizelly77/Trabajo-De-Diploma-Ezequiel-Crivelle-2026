@@ -23,6 +23,7 @@ namespace Ingenieria.De.Software
         private List<_824_ecPostulacion> PartAct_824_ec; 
         private bool _ejecutandoLimpieza = false; // Variable para evitar bucles infinitos de eventos
         private bool _actualizandoGrilla = false; // bandera para evitar que se dispare el evento inesperadamente
+        private Usuario UsuariActual;
 
         public _824_ecFormMisActividades()
         {
@@ -31,6 +32,12 @@ namespace Ingenieria.De.Software
 
         private void _824_ecFormMisActividades_Load(object sender, EventArgs e)
         {
+            UsuariActual = SessionManager.TraerInstancia().usuarioINS;
+            if (UsuariActual == null)
+            {
+                this.Close();
+                throw new Exception("No se encontro un usuario logueado");
+            }
             ConfigurarFiltros_824_ec();
             CargarGrilla_824_ec();
             CargarGrillaPostulados_824_ec();
@@ -51,16 +58,16 @@ namespace Ingenieria.De.Software
             CMDdirecciondeFecha.Items.Clear();
             CMDdirecciondeFecha.Items.Add("Antes del:");
             CMDdirecciondeFecha.Items.Add("Despues del:");
-            CMDdirecciondeFecha.SelectedIndex = 0;
+            CMDdirecciondeFecha.SelectedIndex = 1;
 
         }
         private void CargarListaDesdeBD_824_ec()
         {
-            Usuario usuarioActual = SessionManager.TraerInstancia().usuarioINS;
-            if (usuarioActual != null)
+            
+            if (UsuariActual != null)
             {
                 MisAct_824_ec = _824_ecActividadBLL.ListarTodas_824_ec()
-                    .Where(a => a.Organizador_824_ec != null && a.Organizador_824_ec.Id == usuarioActual.Id)
+                    .Where(a => a.Organizador_824_ec != null && a.Organizador_824_ec.Id == UsuariActual.Id)
                     .ToList();
             }
             else
@@ -451,12 +458,16 @@ namespace Ingenieria.De.Software
                     _824_ecPostulacion viejaPost = _824_ecPostulacionBLL.BuscarPorID_824_ec(mId);
                     bool AptoParaCompletar = _824_ecPostulacionBLL.EvaluarCandidatoAntesDeCambiarEstado_824_ec(viejaPost.Id_824_ec, viejaPost.Estado_824_ec, EstadoPostulacion_824_ec.Aceptado, viejaPost.Actividad_824_ec);
 
-                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Aceptado");
+                    _824_ecNotificacionBLL.Guardar_824_ec(
+                        new _824_ecNotificacion("Postulacion Aceptada"
+                        , $"El usuario {UsuariActual.NombreUsuario} acepto tu postulacion para la actividad {viejaPost.Actividad_824_ec.Nombre_824_ec} para el dia {viejaPost.Actividad_824_ec.FechaHora_824_ec.ToString()}."
+                        , UsuariActual.Id, viejaPost.Candidato_824_ec.Id));
                     MessageBox.Show("Postulacion Aceptada con éxito");
                     if (AptoParaCompletar)
                     {
                         MessageBox.Show("Se alcanzo el cupo minimo, grupo ya puede completarce");
                     }
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Aceptado");
                 }
                 catch (Exception ex)
                 { MessageBox.Show(ex.Message); }
@@ -479,8 +490,12 @@ namespace Ingenieria.De.Software
                     _824_ecPostulacion viejaPost = _824_ecPostulacionBLL.BuscarPorID_824_ec(mId);
                     _824_ecPostulacionBLL.EvaluarCandidatoAntesDeCambiarEstado_824_ec(viejaPost.Id_824_ec, viejaPost.Estado_824_ec, EstadoPostulacion_824_ec.Postulado, viejaPost.Actividad_824_ec);
 
-                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Postulado");
+                    _824_ecNotificacionBLL.Guardar_824_ec(
+                        new _824_ecNotificacion("Postulacion Revocada"
+                        , $"El usuario {UsuariActual.NombreUsuario} Revoco la aceptacion de tu postulacion para la actividad {viejaPost.Actividad_824_ec.Nombre_824_ec} para el dia {viejaPost.Actividad_824_ec.FechaHora_824_ec.ToString()}, el organizador puede volver a aceptarte si asi lo desea ."
+                        , UsuariActual.Id, viejaPost.Candidato_824_ec.Id));
                     MessageBox.Show("Postulación revocada del grupo con éxito");
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Postulado");
                 }
                 catch (Exception ex)
                 { MessageBox.Show(ex.Message); }
@@ -494,8 +509,12 @@ namespace Ingenieria.De.Software
                     _824_ecPostulacion viejaPost2 = _824_ecPostulacionBLL.BuscarPorID_824_ec(mId2);
                     _824_ecPostulacionBLL.EvaluarCandidatoAntesDeCambiarEstado_824_ec(viejaPost2.Id_824_ec, viejaPost2.Estado_824_ec, EstadoPostulacion_824_ec.Rechazado, viejaPost2.Actividad_824_ec);
 
-                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost2.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost2.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost2.Estado_824_ec} a:Rechazado");
+                    _824_ecNotificacionBLL.Guardar_824_ec(
+                        new _824_ecNotificacion("Postulacion Rechazada"
+                        , $"El usuario {UsuariActual.NombreUsuario} Rechazo definitivamente tu postulacion para la actividad {viejaPost2.Actividad_824_ec.Nombre_824_ec} para el dia {viejaPost2.Actividad_824_ec.FechaHora_824_ec.ToString()}, ya no podras participar en esta actividad."
+                        , UsuariActual.Id, viejaPost2.Candidato_824_ec.Id));
                     MessageBox.Show("Postulación rechazada con éxito");
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost2.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost2.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost2.Estado_824_ec} a:Rechazado");
                 }
                 catch (Exception ex2)
                 { MessageBox.Show(ex2.Message); }

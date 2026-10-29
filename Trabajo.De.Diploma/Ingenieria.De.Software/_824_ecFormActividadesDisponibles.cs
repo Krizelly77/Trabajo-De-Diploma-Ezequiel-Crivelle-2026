@@ -19,6 +19,8 @@ namespace Ingenieria.De.Software
         private List<_824_ecActividad> ActDis_824_ec;
         private List<_824_ecPostulacion> MisPost_824_ec;
         private Usuario UsuarioActual;
+        private bool _ejecutandoLimpieza = false; // Variable para evitar bucles infinitos de eventos
+        private bool _actualizandoGrilla = false; // bandera para evitar que se dispare el evento inesperadamente
 
         public _824_ecFormActividadesDisponibles()
         {
@@ -28,7 +30,11 @@ namespace Ingenieria.De.Software
         private void _824_ecFormActividadesDisponibles_Load(object sender, EventArgs e)
         {
             UsuarioActual = SessionManager.TraerInstancia().usuarioINS;
-
+            if (UsuarioActual == null)
+            {
+                this.Close();
+                throw new Exception("No se encontro un usuario logueado");
+            }
             ConfigurarFiltros_824_ec();
             CargarGrillaPostulaciones_824_ec();
             CargarGrilla_824_ec();
@@ -48,7 +54,7 @@ namespace Ingenieria.De.Software
             CMDdirecciondeFecha.Items.Clear();
             CMDdirecciondeFecha.Items.Add("Antes del:");
             CMDdirecciondeFecha.Items.Add("Despues del:");
-            CMDdirecciondeFecha.SelectedIndex = 0;
+            CMDdirecciondeFecha.SelectedIndex = 1;
         }
 
         // cargar la grillas de las postulaciones
@@ -227,8 +233,12 @@ namespace Ingenieria.De.Software
                     nuevaPost.Candidato_824_ec = UsuarioActual;
                     _824_ecPostulacionBLL.RegistrarPostulacion_824_ec(nuevaPost, UsuarioActual.Id);
 
-                    SessionManager.TraerInstancia().RegistrarActividad("Alta de Postulacion: en" + nuevaPost.Actividad_824_ec.Nombre_824_ec + " de id: " + nuevaPost.Id_824_ec);
+                    _824_ecNotificacionBLL.Guardar_824_ec(
+                        new _824_ecNotificacion("Nueva Postulacion"
+                        , $"El usuario {UsuarioActual.NombreUsuario} se postulo para la actividad {nuevaPost.Actividad_824_ec.Nombre_824_ec} para el dia {nuevaPost.Actividad_824_ec.FechaHora_824_ec.ToString()}."
+                        , UsuarioActual.Id, nuevaPost.Actividad_824_ec.Organizador_824_ec.Id ));
                     MessageBox.Show("Postulacion registrada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    SessionManager.TraerInstancia().RegistrarActividad("Alta de Postulacion: en" + nuevaPost.Actividad_824_ec.Nombre_824_ec + " de id: " + nuevaPost.Id_824_ec);
                 }
                 catch (Exception ex)
                 {   MessageBox.Show(ex.Message);}
@@ -249,8 +259,12 @@ namespace Ingenieria.De.Software
                     _824_ecPostulacion viejaPost = _824_ecPostulacionBLL.BuscarPorID_824_ec(mId);
                     _824_ecPostulacionBLL.EvaluarCandidatoAntesDeCambiarEstado_824_ec(viejaPost.Id_824_ec, viejaPost.Estado_824_ec, EstadoPostulacion_824_ec.Retirado, viejaPost.Actividad_824_ec);
 
-                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Retirado");
+                    _824_ecNotificacionBLL.Guardar_824_ec(
+                        new _824_ecNotificacion("Participante retiro su postulacion"
+                        , $"El usuario {UsuarioActual.NombreUsuario} retiro su postulacion para la actividad {viejaPost.Actividad_824_ec.Nombre_824_ec} para el dia {viejaPost.Actividad_824_ec.FechaHora_824_ec.ToString()}."
+                        , UsuarioActual.Id, viejaPost.Actividad_824_ec.Organizador_824_ec.Id));
                     MessageBox.Show("Postulacion retirada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Retirado");
                 }
                 catch(Exception ex) 
                 { MessageBox.Show(ex.Message); }
@@ -280,12 +294,28 @@ namespace Ingenieria.De.Software
 
         private void DGVactividades_SelectionChanged(object sender, EventArgs e)
         {
+            if (_ejecutandoLimpieza) return;
+
+            if (DGVactividades.SelectedRows.Count > 0 || DGVactividades.SelectedCells.Count > 0)
+            {
+                _ejecutandoLimpieza = true;
+                DGVpostulaciones.ClearSelection();
+                _ejecutandoLimpieza = false;
+                BTNretirar.Enabled = false;
+                BTNverDetalle.Enabled = true;
+            }
             // deslocalisamos la logica por si el evento no se dispara al seleccionar desde la otra grilla
             ActualizarEstadoBotonPostular();
         }
         private void ActualizarEstadoBotonPostular()
         {
-            if (DGVactividades.CurrentRow == null)
+            if (DGVpostulaciones.SelectedRows.Count > 0 || DGVpostulaciones.SelectedCells.Count > 0)
+            {
+                BTNpostular.Enabled = false;
+                return;
+            }
+
+            if (DGVactividades.CurrentRow == null || DGVactividades.SelectedRows.Count == 0)
             {
                 BTNpostular.Enabled = false;
                 return;
@@ -299,8 +329,7 @@ namespace Ingenieria.De.Software
                 return;
             }
 
-            _824_ecActividad act = ActDis_824_ec?
-                .FirstOrDefault(a => a.Id_824_ec == actividadId);
+            _824_ecActividad act = ActDis_824_ec?.FirstOrDefault(a => a.Id_824_ec == actividadId);
 
             if (act == null)
             {
@@ -308,13 +337,24 @@ namespace Ingenieria.De.Software
                 return;
             }
 
-            BTNpostular.Enabled =
-                act.Estado_824_ec == EstadoActividad_824_ec.Abierto ||
+            BTNpostular.Enabled = act.Estado_824_ec == EstadoActividad_824_ec.Abierto ||
                 act.Estado_824_ec == EstadoActividad_824_ec.Completado;
         }
 
         private void DGVpostulaciones_SelectionChanged(object sender, EventArgs e)
         {
+            if (_ejecutandoLimpieza) return;
+
+            if (DGVpostulaciones.SelectedRows.Count > 0 || DGVpostulaciones.SelectedCells.Count > 0)
+            {
+                _ejecutandoLimpieza = true;
+                DGVactividades.ClearSelection();
+                _ejecutandoLimpieza = false;
+                BTNretirar.Enabled = true;
+                BTNverDetalle.Enabled = false;
+                BTNpostular.Enabled = false;
+            }
+
             if (DGVpostulaciones.CurrentRow != null && DGVpostulaciones.CurrentRow.Cells["Id"].Value != null)
             {
                 if (int.TryParse(DGVpostulaciones.CurrentRow.Cells["Id"].Value.ToString(), out int PostulacionId))
@@ -323,7 +363,7 @@ namespace Ingenieria.De.Software
                     if (post != null)
                     {
                         // si el grupo esta completado, ya no puede retirar su postulacion
-                        if (post.Actividad_824_ec.Estado_824_ec == EstadoActividad_824_ec.Completado)
+                        if (post.Actividad_824_ec.Estado_824_ec == EstadoActividad_824_ec.Completado || post.Actividad_824_ec.Estado_824_ec == EstadoActividad_824_ec.Caducado)
                             BTNretirar.Enabled = false;
                         else
                             BTNretirar.Enabled = true;

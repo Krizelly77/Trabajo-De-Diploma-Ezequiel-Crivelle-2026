@@ -47,6 +47,7 @@
     <Compile Include="ComponentePermiso.cs" />
     <Compile Include="FiltrosBitacora.cs" />
     <Compile Include="IVerificable.cs" />
+    <Compile Include="_824_ecNotificacion.cs" />
     <Compile Include="_824_ecPostulacion.cs" />
     <Compile Include="RegistroBitacora.cs" />
     <Compile Include="RegistroCambio.cs" />

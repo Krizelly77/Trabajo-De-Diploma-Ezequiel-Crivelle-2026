@@ -50,6 +50,7 @@
     <Compile Include="IdiomaDAL.cs" />
     <Compile Include="PermisoDAL.cs" />
     <Compile Include="_824_ecCategoriaDAL.cs" />
+    <Compile Include="_824_ecNotificacionDAL.cs" />
     <Compile Include="_824_ecPostulacionDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioDAL.cs" />
