@@ -42,7 +42,13 @@ namespace Capa_de_Servicios_SL_
 
         public void RegistrarActividad(string actividad)
         {
-            Notificar(actividad);
+            if (actividad.Length <= 100)
+            {
+                Notificar(actividad);
+            }else
+            {
+                throw new Exception("La tabla en base de datos solo acepta 100 caracteres");
+            }
         }
         #endregion Observer
 

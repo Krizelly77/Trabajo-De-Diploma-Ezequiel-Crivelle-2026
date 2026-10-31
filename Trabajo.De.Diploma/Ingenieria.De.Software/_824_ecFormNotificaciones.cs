@@ -15,7 +15,6 @@ namespace Ingenieria.De.Software
     public partial class _824_ecFormNotificaciones : Form
     {
         private List<_824_ecNotificacion> Notis_824_ec;
-        private List<_824_ecNotificacion> NotisFiltrado_824_ec;
 
         public Usuario UsuarioAnalizado;
 
@@ -157,6 +156,9 @@ namespace Ingenieria.De.Software
             Actualizar_824_ec();
         }
 
+
+        // Botones e interacciones
+        #region Botones e interacciones
         private void BTNvolver_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -175,12 +177,12 @@ namespace Ingenieria.De.Software
             MessageBox.Show(
                 notificacion.Mensaje_824_ec,
                 notificacion.Asunto_824_ec,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
+                MessageBoxButtons.OK
             );
             if(!notificacion.Leida_824_ec)
                 _824_ecNotificacionBLL.MarcarComoLeida_824_ec(idNotificacion);
             cargarLista();
         }
+        #endregion Botones e interacciones
     }
 }

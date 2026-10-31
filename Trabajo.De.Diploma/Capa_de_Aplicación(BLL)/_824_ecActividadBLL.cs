@@ -48,6 +48,8 @@ namespace Capa_de_Aplicación_BLL_
             int resultado = _824_ecActividadDAL.Guardar_824_ec(actividad_824_ec);
             LlamaraAlDigitoVerificador(resultado);
 
+            if (actividad_824_ec.Estado_824_ec == EstadoActividad_824_ec.Completado && estadoAnterior_824_ec != EstadoActividad_824_ec.Completado)
+                resultado = -1;
             return resultado;
         }
 

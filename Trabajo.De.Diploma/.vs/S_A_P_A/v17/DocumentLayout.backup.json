@@ -1,24 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\_824_ecformmisactividades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\_824_ecformmisactividades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\_824_ecformmisactividades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\_824_ecformmisactividades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\_824_ecformactividadesdisponibles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\_824_ecformactividadesdisponibles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\_824_ecformactividadesdisponibles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\_824_ecformactividadesdisponibles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -26,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -35,56 +18,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_824_ecFormActividadesDisponibles.cs",
-              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\_824_ecFormActividadesDisponibles.cs",
-              "RelativeDocumentMoniker": "Ingenieria.De.Software\\_824_ecFormActividadesDisponibles.cs",
-              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\_824_ecFormActividadesDisponibles.cs",
-              "RelativeToolTip": "Ingenieria.De.Software\\_824_ecFormActividadesDisponibles.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAowCEAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-29T17:02:43.467Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_824_ecFormActividadesDisponibles.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\_824_ecFormActividadesDisponibles.cs",
-              "RelativeDocumentMoniker": "Ingenieria.De.Software\\_824_ecFormActividadesDisponibles.cs",
-              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\_824_ecFormActividadesDisponibles.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Ingenieria.De.Software\\_824_ecFormActividadesDisponibles.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-29T17:02:41.12Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "_824_ecFormMisActividades.cs",
-              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\_824_ecFormMisActividades.cs",
-              "RelativeDocumentMoniker": "Ingenieria.De.Software\\_824_ecFormMisActividades.cs",
-              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\_824_ecFormMisActividades.cs",
-              "RelativeToolTip": "Ingenieria.De.Software\\_824_ecFormMisActividades.cs",
-              "ViewState": "AgIAAFoBAAAAAAAAAAAkwKgBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-29T17:02:37.404Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "_824_ecFormMisActividades.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\_824_ecFormMisActividades.cs",
-              "RelativeDocumentMoniker": "Ingenieria.De.Software\\_824_ecFormMisActividades.cs",
-              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\_824_ecFormMisActividades.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Ingenieria.De.Software\\_824_ecFormMisActividades.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-29T17:02:32.258Z",
-              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         }

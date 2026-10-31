@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,6 @@ namespace Ingenieria.De.Software
         private List<_824_ecPostulacion> MisPost_824_ec;
         private Usuario UsuarioActual;
         private bool _ejecutandoLimpieza = false; // Variable para evitar bucles infinitos de eventos
-        private bool _actualizandoGrilla = false; // bandera para evitar que se dispare el evento inesperadamente
 
         public _824_ecFormActividadesDisponibles()
         {
@@ -238,6 +238,7 @@ namespace Ingenieria.De.Software
                         , $"El usuario {UsuarioActual.NombreUsuario} se postulo para la actividad {nuevaPost.Actividad_824_ec.Nombre_824_ec} para el dia {nuevaPost.Actividad_824_ec.FechaHora_824_ec.ToString()}."
                         , UsuarioActual.Id, nuevaPost.Actividad_824_ec.Organizador_824_ec.Id ));
                     MessageBox.Show("Postulacion registrada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    GenerarComprobantePostulacion_824_ec(nuevaPost);
                     SessionManager.TraerInstancia().RegistrarActividad("Alta de Postulacion: en" + nuevaPost.Actividad_824_ec.Nombre_824_ec + " de id: " + nuevaPost.Id_824_ec);
                 }
                 catch (Exception ex)
@@ -264,7 +265,7 @@ namespace Ingenieria.De.Software
                         , $"El usuario {UsuarioActual.NombreUsuario} retiro su postulacion para la actividad {viejaPost.Actividad_824_ec.Nombre_824_ec} para el dia {viejaPost.Actividad_824_ec.FechaHora_824_ec.ToString()}."
                         , UsuarioActual.Id, viejaPost.Actividad_824_ec.Organizador_824_ec.Id));
                     MessageBox.Show("Postulacion retirada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Retirado");
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion de: {viejaPost.Candidato_824_ec.NombreUsuario}, actividad:{viejaPost.Actividad_824_ec.Nombre_824_ec}, a:Retirado");
                 }
                 catch(Exception ex) 
                 { MessageBox.Show(ex.Message); }
@@ -402,5 +403,45 @@ namespace Ingenieria.De.Software
         }
         #endregion Controles
 
+        private void GenerarComprobantePostulacion_824_ec(_824_ecPostulacion postulacion)
+        {
+            DialogResult respuesta = MessageBox.Show( "¿Desea guardar un comprobante de esta postulación en formato PDF?", "Comprobante de postulación",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (respuesta != DialogResult.Yes)
+                return;
+
+            try
+            {
+                string contenido =
+                    "COMPROBANTE DE POSTULACIÓN\n" +
+                    "========================================\n\n" +
+                    "Fecha de generación: " + DateTime.Now + "\n\n" +
+                    "DATOS DEL POSTULANTE\n" +
+                    "Usuario: " + postulacion.Candidato_824_ec.NombreUsuario + "\n\n" +
+                    "DATOS DE LA ACTIVIDAD\n" +
+                    "Actividad: " + postulacion.Actividad_824_ec.Nombre_824_ec + "\n" +
+                    "Fecha y hora: " + postulacion.Actividad_824_ec.FechaHora_824_ec + "\n" +
+                    "Organizador: " + postulacion.Actividad_824_ec.Organizador_824_ec.NombreUsuario + "\n\n" +
+                    "========================================\n" +
+                    "La postulación fue registrada correctamente.";
+
+                using (PrintDocument documento = _824_ecReportesBLL.PrepararReporte_824_ec(contenido))
+                {
+                    using (PrintPreviewDialog vistaPrevia = new PrintPreviewDialog())
+                    {
+                        vistaPrevia.Document = documento;
+                        vistaPrevia.Width = 900;
+                        vistaPrevia.Height = 700;
+                        vistaPrevia.ShowDialog();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show( "La postulación se registró correctamente, pero no se pudo generar el comprobante.\n\n" + ex.Message, "Error al generar comprobante",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

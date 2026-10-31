@@ -25,3 +25,4 @@ C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\obj\Debug\Capa_de_.805A0882.Up2Date
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\obj\Debug\Capa_de_Servicios(SL).dll
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\obj\Debug\Capa_de_Servicios(SL).pdb
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Servicios(SL)\bin\Debug\iTextSharp.dll

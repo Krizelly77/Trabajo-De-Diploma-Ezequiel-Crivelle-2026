@@ -31,8 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="iTextSharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <HintPath>..\packages\iTextSharp-LGPL.4.1.6\lib\iTextSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +49,7 @@
     <Compile Include="CryptoManager.cs" />
     <Compile Include="ISessionObserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_824_ecGestorPdf.cs" />
     <Compile Include="_824_ecSerializadorXml.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="ValidadorDeIntegridad.cs" />
@@ -53,6 +59,9 @@
       <Project>{de101f63-1c88-4bbb-a68c-f0daa073e934}</Project>
       <Name>Capa_de_Dominio%28BE%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

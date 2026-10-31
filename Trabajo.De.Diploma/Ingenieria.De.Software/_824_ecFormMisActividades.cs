@@ -467,7 +467,7 @@ namespace Ingenieria.De.Software
                     {
                         MessageBox.Show("Se alcanzo el cupo minimo, grupo ya puede completarce");
                     }
-                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Aceptado");
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad de id: {viejaPost.Actividad_824_ec.Id_824_ec}, a:Aceptado");
                 }
                 catch (Exception ex)
                 { MessageBox.Show(ex.Message); }
@@ -495,7 +495,7 @@ namespace Ingenieria.De.Software
                         , $"El usuario {UsuariActual.NombreUsuario} Revoco la aceptacion de tu postulacion para la actividad {viejaPost.Actividad_824_ec.Nombre_824_ec} para el dia {viejaPost.Actividad_824_ec.FechaHora_824_ec.ToString()}, el organizador puede volver a aceptarte si asi lo desea ."
                         , UsuariActual.Id, viejaPost.Candidato_824_ec.Id));
                     MessageBox.Show("Postulación revocada del grupo con éxito");
-                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost.Estado_824_ec} a:Postulado");
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: {viejaPost.Candidato_824_ec.NombreUsuario}, en la actividad de id: {viejaPost.Actividad_824_ec.Id_824_ec}, a:Postulado");
                 }
                 catch (Exception ex)
                 { MessageBox.Show(ex.Message); }
@@ -514,7 +514,7 @@ namespace Ingenieria.De.Software
                         , $"El usuario {UsuariActual.NombreUsuario} Rechazo definitivamente tu postulacion para la actividad {viejaPost2.Actividad_824_ec.Nombre_824_ec} para el dia {viejaPost2.Actividad_824_ec.FechaHora_824_ec.ToString()}, ya no podras participar en esta actividad."
                         , UsuariActual.Id, viejaPost2.Candidato_824_ec.Id));
                     MessageBox.Show("Postulación rechazada con éxito");
-                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: la postulacion de {viejaPost2.Candidato_824_ec.NombreUsuario}, en la actividad: {viejaPost2.Actividad_824_ec.Nombre_824_ec}, del estado:{viejaPost2.Estado_824_ec} a:Rechazado");
+                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion: {viejaPost2.Candidato_824_ec.NombreUsuario}, en la actividad de id: {viejaPost2.Actividad_824_ec.Id_824_ec}, a:Rechazado");
                 }
                 catch (Exception ex2)
                 { MessageBox.Show(ex2.Message); }

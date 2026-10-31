@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,6 +105,8 @@ namespace Ingenieria.De.Software
                     _824_eDeshabilitarCampos();
                     LBLnombree.Text = "Vista de Actividad ";
                     panel1.BackColor = Color.DimGray;
+                    BTNcancelar.Text = "OK";
+                    BTNcancelar.ForeColor = Color.OliveDrab;
                     BTNrestablecerCampos.Enabled = false;
                     BTNrestablecerCampos.Visible = false;
                     BTNconfirmar.Enabled = false;
@@ -256,11 +259,18 @@ namespace Ingenieria.De.Software
                         if (confirmacion2)
                         {
                             ValorizarEntidad(_824_ecActividadEditable);
-                            _824_ecActividadBLL.Modificar_824_ec(_824_ecActividadEditable, EstadoAnterior);
+                            int Completado = _824_ecActividadBLL.Modificar_824_ec(_824_ecActividadEditable, EstadoAnterior);
 
-                            SessionManager.TraerInstancia().RegistrarActividad("Modificación de actividad: " + _824_ecActividadEditable.Nombre_824_ec);
-                            MessageBox.Show("Actividad modificada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Close();
+                            if (Completado == -1)
+                            {
+                                GenerarComprobanteGrupo_824_ec(_824_ecActividadEditable);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Actividad modificada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                                SessionManager.TraerInstancia().RegistrarActividad("Modificación de actividad: " + _824_ecActividadEditable.Nombre_824_ec);
+                                this.Close();
                         }
 
                         break;
@@ -316,5 +326,67 @@ namespace Ingenieria.De.Software
         }
         #endregion botones
 
+        private void GenerarComprobanteGrupo_824_ec( _824_ecActividad actividad)
+        {
+            List<_824_ecPostulacion> participantes = _824_ecPostulacionBLL.ListarCandidatosPorActividad_824_ec(actividad.Id_824_ec)
+                .Where(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado).ToList(); 
+
+            DialogResult respuesta = MessageBox.Show( "Se ha conformado un grupo para esta actividad. ¿Desea guardar un comprobante en formato PDF?", "Grupo conformado",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (respuesta != DialogResult.Yes)
+                return;
+
+            try
+            {
+                StringBuilder contenido = new StringBuilder();
+
+                contenido.AppendLine("COMPROBANTE DE CONFORMACIÓN DE GRUPO");
+                contenido.AppendLine("========================================");
+                contenido.AppendLine();
+                contenido.AppendLine("Fecha de generación: " + DateTime.Now);
+                contenido.AppendLine();
+
+                contenido.AppendLine("DATOS DE LA ACTIVIDAD");
+                contenido.AppendLine("Actividad: " + actividad.Nombre_824_ec);
+                contenido.AppendLine("Fecha y hora: " + actividad.FechaHora_824_ec);
+                contenido.AppendLine("Organizador: " + actividad.Organizador_824_ec.NombreUsuario);
+                contenido.AppendLine("Cantidad mínima requerida: " + actividad.CantidadMinima_824_ec);
+                contenido.AppendLine("Participantes aceptados: " + participantes.Count);
+                contenido.AppendLine();
+
+                contenido.AppendLine("INTEGRANTES DEL GRUPO");
+                contenido.AppendLine("----------------------------------------");
+
+                int numero = 1;
+
+                foreach (var participante in participantes)
+                {
+                    contenido.AppendLine(numero + ". " + participante.Candidato_824_ec.NombreUsuario);
+                    numero++;
+                }
+
+                contenido.AppendLine();
+                contenido.AppendLine("========================================");
+                contenido.AppendLine("Se ha conformado correctamente el grupo para esta actividad.");
+
+                using (PrintDocument documento = _824_ecReportesBLL.PrepararReporte_824_ec(contenido.ToString()))
+                {
+                    using (PrintPreviewDialog vistaPrevia = new PrintPreviewDialog())
+                    {
+                        vistaPrevia.Document = documento;
+                        vistaPrevia.Width = 900;
+                        vistaPrevia.Height = 700;
+
+                        vistaPrevia.ShowDialog();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show( "El grupo se conformó correctamente, pero no se pudo generar el comprobante.\n\n" + ex.Message, "Error al generar comprobante",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }
