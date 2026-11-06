@@ -19,8 +19,9 @@ namespace Capa_de_Servicios_SL_
         public _824_ecGestorPdf()
         {
             documento_824_ec = new PrintDocument();
-
             documento_824_ec.DefaultPageSettings.Margins = new Margins(50, 50, 50, 50);
+
+            documento_824_ec.BeginPrint += (sender, e) =>{ posicion_824_ec = 0;};
 
             documento_824_ec.PrintPage += Documento_PrintPage;
 

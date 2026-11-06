@@ -237,7 +237,6 @@ namespace Ingenieria.De.Software
                         new _824_ecNotificacion("Nueva Postulacion"
                         , $"El usuario {UsuarioActual.NombreUsuario} se postulo para la actividad {nuevaPost.Actividad_824_ec.Nombre_824_ec} para el dia {nuevaPost.Actividad_824_ec.FechaHora_824_ec.ToString()}."
                         , UsuarioActual.Id, nuevaPost.Actividad_824_ec.Organizador_824_ec.Id ));
-                    MessageBox.Show("Postulacion registrada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     GenerarComprobantePostulacion_824_ec(nuevaPost);
                     SessionManager.TraerInstancia().RegistrarActividad("Alta de Postulacion: en" + nuevaPost.Actividad_824_ec.Nombre_824_ec + " de id: " + nuevaPost.Id_824_ec);
                 }
@@ -405,14 +404,11 @@ namespace Ingenieria.De.Software
 
         private void GenerarComprobantePostulacion_824_ec(_824_ecPostulacion postulacion)
         {
-            DialogResult respuesta = MessageBox.Show( "¿Desea guardar un comprobante de esta postulación en formato PDF?", "Comprobante de postulación",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (respuesta != DialogResult.Yes)
-                return;
-
             try
             {
+                // 1. Garantizar la carpeta predeterminada
+                string carpetaDefault = _824_ecDirectivosManejador.ObtenerRutaCarpetaDefault("ReportesPDF");
+
                 string contenido =
                     "COMPROBANTE DE POSTULACIÓN\n" +
                     "========================================\n\n" +
@@ -426,16 +422,51 @@ namespace Ingenieria.De.Software
                     "========================================\n" +
                     "La postulación fue registrada correctamente.";
 
+                // 2. Preguntar al usuario el destino / modalidad
+                DialogResult opcion = MessageBox.Show(
+                    "Postulacion registrada con exito ¿Desea obtener el comprobante?\n\n" +
+                    "[Sí] - Guardar directo en carpeta predeterminada (AppData)\n" +
+                    "[No] - Abrir Vista Previa (Elegir ubicación / Imprimir)\n" +
+                    "[Cancelar] - No deseo generar un comprobante",
+                    "Seleccionar modalidad de comprobante",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+
+                if (opcion == DialogResult.Cancel) return;
+
                 using (PrintDocument documento = _824_ecReportesBLL.PrepararReporte_824_ec(contenido))
                 {
-                    using (PrintPreviewDialog vistaPrevia = new PrintPreviewDialog())
+                    if (opcion == DialogResult.Yes)
                     {
-                        vistaPrevia.Document = documento;
-                        vistaPrevia.Width = 900;
-                        vistaPrevia.Height = 700;
-                        vistaPrevia.ShowDialog();
+                        // GUARDADO DIRECTO EN LA CARPETA DEFAULT
+                        string nombreArchivo = $"Comprobante_Postulacion_{postulacion.Id_824_ec}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                        string rutaFinal = System.IO.Path.Combine(carpetaDefault, nombreArchivo);
+
+                        // Configurar la impresora virtual 'Microsoft Print to PDF'
+                        documento.PrinterSettings.PrinterName = "Microsoft Print to PDF";
+                        documento.PrinterSettings.PrintToFile = true;
+                        documento.PrinterSettings.PrintFileName = rutaFinal;
+                        documento.PrintController = new System.Drawing.Printing.StandardPrintController();
+
+                        documento.Print(); // Imprimir directo sin cuadro de diálogo
+
+                        MessageBox.Show($"Comprobante guardado con éxito en:\n{rutaFinal}",
+                            "Archivo generado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (opcion == DialogResult.No)
+                    {
+                        // vista
+                        using (PrintPreviewDialog vistaPrevia = new PrintPreviewDialog())
+                        {
+                            vistaPrevia.Document = documento;
+                            vistaPrevia.Width = 900;
+                            vistaPrevia.Height = 700;
+                            vistaPrevia.ShowDialog();
+                        }
                     }
                 }
+
+
             }
             catch (Exception ex)
             {

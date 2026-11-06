@@ -15,6 +15,12 @@ namespace Capa_de_Acceso_a_Datos_DAL_
         public DAO()
         {
             var connectionSetting = ConfigurationManager.ConnectionStrings["MiConexionBiblioteca"];
+
+            if (connectionSetting == null || string.IsNullOrWhiteSpace(connectionSetting.ConnectionString))
+            {
+                throw new ConfigurationErrorsException("No se encontró la cadena de conexión 'MiConexionBiblioteca' en el archivo App.config.");
+            }
+
             cadenaConexion = connectionSetting.ConnectionString;
         }
 
@@ -35,7 +41,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                     return seta;
                 }
             }
-            catch (Exception ex) { throw (ex); }
+            catch (Exception) { throw; }
         }
         public int EjecutarNonQuery(string comando, List<SqlParameter> parametros = null)
         {
@@ -52,7 +58,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                     return filasAfectadas;
                 }
             }
-            catch (Exception ex) { throw (ex); }
+            catch (Exception) { throw; }
         }
         public int ObtenerProximoId(string tabla)
         {
@@ -65,7 +71,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                     return int.Parse(coma.ExecuteScalar().ToString());
                 }
             }
-            catch (Exception ex) { throw (ex); }
+            catch (Exception) { throw; }
         }
         public int EjecutarTransaccion(List<(string comando, List<SqlParameter> parametros)> comandos)
         {

@@ -83,7 +83,7 @@ namespace Capa_de_Aplicación_BLL_
             // para comprobar que no se alcanzo el cupo maximo 
             List<_824_ecPostulacion> postulaciones_824_ec = _824_ecPostulacionDAL.ListarPorActividad_824_ec(actividad_824_ec.Id_824_ec);
             int Cupos_824_ec = postulaciones_824_ec.Count(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado);
-            if (Cupos_824_ec >= actividad_824_ec.CantidadMaxima_824_ec)
+            if (Cupos_824_ec >= actividad_824_ec.CantidadMaxima_824_ec && nuevoEstado_824_ec != EstadoPostulacion_824_ec.Retirado)
                 throw new Exception("Cupo maximo alcanzado");
 
             int resultado = _824_ecPostulacionDAL.ModificarEstado_824_ec(postulacionId_824_ec, nuevoEstado_824_ec);

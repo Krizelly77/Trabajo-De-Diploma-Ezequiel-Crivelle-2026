@@ -14,7 +14,7 @@ namespace Capa_de_Servicios_SL_
         public static void Serializar_824_ec(string rutaArchivo, T datos)
         {
             XmlSerializer serializador = new XmlSerializer(typeof(T));
-            using (StreamWriter writer = new StreamWriter(rutaArchivo))
+            using (StreamWriter writer = new StreamWriter(rutaArchivo, false, System.Text.Encoding.UTF8))
             {
                 serializador.Serialize(writer, datos);
             }
@@ -25,7 +25,7 @@ namespace Capa_de_Servicios_SL_
             try
             {
                 XmlSerializer dserializador = new XmlSerializer(typeof(T));
-                using (StreamReader reader = new StreamReader(rutaArchivo))
+                using (StreamReader reader = new StreamReader(rutaArchivo, System.Text.Encoding.UTF8))
                 {
                     return (T)dserializador.Deserialize(reader);
                 }

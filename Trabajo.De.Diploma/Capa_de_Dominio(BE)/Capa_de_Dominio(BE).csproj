@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="_824_ecActividad.cs" />
+    <Compile Include="_824_ecActividadCambio.cs" />
     <Compile Include="_824_ecBE_Enums.cs" />
     <Compile Include="_824_ecCategoria.cs" />
     <Compile Include="ComponentePermiso.cs" />

@@ -50,6 +50,7 @@
     <Compile Include="IdiomaDAL.cs" />
     <Compile Include="PermisoDAL.cs" />
     <Compile Include="_824_ecCategoriaDAL.cs" />
+    <Compile Include="_824_ecDatabaseInitializer.cs" />
     <Compile Include="_824_ecNotificacionDAL.cs" />
     <Compile Include="_824_ecPostulacionDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +61,11 @@
       <Project>{de101f63-1c88-4bbb-a68c-f0daa073e934}</Project>
       <Name>Capa_de_Dominio%28BE%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="script_inicial.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

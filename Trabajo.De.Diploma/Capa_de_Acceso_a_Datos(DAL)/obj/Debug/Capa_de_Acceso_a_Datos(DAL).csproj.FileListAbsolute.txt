@@ -25,3 +25,4 @@ C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Acceso_a_Datos(DAL)\obj\Debug\Capa_de_.81AD72D7.Up2Date
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Acceso_a_Datos(DAL)\obj\Debug\Capa_de_Acceso_a_Datos(DAL).dll
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Acceso_a_Datos(DAL)\obj\Debug\Capa_de_Acceso_a_Datos(DAL).pdb
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Acceso_a_Datos(DAL)\bin\Debug\script_inicial.sql

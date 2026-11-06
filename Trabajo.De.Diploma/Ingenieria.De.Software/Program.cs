@@ -16,6 +16,26 @@ namespace Ingenieria.De.Software
         [STAThread]
         static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            try
+            {
+                // 1. Conecta a master, verifica/crea la BD y ejecuta script_inicial.sql si no existe
+                _824_ecDatabaseInitializerBLL.EnsureDatabaseExists();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Ocurrió un error al inicializar la base de datos:\n\n{ex.Message}",
+                    "Error de Inicialización",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                // Detiene la ejecución para no abrir la UI sin base de datos
+                return;
+            }
+
             SessionManager.TraerInstancia().Suscribir(new BitacoraObserver());
 
             Application.EnableVisualStyles();

@@ -1,7 +1,28 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1B8B5122-C102-42BA-B8C3-ED457F07A10F}|Capa_de_Aplicaci\u00F3n(BLL)\\Capa_de_Aplicaci\u00F3n(BLL).csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\capa_de_aplicaci\u00F3n(bll)\\_824_ecdatabaseinitializerbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1B8B5122-C102-42BA-B8C3-ED457F07A10F}|Capa_de_Aplicaci\u00F3n(BLL)\\Capa_de_Aplicaci\u00F3n(BLL).csproj|solutionrelative:capa_de_aplicaci\u00F3n(bll)\\_824_ecdatabaseinitializerbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AAA4AECD-6B77-4349-A8BA-606227022EE6}|Capa_de_Acceso_a_Datos(DAL)\\Capa_de_Acceso_a_Datos(DAL).csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\capa_de_acceso_a_datos(dal)\\_824_ecdatabaseinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AAA4AECD-6B77-4349-A8BA-606227022EE6}|Capa_de_Acceso_a_Datos(DAL)\\Capa_de_Acceso_a_Datos(DAL).csproj|solutionrelative:capa_de_acceso_a_datos(dal)\\_824_ecdatabaseinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\ingenieria.de.software\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{9987A0D2-C36B-4565-94F6-CC9B9078CD7D}|Ingenieria.De.Software\\Ingenieria.De.Software.csproj|solutionrelative:ingenieria.de.software\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AAA4AECD-6B77-4349-A8BA-606227022EE6}|Capa_de_Acceso_a_Datos(DAL)\\Capa_de_Acceso_a_Datos(DAL).csproj|c:\\users\\ezequ\\onedrive\\escritorio\\sistemaparaarmarparticiparactividades\\trabajo.de.diploma\\capa_de_acceso_a_datos(dal)\\dao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AAA4AECD-6B77-4349-A8BA-606227022EE6}|Capa_de_Acceso_a_Datos(DAL)\\Capa_de_Acceso_a_Datos(DAL).csproj|solutionrelative:capa_de_acceso_a_datos(dal)\\dao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +39,71 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_824_ecDatabaseInitializerBLL.cs",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Aplicaci\u00F3n(BLL)\\_824_ecDatabaseInitializerBLL.cs",
+              "RelativeDocumentMoniker": "Capa_de_Aplicaci\u00F3n(BLL)\\_824_ecDatabaseInitializerBLL.cs",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Aplicaci\u00F3n(BLL)\\_824_ecDatabaseInitializerBLL.cs",
+              "RelativeToolTip": "Capa_de_Aplicaci\u00F3n(BLL)\\_824_ecDatabaseInitializerBLL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-06T22:30:03.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Program.cs",
+              "RelativeDocumentMoniker": "Ingenieria.De.Software\\Program.cs",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\Program.cs",
+              "RelativeToolTip": "Ingenieria.De.Software\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-06T22:27:23.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_824_ecDatabaseInitializer.cs",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Acceso_a_Datos(DAL)\\_824_ecDatabaseInitializer.cs",
+              "RelativeDocumentMoniker": "Capa_de_Acceso_a_Datos(DAL)\\_824_ecDatabaseInitializer.cs",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Acceso_a_Datos(DAL)\\_824_ecDatabaseInitializer.cs",
+              "RelativeToolTip": "Capa_de_Acceso_a_Datos(DAL)\\_824_ecDatabaseInitializer.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwAwAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-06T22:26:19.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DAO.cs",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Acceso_a_Datos(DAL)\\DAO.cs",
+              "RelativeDocumentMoniker": "Capa_de_Acceso_a_Datos(DAL)\\DAO.cs",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Capa_de_Acceso_a_Datos(DAL)\\DAO.cs",
+              "RelativeToolTip": "Capa_de_Acceso_a_Datos(DAL)\\DAO.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAcwHEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-06T22:22:34.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\App.config",
+              "RelativeDocumentMoniker": "Ingenieria.De.Software\\App.config",
+              "ToolTip": "C:\\Users\\ezequ\\OneDrive\\Escritorio\\SistemaParaArmarParticiparActividades\\Trabajo.De.Diploma\\Ingenieria.De.Software\\App.config",
+              "RelativeToolTip": "Ingenieria.De.Software\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-11-06T22:22:25.012Z",
+              "EditorCaption": ""
             }
           ]
         }

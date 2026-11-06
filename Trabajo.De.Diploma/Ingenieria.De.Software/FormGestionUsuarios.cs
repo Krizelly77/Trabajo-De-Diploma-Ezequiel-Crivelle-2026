@@ -142,6 +142,7 @@ namespace Ingenieria.De.Software
                 {
                     saveFileDialog.Filter = "Archivos XML (*.xml)|*.xml";
                     saveFileDialog.Title = "Guardar archivo XML de Usuarios";
+                    saveFileDialog.InitialDirectory = _824_ecDirectivosManejador.ObtenerRutaCarpetaDefault("ExportacionesXML");
 
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
@@ -164,6 +165,7 @@ namespace Ingenieria.De.Software
                 {
                     openFileDialog.Filter = "Archivos XML (*.xml)|*.xml";
                     openFileDialog.Title = "Seleccionar archivo XML de Usuarios";
+                    openFileDialog.InitialDirectory = _824_ecDirectivosManejador.ObtenerRutaCarpetaDefault("ExportacionesXML");
 
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {

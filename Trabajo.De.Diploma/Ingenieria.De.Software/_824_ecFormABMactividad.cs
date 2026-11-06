@@ -331,10 +331,19 @@ namespace Ingenieria.De.Software
             List<_824_ecPostulacion> participantes = _824_ecPostulacionBLL.ListarCandidatosPorActividad_824_ec(actividad.Id_824_ec)
                 .Where(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado).ToList(); 
 
-            DialogResult respuesta = MessageBox.Show( "Se ha conformado un grupo para esta actividad. ¿Desea guardar un comprobante en formato PDF?", "Grupo conformado",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            // Garantizar la carpeta predeterminada para PDF
+            string carpetaDefault = _824_ecDirectivosManejador.ObtenerRutaCarpetaDefault("ReportesPDF");
 
-            if (respuesta != DialogResult.Yes)
+            DialogResult opcion = MessageBox.Show(
+                "Se ha conformado un grupo para esta actividad. ¿Desea obtener el comprobante?\n\n" +
+                "[Sí] - Guardar directo en carpeta predeterminada (AppData)\n" +
+                "[No] - Abrir Vista Previa (Elegir ubicación / Imprimir)\n" +
+                "[Cancelar] - No deseo generar un comprobante",
+                "Grupo conformado - Generar comprobante",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            if (opcion == DialogResult.Cancel)
                 return;
 
             try
@@ -372,13 +381,33 @@ namespace Ingenieria.De.Software
 
                 using (PrintDocument documento = _824_ecReportesBLL.PrepararReporte_824_ec(contenido.ToString()))
                 {
-                    using (PrintPreviewDialog vistaPrevia = new PrintPreviewDialog())
+                    if (opcion == DialogResult.Yes)
                     {
-                        vistaPrevia.Document = documento;
-                        vistaPrevia.Width = 900;
-                        vistaPrevia.Height = 700;
+                        // GUARDADO DIRECTO EN APPDATA
+                        string nombreArchivo = $"Comprobante_Grupo_Actividad_{actividad.Id_824_ec}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                        string rutaFinal = System.IO.Path.Combine(carpetaDefault, nombreArchivo);
 
-                        vistaPrevia.ShowDialog();
+                        documento.PrinterSettings.PrinterName = "Microsoft Print to PDF";
+                        documento.PrinterSettings.PrintToFile = true;
+                        documento.PrinterSettings.PrintFileName = rutaFinal;
+                        documento.PrintController = new System.Drawing.Printing.StandardPrintController();
+
+                        documento.Print();
+
+                        MessageBox.Show($"Comprobante de grupo guardado exitosamente en:\n{rutaFinal}",
+                            "Comprobante Generado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (opcion == DialogResult.No)
+                    {
+                        // VISTA PREVIA TRADICIONAL
+                        using (PrintPreviewDialog vistaPrevia = new PrintPreviewDialog())
+                        {
+                            vistaPrevia.Document = documento;
+                            vistaPrevia.Width = 900;
+                            vistaPrevia.Height = 700;
+
+                            vistaPrevia.ShowDialog();
+                        }
                     }
                 }
             }

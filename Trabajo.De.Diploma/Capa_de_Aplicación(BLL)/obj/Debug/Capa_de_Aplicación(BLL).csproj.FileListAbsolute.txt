@@ -37,3 +37,4 @@ C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Aplicación(BLL)\obj\Debug\Capa_de_.7DC75426.Up2Date
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Aplicación(BLL)\obj\Debug\Capa_de_Aplicación(BLL).dll
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Aplicación(BLL)\obj\Debug\Capa_de_Aplicación(BLL).pdb
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Capa_de_Aplicación(BLL)\bin\Debug\script_inicial.sql
