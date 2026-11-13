@@ -282,8 +282,14 @@ namespace Ingenieria.De.Software
                         foreach (Usuario usu in listaUsuarios)
                         {
                             usu.BloqueoDV = false; //desbloqueo
-                            usuarioBll.Guardar(usu); //guardar actualiza las dvs 
+                            usuarioBll.Guardar(usu); //guardar la desactivacion del bloqueo
                         }
+                        // Apagamos temporalmente el escáner para que nos deje recalculart
+                        DigitoVerificadorBLL.ValidacionHabilitada = false;
+
+                        // Ejecutamos la re-sincronización masiva de las tablas
+                        DigitoVerificadorBLL dvBLL = new DigitoVerificadorBLL();
+                        dvBLL.RecalcularIntegridadGlobal();
 
                         MessageBox.Show(
                             "El sistema se ha normalizado con exito, Se desbloquearon todos los accesos y las firmas digitales de la base de datos se encuentran actualizadas",
@@ -302,6 +308,10 @@ namespace Ingenieria.De.Software
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error
                     );
+                }
+                finally
+                {
+                    DigitoVerificadorBLL.ValidacionHabilitada = true;
                 }
             }
         }

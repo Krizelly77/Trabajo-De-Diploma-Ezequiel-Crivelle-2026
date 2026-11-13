@@ -37,7 +37,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                 new SqlParameter("@activo", usa.Activo),
                 new SqlParameter("@permiso", usa.NivelPermisos),
                 new SqlParameter("@bloqueoDV", usa.BloqueoDV),
-                new SqlParameter("@dvh", usa.DVH ?? (object)DBNull.Value), // para que acepte null
+                new SqlParameter("@dvh", usa.DVH_824_ec ?? (object)DBNull.Value), // para que acepte null
             };
 
             string comando;
@@ -129,7 +129,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             usa.Activo = Convert.ToBoolean(fila["Usuario_Activo"]);
             usa.NivelPermisos = Convert.ToInt32(fila["Usuario_Permiso"]);
             usa.BloqueoDV = Convert.ToBoolean(fila["Usuario_BloqueoDV"]);
-            usa.DVH = fila["Usuario_DVH"].ToString();
+            usa.DVH_824_ec = fila["Usuario_DVH"].ToString();
 
         }
         public static Usuario ObtenerPorNombre(string username)
@@ -258,7 +258,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
                     _824_ecPostulacion post = new _824_ecPostulacion
                     {
                         Id_824_ec = Convert.ToInt32(fila["Postulacion_Id"]),
-                        Candidato_824_ec = usuario,
+                        GestorResponsable_824_ec = usuario,
                         FechaPostulacion_824_ec = Convert.ToDateTime(fila["Postulacion_Fecha"]),
                         Actividad_824_ec = _824_ecActividadDAL.ObtenerPorId_824_ec(Convert.ToInt32(fila["Actividad_Id"])),
                         Estado_824_ec = (EstadoPostulacion_824_ec)Convert.ToInt32(fila["Postulacion_Estado"])

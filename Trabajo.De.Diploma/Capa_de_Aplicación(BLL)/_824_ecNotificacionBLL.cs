@@ -20,6 +20,40 @@ namespace Capa_de_Aplicación_BLL_
             return resultado;
         }
 
+        public static int MarcarComoLeida_824_ec(int idNotificacion_824_ec)
+        {
+            int resultado = _824_ecNotificacionDAL.MarcarComoLeida_824_ec(idNotificacion_824_ec);
+            LlamarAlDigitoVerificador_824_ec(resultado);
+            return resultado;
+        }
+
+        public static int Eliminar_824_ec(int idNotificacion_824_ec)
+        {
+            int resultado = _824_ecNotificacionDAL.Eliminar_824_ec(idNotificacion_824_ec);
+            LlamarAlDigitoVerificador_824_ec(resultado);
+            return resultado;
+        }
+        
+        // solo lectura
+        public static List<_824_ecNotificacion> Listar_824_ec()
+        {
+            return _824_ecNotificacionDAL.Listar_824_ec();
+        }
+
+        public static List<_824_ecNotificacion> ListarPorDestinatario_824_ec(int idDestinatario_824_ec)
+        {
+            if (idDestinatario_824_ec <= 0)
+                throw new Exception("El ID de destinatario especificado es inválido.");
+
+            return _824_ecNotificacionDAL.ListarPorDestinatario_824_ec(idDestinatario_824_ec);
+        }
+
+        public static _824_ecNotificacion ObtenerPorId_824_ec(int id_824_ec)
+        {
+            return _824_ecNotificacionDAL.ObtenerPorId_824_ec(id_824_ec);
+        }
+
+        // metodos de apoyo
         public static void ValidarNotificacion_824_ec(_824_ecNotificacion notificacion_824_ec)
         {
             if (notificacion_824_ec == null)
@@ -63,8 +97,24 @@ namespace Capa_de_Aplicación_BLL_
             Usuario remitente = UsuarioBLL.ObtenerPorId(notificacion_824_ec.IdRemitente_824_ec);
             if (remitente == null)
                 throw new Exception($"El usuario remitente con ID {notificacion_824_ec.IdRemitente_824_ec} no existe en el sistema.");
-        }
 
+            if (notificacion_824_ec.Participante_824_ec != null)
+            {
+                var partExistente = _824_ecParticipanteBLL.ObtenerPorId_824_ec(notificacion_824_ec.Participante_824_ec.Id_824_ec);
+                if (partExistente == null)
+                    throw new Exception($"El participante asociado con ID {notificacion_824_ec.Participante_824_ec.Id_824_ec} no existe.");
+            }
+
+            if (notificacion_824_ec.ParticipantesAgrupados != null && notificacion_824_ec.ParticipantesAgrupados.Count > 0)
+            {
+                foreach (var part in notificacion_824_ec.ParticipantesAgrupados)
+                {
+                    var partExistente = _824_ecParticipanteBLL.ObtenerPorId_824_ec(part.Id_824_ec);
+                    if (partExistente == null)
+                        throw new Exception($"El participante agrupado con ID {part.Id_824_ec} no existe.");
+                }
+            }
+        }
         private static void LlamarAlDigitoVerificador_824_ec(int resultado)
         {
             DigitoVerificadorBLL dvBLL = new DigitoVerificadorBLL();
@@ -74,38 +124,6 @@ namespace Capa_de_Aplicación_BLL_
                 dvBLL.RecalcularIntegridadTabla("Notificacion", "Notificacion_Id", _824_ecNotificacionDAL.Listar_824_ec,
                     n => n.Id_824_ec, (n, dvh) => n.DVH_824_ec = dvh);
             }
-        }
-
-        public static List<_824_ecNotificacion> Listar_824_ec()
-        {
-            return _824_ecNotificacionDAL.Listar_824_ec();
-        }
-
-        public static List<_824_ecNotificacion> ListarPorDestinatario_824_ec(int idDestinatario_824_ec)
-        {
-            if (idDestinatario_824_ec <= 0)
-                throw new Exception("El ID de destinatario especificado es inválido.");
-
-            return _824_ecNotificacionDAL.ListarPorDestinatario_824_ec(idDestinatario_824_ec);
-        }
-
-        public static _824_ecNotificacion ObtenerPorId_824_ec(int id_824_ec)
-        {
-            return _824_ecNotificacionDAL.ObtenerPorId_824_ec(id_824_ec);
-        }
-
-        public static int MarcarComoLeida_824_ec(int idNotificacion_824_ec)
-        {
-            int resultado = _824_ecNotificacionDAL.MarcarComoLeida_824_ec(idNotificacion_824_ec);
-            LlamarAlDigitoVerificador_824_ec(resultado);
-            return resultado;
-        }
-
-        public static int Eliminar_824_ec(int idNotificacion_824_ec)
-        {
-            int resultado = _824_ecNotificacionDAL.Eliminar_824_ec(idNotificacion_824_ec);
-            LlamarAlDigitoVerificador_824_ec(resultado);
-            return resultado;
         }
 
     }

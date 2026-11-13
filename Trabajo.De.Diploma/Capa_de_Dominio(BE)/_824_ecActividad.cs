@@ -22,8 +22,11 @@ namespace Capa_de_Dominio_BE_
         public NivelRequerido_824_ec NivelRequerido_824_ec { get; set; } // nivel de experiencia de la actividad
         public EstadoActividad_824_ec Estado_824_ec { get; set; } // estado en que se encuentra la actividad
 
-        // usuario organizador que la creo
+        // usuario organizador responsable de la actividad
         public Usuario Organizador_824_ec { get; set; }
+        // solicitante que la pidio
+        public _824_ecSolicitante Solicitante824_ec { get; set; }
+
 
         // postulaciones recibidas
         public List<_824_ecPostulacion> Postulaciones_824_ec { get; set; }
@@ -38,7 +41,6 @@ namespace Capa_de_Dominio_BE_
         public string DVH_824_ec { get; set; } // digito verificador
         public List<string> ObtenerCamposParaDV()
         {
-
             return new List<string>
             {
                 this.Id_824_ec.ToString(),
@@ -51,6 +53,7 @@ namespace Capa_de_Dominio_BE_
                 ((int)this.NivelRequerido_824_ec).ToString(),
                 ((int)this.Estado_824_ec).ToString(),
                 (this.Organizador_824_ec?.Id ?? 0).ToString(),
+                (this.Solicitante824_ec?.Id_824_ec ?? 0).ToString()
             };
         }
     }

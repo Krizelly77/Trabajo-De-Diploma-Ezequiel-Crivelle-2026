@@ -49,11 +49,14 @@
     <Compile Include="FiltrosBitacora.cs" />
     <Compile Include="IVerificable.cs" />
     <Compile Include="_824_ecNotificacion.cs" />
+    <Compile Include="_824_ecParticipante.cs" />
+    <Compile Include="_824_ecCliente.cs" />
     <Compile Include="_824_ecPostulacion.cs" />
     <Compile Include="RegistroBitacora.cs" />
     <Compile Include="RegistroCambio.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_824_ecSolicitante.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

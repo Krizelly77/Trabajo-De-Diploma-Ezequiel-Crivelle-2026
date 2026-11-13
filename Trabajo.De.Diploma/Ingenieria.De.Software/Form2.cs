@@ -185,6 +185,15 @@ namespace Ingenieria.De.Software
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             CargarNotificaciones();
         }
+        private void BTNmaestros_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _824_ecFormABMmaestro fMaes_824_ec = new _824_ecFormABMmaestro();
+                fMaes_824_ec.ShowDialog(this);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
         #endregion formularios
 
     }

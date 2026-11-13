@@ -36,14 +36,16 @@ namespace Capa_de_Aplicación_BLL_
             ValidacionGuardarModificar(actividad_824_ec);
 
             if (estadoAnterior_824_ec == EstadoActividad_824_ec.Completado || estadoAnterior_824_ec == EstadoActividad_824_ec.Caducado || estadoAnterior_824_ec == EstadoActividad_824_ec.Cancelado)
-                throw new Exception("No se puede modificar una actividad ya "+estadoAnterior_824_ec.ToString());
+                throw new Exception("No se puede modificar una actividad ya " + estadoAnterior_824_ec.ToString());
 
-            // para comprobar que se alcanzo la cantidad minima para confirmar 
+            // Conteo real de participantes aceptados (contempla postulaciones individuales y grupales)
             List<_824_ecPostulacion> postulaciones_824_ec = _824_ecPostulacionDAL.ListarPorActividad_824_ec(actividad_824_ec.Id_824_ec);
-            int Cupos_824_ec = postulaciones_824_ec.Count(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado);
+            int Cupos_824_ec = postulaciones_824_ec
+                .Where(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado)
+                .Sum(p => (p.ParticipantesAgrupados != null && p.ParticipantesAgrupados.Count > 0) ? p.ParticipantesAgrupados.Count : 1);
+
             if (Cupos_824_ec < actividad_824_ec.CantidadMinima_824_ec && actividad_824_ec.Estado_824_ec == EstadoActividad_824_ec.Completado)
                 throw new Exception("Cupo minimo no alcanzado");
-
 
             int resultado = _824_ecActividadDAL.Guardar_824_ec(actividad_824_ec);
             LlamaraAlDigitoVerificador(resultado);
@@ -56,10 +58,10 @@ namespace Capa_de_Aplicación_BLL_
 
         private static void ValidacionGuardarModificar(_824_ecActividad actividad_824_ec)
         {
-            if (string.IsNullOrWhiteSpace(actividad_824_ec.Nombre_824_ec)) // validar nombre
+            if (string.IsNullOrWhiteSpace(actividad_824_ec.Nombre_824_ec))
                 throw new Exception("El nombre de la actividad es obligatorio");
 
-            if (actividad_824_ec.Nombre_824_ec.Length > 30) // validar nombre
+            if (actividad_824_ec.Nombre_824_ec.Length > 30)
                 throw new Exception("Maximo 30 caracteres");
 
             if (actividad_824_ec.Categoria_824_ec == null || actividad_824_ec.Categoria_824_ec.Id_824_ec == 0)
@@ -82,6 +84,25 @@ namespace Capa_de_Aplicación_BLL_
 
             if (actividad_824_ec.Organizador_824_ec == null || actividad_824_ec.Organizador_824_ec.Id == 0)
                 throw new Exception("La actividad debe tener un organizador asignado.");
+
+            if (actividad_824_ec.Solicitante824_ec == null || actividad_824_ec.Solicitante824_ec.Id_824_ec <= 0)
+                throw new Exception("La actividad debe tener un solicitante asignado.");
+        }
+        public static int Eliminar_824_ec(int actividadId_824_ec)
+        {
+            if (actividadId_824_ec <= 0)
+                throw new Exception("Identificador de actividad inválido para eliminar.");
+
+            int resultado = _824_ecActividadDAL.Eliminar_824_ec(actividadId_824_ec);
+            LlamaraAlDigitoVerificador(resultado, true);
+
+            return resultado;
+        }
+        public static int CambiarEstado_824_ec(int actividadId_824_ec, EstadoActividad_824_ec nuevoEstado_824_ec)
+        {
+            int resultado = _824_ecActividadDAL.ModificarEstado_824_ec(actividadId_824_ec, nuevoEstado_824_ec);
+            LlamaraAlDigitoVerificador(resultado);
+            return resultado;
         }
 
         private static void LlamaraAlDigitoVerificador(int resultado, bool post = false)
@@ -98,8 +119,6 @@ namespace Capa_de_Aplicación_BLL_
                     p => p.Id_824_ec, (p, dvh) => p.DVH_824_ec = dvh);
             }
         }
-
-
         public static bool VerificarCaducidad_824_ec(_824_ecActividad actividad_824_ec)
         { // de la forma lazy, cada que se pida la lista
             if (actividad_824_ec.Estado_824_ec == EstadoActividad_824_ec.Abierto &&
@@ -112,23 +131,7 @@ namespace Capa_de_Aplicación_BLL_
             return false;
         }
 
-        public static int CambiarEstado_824_ec(int actividadId_824_ec, EstadoActividad_824_ec nuevoEstado_824_ec)
-        {
-            int resultado = _824_ecActividadDAL.ModificarEstado_824_ec(actividadId_824_ec, nuevoEstado_824_ec);
-            LlamaraAlDigitoVerificador(resultado);
-            return resultado;
-        }
 
-        public static int Eliminar_824_ec(int actividadId_824_ec)
-        {
-            if (actividadId_824_ec <= 0)
-                throw new Exception("Identificador de actividad inválido para eliminar.");
-
-            int resultado = _824_ecActividadDAL.Eliminar_824_ec(actividadId_824_ec);
-            LlamaraAlDigitoVerificador(resultado, true);
-
-            return resultado;
-        }
 
         // buscar
         public static List<_824_ecActividad> ListarTodas_824_ec()
@@ -142,6 +145,13 @@ namespace Capa_de_Aplicación_BLL_
             }
 
             return lista_824_ec;
+        }
+        public static List<_824_ecActividad> ListarPorSolicitante_824_ec(int idSolicitante)
+        {
+            if (idSolicitante <= 0)
+                throw new Exception("El ID del solicitante es inválido.");
+
+            return _824_ecActividadDAL.ListarPorSolicitante_824_ec(idSolicitante);
         }
         public static _824_ecActividad ObtenerPorId_824_ec(int _824_ecID)
         {

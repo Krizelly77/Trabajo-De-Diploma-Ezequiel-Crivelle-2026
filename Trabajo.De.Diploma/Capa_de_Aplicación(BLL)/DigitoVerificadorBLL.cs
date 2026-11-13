@@ -37,6 +37,15 @@ namespace Capa_de_Aplicación_BLL_
             // 5. Validar Notificacion
             string resNotificacion = ValidarTabla<_824_ecNotificacion>("Notificacion", "Notificacion_DVH", () => _824_ecNotificacionDAL.Listar_824_ec().Cast<IVerificable>().ToList());
             if (resNotificacion != "ok") return resNotificacion;
+
+            // 6. Validar Solicitante 
+            string resSolicitante = ValidarTabla<_824_ecSolicitante>("Solicitante", "Solicitante_DVH", () => _824_ecSolicitanteDAL.ListarTodos_824_ec().Cast<IVerificable>().ToList());
+            if (resSolicitante != "ok") return resSolicitante;
+
+            // 7. Validar Participante 
+            string resParticipante = ValidarTabla<_824_ecParticipante>("Participante", "Participante_DVH", () => _824_ecParticipanteDAL.ListarTodos_824_ec().Cast<IVerificable>().ToList());
+            if (resParticipante != "ok") return resParticipante;
+            
             return "ok";
         }
 
@@ -111,7 +120,8 @@ namespace Capa_de_Aplicación_BLL_
             RecalcularIntegridadTabla("Actividad", "Actividad_Id", _824_ecActividadDAL.ListarTodas_824_ec, a => a.Id_824_ec, (a, dvh) => a.DVH_824_ec = dvh);
             RecalcularIntegridadTabla("Postulacion", "Postulacion_Id", _824_ecPostulacionDAL.ListarTodas_824_ec, p => p.Id_824_ec, (p, dvh) => p.DVH_824_ec = dvh);
             RecalcularIntegridadTabla("Notificacion", "Notificacion_Id", _824_ecNotificacionDAL.Listar_824_ec, n => n.Id_824_ec, (n, dvh) => n.DVH_824_ec = dvh);
-
+            RecalcularIntegridadTabla("Solicitante", "Solicitante_Id", _824_ecSolicitanteDAL.ListarTodos_824_ec, s => s.Id_824_ec, (s, dvh) => s.DVH_824_ec = dvh);
+            RecalcularIntegridadTabla("Participante", "Participante_Id", _824_ecParticipanteDAL.ListarTodos_824_ec, part => part.Id_824_ec, (part, dvh) => part.DVH_824_ec = dvh);
         }
 
         private string GetDVHFromEntidad(IVerificable entidad)
@@ -121,6 +131,8 @@ namespace Capa_de_Aplicación_BLL_
             if (entidad is _824_ecActividad a) return a.DVH_824_ec;
             if (entidad is _824_ecPostulacion p) return p.DVH_824_ec;
             if (entidad is _824_ecNotificacion n) return n.DVH_824_ec;
+            if (entidad is _824_ecSolicitante s) return s.DVH_824_ec;
+            if (entidad is _824_ecParticipante part) return part.DVH_824_ec;
 
             return null;
         }

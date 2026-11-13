@@ -1,4 +1,4 @@
-﻿using Capa_de_Acceso_a_Datos_DAL_;
+﻿ using Capa_de_Acceso_a_Datos_DAL_;
 using Capa_de_Dominio_BE_;
 using System;
 using System.Collections.Generic;

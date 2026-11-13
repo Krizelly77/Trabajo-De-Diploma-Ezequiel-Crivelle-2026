@@ -22,7 +22,8 @@ namespace Capa_de_Dominio_BE_
         public bool Activo { get; set; }
         public int NivelPermisos {  get; set; }
         public bool BloqueoDV { get; set; }
-        public string DVH { get; set; }
+        public string DVH_824_ec { get; set; }
+        public string DVH { get => DVH_824_ec; set => DVH_824_ec = value; }
 
         [XmlIgnore]
         public List<ComponentePermiso> Permisos { get; set; } = new List<ComponentePermiso>();

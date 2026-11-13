@@ -65,13 +65,16 @@ namespace Ingenieria.De.Software
             DGVpostulaciones.Columns["Id"].Visible = false;
 
             DGVpostulaciones.Columns.Add("Actividad", "Actividad");
-            DGVpostulaciones.Columns["Actividad"].Width = 150;
+            DGVpostulaciones.Columns["Actividad"].Width = 140;
 
-            DGVpostulaciones.Columns.Add("Postulacion", "Postulacion");
-            DGVpostulaciones.Columns["Postulacion"].Width = 100;
+            DGVpostulaciones.Columns.Add("Participante", "Participante / Grupo");
+            DGVpostulaciones.Columns["Participante"].Width = 180;
+
+            DGVpostulaciones.Columns.Add("Postulacion", "Estado");
+            DGVpostulaciones.Columns["Postulacion"].Width = 90;
 
             DGVpostulaciones.Columns.Add("Caduca", "Caduca");
-            DGVpostulaciones.Columns["Caduca"].Width = 100;
+            DGVpostulaciones.Columns["Caduca"].Width = 95;
 
             DGVpostulaciones.AllowUserToAddRows = false;
             DGVpostulaciones.AllowUserToDeleteRows = false;
@@ -82,24 +85,78 @@ namespace Ingenieria.De.Software
 
             ActualizarPostulaciones_824_ec();
         }
+
         private void ActualizarPostulaciones_824_ec()
         {
             MisPost_824_ec = _824_ecPostulacionBLL.ListarActividadPorCandidato_824_ec(UsuarioActual.Id).ToList();
+            FiltrarPostulaciones_824_ec();
+        }
+
+        private void FiltrarPostulaciones_824_ec()
+        {
             if (DGVpostulaciones.Columns.Count == 0) return;
+
             DGVpostulaciones.Rows.Clear();
+
             if (MisPost_824_ec != null)
             {
-                foreach (var pos in MisPost_824_ec)
+                var filtradas = MisPost_824_ec.AsEnumerable();
+
+                // 1. Filtro por Nombre de Actividad
+                string filtroAct = TXTfiltroPostActividad.Text.Trim().ToLower();
+                if (!string.IsNullOrEmpty(filtroAct))
                 {
+                    filtradas = filtradas.Where(p =>
+                        p.Actividad_824_ec != null &&
+                        p.Actividad_824_ec.Nombre_824_ec != null &&
+                        p.Actividad_824_ec.Nombre_824_ec.ToLower().Contains(filtroAct));
+                }
+
+                // 2. Filtro por Documento del Participante (soporta Individual y Grupal)
+                string filtroDoc = TXTfiltroPostDocumento.Text.Trim().ToLower();
+                if (!string.IsNullOrEmpty(filtroDoc))
+                {
+                    filtradas = filtradas.Where(p =>
+                        // Coincidencia en postulación individual
+                        (p.Participante_824_ec != null &&
+                         p.Participante_824_ec.Documento_824_ec != null &&
+                         p.Participante_824_ec.Documento_824_ec.ToLower().Contains(filtroDoc))
+                        ||
+                        // Coincidencia en alguno de los integrantes de una postulación grupal
+                        (p.ParticipantesAgrupados != null &&
+                         p.ParticipantesAgrupados.Any(ag =>
+                             ag.Documento_824_ec != null &&
+                             ag.Documento_824_ec.ToLower().Contains(filtroDoc)))
+                    );
+                }
+
+                foreach (var pos in filtradas)
+                {
+                    string infoParticipante = ObtenerDescripcionParticipantes_824_ec(pos);
+
                     DGVpostulaciones.Rows.Add(
                         pos.Id_824_ec,
                         pos.Actividad_824_ec.Nombre_824_ec,
+                        infoParticipante,
                         pos.Estado_824_ec.ToString(),
-                        pos.Actividad_824_ec.FechaCaducidad_824_ec
+                        pos.Actividad_824_ec.FechaCaducidad_824_ec.ToShortDateString()
                     );
                 }
             }
+        }
 
+        private string ObtenerDescripcionParticipantes_824_ec(_824_ecPostulacion pos)
+        {
+            if (pos.ParticipantesAgrupados != null && pos.ParticipantesAgrupados.Count > 0)
+            {
+                var apellidos = pos.ParticipantesAgrupados.Select(p => p.Apellido_824_ec);
+                return $"Grupo ({pos.ParticipantesAgrupados.Count}): {string.Join(", ", apellidos)}";
+            }
+            if (pos.Participante_824_ec != null)
+            {
+                return $"{pos.Participante_824_ec.Apellido_824_ec}, {pos.Participante_824_ec.Nombre_824_ec} ({pos.Participante_824_ec.Documento_824_ec})";
+            }
+            return "Sin participante asignado";
         }
         #endregion grillaPostulaciones
 
@@ -174,9 +231,10 @@ namespace Ingenieria.De.Software
                 foreach (var act in filtradas)
                 {
                     var postulaciones = _824_ecPostulacionBLL.ListarCandidatosPorActividad_824_ec(act.Id_824_ec);
-                    int cantParticipantes = postulaciones != null
-                        ? postulaciones.Count(p => p.Estado_824_ec == _824_ecBE_Enums.EstadoPostulacion_824_ec.Aceptado)
-                        : 0;
+                    int cantParticipantes = postulaciones != null ? postulaciones
+                            .Where(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado)
+                            .Sum(p => (p.ParticipantesAgrupados != null && p.ParticipantesAgrupados.Count > 0) ? p.ParticipantesAgrupados.Count
+                                : 1): 0;
 
                     DGVactividades.Rows.Add(
                         act.Id_824_ec,
@@ -225,55 +283,116 @@ namespace Ingenieria.De.Software
             {
                 try
                 {
-                    _824_ecPostulacion nuevaPost = new _824_ecPostulacion();
+                    using (_824_ecConformarPostulacion fcon = new _824_ecConformarPostulacion())
+                    {
+                        int mId = int.Parse(DGVactividades.SelectedRows[0].Cells[0].Value.ToString());
+                        fcon._824_ecActividadActual = _824_ecActividadBLL.ObtenerPorId_824_ec(mId);
 
-                    int mId = int.Parse(DGVactividades.SelectedRows[0].Cells[0].Value.ToString());
+                        if (fcon.ShowDialog(this) == DialogResult.OK)
+                        {
+                            ActualizarPostulaciones_824_ec();
+                            Actualizar_824_ec();
 
-                    nuevaPost.Actividad_824_ec = _824_ecActividadBLL.ObtenerPorId_824_ec(mId);
-                    nuevaPost.Candidato_824_ec = UsuarioActual;
-                    _824_ecPostulacionBLL.RegistrarPostulacion_824_ec(nuevaPost, UsuarioActual.Id);
-
-                    _824_ecNotificacionBLL.Guardar_824_ec(
-                        new _824_ecNotificacion("Nueva Postulacion"
-                        , $"El usuario {UsuarioActual.NombreUsuario} se postulo para la actividad {nuevaPost.Actividad_824_ec.Nombre_824_ec} para el dia {nuevaPost.Actividad_824_ec.FechaHora_824_ec.ToString()}."
-                        , UsuarioActual.Id, nuevaPost.Actividad_824_ec.Organizador_824_ec.Id ));
-                    GenerarComprobantePostulacion_824_ec(nuevaPost);
-                    SessionManager.TraerInstancia().RegistrarActividad("Alta de Postulacion: en" + nuevaPost.Actividad_824_ec.Nombre_824_ec + " de id: " + nuevaPost.Id_824_ec);
+                            if (fcon.PostulacionesCreadas.Count > 0)
+                            {
+                                GenerarComprobantePostulacion_824_ec(fcon.PostulacionesCreadas);
+                            }
+                        }
+                    }
                 }
                 catch (Exception ex)
-                {   MessageBox.Show(ex.Message);}
-
-                ActualizarPostulaciones_824_ec();
-                Actualizar_824_ec();
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
-                MessageBox.Show("Debe seleccionar una actividad para postularte");
+            {
+                MessageBox.Show("Debe seleccionar una actividad para conformar una postulación.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
         private void BTNretirar_Click(object sender, EventArgs e)
         {
-            if (DGVpostulaciones.SelectedRows.Count > 0)
+            if (DGVpostulaciones.SelectedRows.Count == 0)
             {
-                try
-                {
-                    int mId = int.Parse(DGVpostulaciones.SelectedRows[0].Cells[0].Value.ToString());
-                    _824_ecPostulacion viejaPost = _824_ecPostulacionBLL.BuscarPorID_824_ec(mId);
-                    _824_ecPostulacionBLL.EvaluarCandidatoAntesDeCambiarEstado_824_ec(viejaPost.Id_824_ec, viejaPost.Estado_824_ec, EstadoPostulacion_824_ec.Retirado, viejaPost.Actividad_824_ec);
+                MessageBox.Show("Debe seleccionar una postulación para retirarla.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                    _824_ecNotificacionBLL.Guardar_824_ec(
-                        new _824_ecNotificacion("Participante retiro su postulacion"
-                        , $"El usuario {UsuarioActual.NombreUsuario} retiro su postulacion para la actividad {viejaPost.Actividad_824_ec.Nombre_824_ec} para el dia {viejaPost.Actividad_824_ec.FechaHora_824_ec.ToString()}."
-                        , UsuarioActual.Id, viejaPost.Actividad_824_ec.Organizador_824_ec.Id));
-                    MessageBox.Show("Postulacion retirada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    SessionManager.TraerInstancia().RegistrarActividad($"Modificacion de Postulacion de: {viejaPost.Candidato_824_ec.NombreUsuario}, actividad:{viejaPost.Actividad_824_ec.Nombre_824_ec}, a:Retirado");
+            try
+            {
+                int mId = int.Parse(DGVpostulaciones.SelectedRows[0].Cells[0].Value.ToString());
+                _824_ecPostulacion viejaPost = _824_ecPostulacionBLL.BuscarPorID_824_ec(mId);
+
+                if (viejaPost == null) return;
+
+                // Paso 18 PN2: Solicitar DNI y Palabra Clave del participante para autenticar el retiro
+                if (!SolicitarCredencialesRetiro_824_ec(viejaPost, out string dniIngresado, out string claveIngresada))
+                {
+                    return; // El gestor canceló la ventana de validación
                 }
-                catch(Exception ex) 
-                { MessageBox.Show(ex.Message); }
+
+                // Paso 19 PN2: Validar credenciales con CryptoManager y cambiar estado a Retirado
+                _824_ecPostulacionBLL.RetirarPostulacionConValidacion_824_ec(viejaPost.Id_824_ec, dniIngresado, claveIngresada);
+
+                string descParticipante = ObtenerDescripcionParticipantes_824_ec(viejaPost);
+
+                // Notificar al Organizador de Actividades
+                _824_ecNotificacionBLL.Guardar_824_ec(
+                    new _824_ecNotificacion(
+                        "Retiro de postulación",
+                        $"El gestor {UsuarioActual.NombreUsuario} registró el retiro de postulación ({descParticipante}) para la actividad {viejaPost.Actividad_824_ec.Nombre_824_ec}.",
+                        UsuarioActual.Id,
+                        viejaPost.Actividad_824_ec.Organizador_824_ec.Id
+                    ));
+
+                SessionManager.TraerInstancia().RegistrarActividad($"Retiro de Postulacion ID {viejaPost.Id_824_ec} ({descParticipante}) en actividad {viejaPost.Actividad_824_ec.Nombre_824_ec}");
+                MessageBox.Show("Postulación retirada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 ActualizarPostulaciones_824_ec();
                 Actualizar_824_ec();
             }
-            else
-                MessageBox.Show("Debe seleccionar una postulacion para retirarla");
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error en retiro de postulación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private bool SolicitarCredencialesRetiro_824_ec(_824_ecPostulacion post, out string documento, out string palabraClave)
+        {
+            documento = string.Empty;
+            palabraClave = string.Empty;
+
+            using (Form prompt = new Form())
+            {
+                prompt.Width = 380;
+                prompt.Height = 230;
+                prompt.FormBorderStyle = FormBorderStyle.FixedDialog;
+                prompt.Text = "Validación de Seguridad - Retiro";
+                prompt.StartPosition = FormStartPosition.CenterParent;
+                prompt.MaximizeBox = false;
+                prompt.MinimizeBox = false;
+
+                Label lblInfo = new Label { Left = 20, Top = 15, Width = 330, Text = $"Actividad: {post.Actividad_824_ec.Nombre_824_ec}" };
+                Label lblDni = new Label { Left = 20, Top = 45, Width = 120, Text = "DNI Participante:" };
+                TextBox txtDni = new TextBox { Left = 150, Top = 42, Width = 190 };
+
+                Label lblClave = new Label { Left = 20, Top = 85, Width = 120, Text = "Palabra Clave:" };
+                TextBox txtClave = new TextBox { Left = 150, Top = 82, Width = 190, PasswordChar = '*' };
+
+                Button btnOk = new Button { Text = "Validar y Retirar", Left = 130, Width = 110, Top = 135, DialogResult = DialogResult.OK };
+                Button btnCancel = new Button { Text = "Cancelar", Left = 250, Width = 90, Top = 135, DialogResult = DialogResult.Cancel };
+
+                prompt.Controls.AddRange(new Control[] { lblInfo, lblDni, txtDni, lblClave, txtClave, btnOk, btnCancel });
+                prompt.AcceptButton = btnOk;
+                prompt.CancelButton = btnCancel;
+
+                if (prompt.ShowDialog(this) == DialogResult.OK)
+                {
+                    documento = txtDni.Text.Trim();
+                    palabraClave = txtClave.Text.Trim();
+                    return true;
+                }
+                return false;
+            }
         }
         #endregion Botones
 
@@ -400,31 +519,62 @@ namespace Ingenieria.De.Software
                 }
             }
         }
+        private void TXTfiltroPostActividad_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarPostulaciones_824_ec();
+        }
+
+        private void TXTfiltroPostDocumento_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarPostulaciones_824_ec();
+        }
         #endregion Controles
 
-        private void GenerarComprobantePostulacion_824_ec(_824_ecPostulacion postulacion)
+        private void GenerarComprobantePostulacion_824_ec(List<_824_ecPostulacion> postulaciones)
         {
             try
             {
-                // 1. Garantizar la carpeta predeterminada
                 string carpetaDefault = _824_ecDirectivosManejador.ObtenerRutaCarpetaDefault("ReportesPDF");
+                var primera = postulaciones.First();
+
+                string detallePostulaciones = "";
+                foreach (var post in postulaciones)
+                {
+                    detallePostulaciones += $"----------------------------------------\n" +
+                                            $"N° Postulación: {post.Id_824_ec}\n";
+
+                    if (post.ParticipantesAgrupados != null && post.ParticipantesAgrupados.Count > 0)
+                    {
+                        detallePostulaciones += $"Modalidad: Grupal ({post.ParticipantesAgrupados.Count} integrantes)\n";
+                        foreach (var p in post.ParticipantesAgrupados)
+                        {
+                            detallePostulaciones += $"  - {p.Apellido_824_ec}, {p.Nombre_824_ec} (DNI: {p.Documento_824_ec})\n";
+                        }
+                    }
+                    else if (post.Participante_824_ec != null)
+                    {
+                        detallePostulaciones += $"Modalidad: Individual\n" +
+                                                $"Participante: {post.Participante_824_ec.Apellido_824_ec}, {post.Participante_824_ec.Nombre_824_ec} (DNI: {post.Participante_824_ec.Documento_824_ec})\n";
+                    }
+                }
 
                 string contenido =
                     "COMPROBANTE DE POSTULACIÓN\n" +
                     "========================================\n\n" +
-                    "Fecha de generación: " + DateTime.Now + "\n\n" +
-                    "DATOS DEL POSTULANTE\n" +
-                    "Usuario: " + postulacion.Candidato_824_ec.NombreUsuario + "\n\n" +
+                    "Fecha de generación: " + DateTime.Now + "\n" +
+                    "Gestor responsable: " + primera.GestorResponsable_824_ec.NombreUsuario + "\n\n" +
                     "DATOS DE LA ACTIVIDAD\n" +
-                    "Actividad: " + postulacion.Actividad_824_ec.Nombre_824_ec + "\n" +
-                    "Fecha y hora: " + postulacion.Actividad_824_ec.FechaHora_824_ec + "\n" +
-                    "Organizador: " + postulacion.Actividad_824_ec.Organizador_824_ec.NombreUsuario + "\n\n" +
+                    "Actividad: " + primera.Actividad_824_ec.Nombre_824_ec + "\n" +
+                    "Fecha y hora: " + primera.Actividad_824_ec.FechaHora_824_ec + "\n" +
+                    "Lugar: " + primera.Actividad_824_ec.Ubicacion_824_ec + "\n" +
+                    "Organizador: " + primera.Actividad_824_ec.Organizador_824_ec.NombreUsuario + "\n\n" +
+                    "DETALLE DE POSTULACIONES REGISTRADAS (" + postulaciones.Count + ")\n" +
+                    detallePostulaciones +
                     "========================================\n" +
-                    "La postulación fue registrada correctamente.";
+                    "Las postulaciones fueron registradas correctamente.";
 
-                // 2. Preguntar al usuario el destino / modalidad
                 DialogResult opcion = MessageBox.Show(
-                    "Postulacion registrada con exito ¿Desea obtener el comprobante?\n\n" +
+                    "Postulación registrada con éxito. ¿Desea obtener el comprobante?\n\n" +
                     "[Sí] - Guardar directo en carpeta predeterminada (AppData)\n" +
                     "[No] - Abrir Vista Previa (Elegir ubicación / Imprimir)\n" +
                     "[Cancelar] - No deseo generar un comprobante",
@@ -438,24 +588,22 @@ namespace Ingenieria.De.Software
                 {
                     if (opcion == DialogResult.Yes)
                     {
-                        // GUARDADO DIRECTO EN LA CARPETA DEFAULT
-                        string nombreArchivo = $"Comprobante_Postulacion_{postulacion.Id_824_ec}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                        string prefijo = postulaciones.Count > 1 ? "Comprobante_Postulaciones_Multiple" : $"Comprobante_Postulacion_{primera.Id_824_ec}";
+                        string nombreArchivo = $"{prefijo}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
                         string rutaFinal = System.IO.Path.Combine(carpetaDefault, nombreArchivo);
 
-                        // Configurar la impresora virtual 'Microsoft Print to PDF'
                         documento.PrinterSettings.PrinterName = "Microsoft Print to PDF";
                         documento.PrinterSettings.PrintToFile = true;
                         documento.PrinterSettings.PrintFileName = rutaFinal;
                         documento.PrintController = new System.Drawing.Printing.StandardPrintController();
 
-                        documento.Print(); // Imprimir directo sin cuadro de diálogo
+                        documento.Print();
 
                         MessageBox.Show($"Comprobante guardado con éxito en:\n{rutaFinal}",
                             "Archivo generado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else if (opcion == DialogResult.No)
                     {
-                        // vista
                         using (PrintPreviewDialog vistaPrevia = new PrintPreviewDialog())
                         {
                             vistaPrevia.Document = documento;
@@ -465,14 +613,13 @@ namespace Ingenieria.De.Software
                         }
                     }
                 }
-
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show( "La postulación se registró correctamente, pero no se pudo generar el comprobante.\n\n" + ex.Message, "Error al generar comprobante",
+                MessageBox.Show("La postulación se registró correctamente, pero no se pudo generar el comprobante.\n\n" + ex.Message, "Error al generar comprobante",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
     }
 }

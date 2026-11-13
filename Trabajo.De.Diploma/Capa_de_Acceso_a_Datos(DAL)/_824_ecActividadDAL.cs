@@ -42,37 +42,39 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             parametros_824_ec.Add(new SqlParameter("@nivelRequerido", (int)act_824_ec.NivelRequerido_824_ec));
             parametros_824_ec.Add(new SqlParameter("@estado", (int)act_824_ec.Estado_824_ec));
             parametros_824_ec.Add(new SqlParameter("@organizadorId", act_824_ec.Organizador_824_ec.Id));
+            parametros_824_ec.Add(new SqlParameter("@solicitanteId", (object)act_824_ec.Solicitante824_ec?.Id_824_ec ?? DBNull.Value));
 
             if (act_824_ec.Id_824_ec == 0)
             {
                 act_824_ec.Id_824_ec = SiguienteId_824_ec();
                 parametros_824_ec.Add(new SqlParameter("@id", act_824_ec.Id_824_ec));
                 comando_824_ec = @"INSERT INTO Actividad 
-                            (Actividad_Id, Actividad_Nombre, Actividad_Descripcion, Categoria_Id, 
-                             Actividad_FechaHora, Actividad_FechaPublicacion, Actividad_FechaCaducidad, Actividad_Ubicacion, 
-                             Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId) 
-                            VALUES 
-                            (@id, @nombre, @descripcion, @categoriaId, 
-                             @fechaHora, @fechaPublicacion, @fechaCaducidad, @ubicacion, 
-                             @cantMin, @cantMax, @nivelRequerido, @estado, @organizadorId)";
+                    (Actividad_Id, Actividad_Nombre, Actividad_Descripcion, Categoria_Id, 
+                     Actividad_FechaHora, Actividad_FechaPublicacion, Actividad_FechaCaducidad, Actividad_Ubicacion, 
+                     Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId, Solicitante_Id) 
+                    VALUES 
+                    (@id, @nombre, @descripcion, @categoriaId, 
+                     @fechaHora, @fechaPublicacion, @fechaCaducidad, @ubicacion, 
+                     @cantMin, @cantMax, @nivelRequerido, @estado, @organizadorId, @solicitanteId)";
             }
             else
             {
                 parametros_824_ec.Add(new SqlParameter("@id", act_824_ec.Id_824_ec));
                 comando_824_ec = @"UPDATE Actividad SET 
-                            Actividad_Nombre = @nombre,
-                            Actividad_Descripcion = @descripcion,
-                            Categoria_Id = @categoriaId,
-                            Actividad_FechaHora = @fechaHora,
-                            Actividad_FechaPublicacion = @fechaPublicacion,
-                            Actividad_FechaCaducidad = @fechaCaducidad,
-                            Actividad_Ubicacion = @ubicacion,
-                            Actividad_CantMinima = @cantMin,
-                            Actividad_CantMaxima = @cantMax,
-                            Actividad_NivelRequerido = @nivelRequerido,
-                            Actividad_Estado = @estado,
-                            Usuario_OrganizadorId = @organizadorId
-                            WHERE Actividad_Id = @id";
+                    Actividad_Nombre = @nombre,
+                    Actividad_Descripcion = @descripcion,
+                    Categoria_Id = @categoriaId,
+                    Actividad_FechaHora = @fechaHora,
+                    Actividad_FechaPublicacion = @fechaPublicacion,
+                    Actividad_FechaCaducidad = @fechaCaducidad,
+                    Actividad_Ubicacion = @ubicacion,
+                    Actividad_CantMinima = @cantMin,
+                    Actividad_CantMaxima = @cantMax,
+                    Actividad_NivelRequerido = @nivelRequerido,
+                    Actividad_Estado = @estado,
+                    Usuario_OrganizadorId = @organizadorId,
+                    Solicitante_Id = @solicitanteId
+                    WHERE Actividad_Id = @id";
             }
 
             return dao_824_ec.EjecutarNonQuery(comando_824_ec, parametros_824_ec);
@@ -112,9 +114,9 @@ namespace Capa_de_Acceso_a_Datos_DAL_
         public static _824_ecActividad ObtenerPorId_824_ec(int pid_824_ec)
         {
             string comando_824_ec = @"SELECT Actividad_Id, Actividad_Nombre, Actividad_Descripcion, Categoria_Id, 
-                                       Actividad_FechaHora, Actividad_FechaPublicacion, Actividad_FechaCaducidad, Actividad_Ubicacion, 
-                                       Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId, Actividad_DVH
-                                FROM Actividad WHERE Actividad_Id = @id";
+                               Actividad_FechaHora, Actividad_FechaPublicacion, Actividad_FechaCaducidad, Actividad_Ubicacion, 
+                               Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId, Solicitante_Id, Actividad_DVH
+                        FROM Actividad WHERE Actividad_Id = @id";
 
             List<SqlParameter> parametros_824_ec = new List<SqlParameter> { new SqlParameter("@id", pid_824_ec) };
             DAO dao_824_ec = new DAO();
@@ -129,16 +131,38 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             }
             return null;
         }
-
         public static List<_824_ecActividad> ListarTodas_824_ec()
         {
             string comando_824_ec = @"SELECT Actividad_Id, Actividad_Nombre, Actividad_Descripcion, Categoria_Id, 
-                                       Actividad_FechaHora, Actividad_FechaPublicacion, Actividad_FechaCaducidad, Actividad_Ubicacion, 
-                                       Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId, Actividad_DVH 
-                                FROM Actividad ORDER BY Actividad_FechaPublicacion DESC";
+                               Actividad_FechaHora, Actividad_FechaPublicacion, Actividad_FechaCaducidad, Actividad_Ubicacion, 
+                               Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId, Solicitante_Id, Actividad_DVH 
+                        FROM Actividad ORDER BY Actividad_FechaPublicacion DESC";
 
             DAO dao_824_ec = new DAO();
             DataSet seta_824_ec = dao_824_ec.ObtenerDataSet(comando_824_ec);
+            List<_824_ecActividad> lista_824_ec = new List<_824_ecActividad>();
+
+            if (seta_824_ec.Tables.Count > 0 && seta_824_ec.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow fila_824_ec in seta_824_ec.Tables[0].Rows)
+                {
+                    _824_ecActividad act_824_ec = new _824_ecActividad { Id_824_ec = Convert.ToInt32(fila_824_ec["Actividad_Id"]) };
+                    ValorizarEntidad_824_ec(act_824_ec, fila_824_ec);
+                    lista_824_ec.Add(act_824_ec);
+                }
+            }
+            return lista_824_ec;
+        }
+        public static List<_824_ecActividad> ListarPorSolicitante_824_ec(int idSolicitante)
+        {
+            string comando_824_ec = @"SELECT Actividad_Id, Actividad_Nombre, Actividad_Descripcion, Categoria_Id, 
+                               Actividad_FechaHora, Actividad_FechaPublicacion, Actividad_FechaCaducidad, Actividad_Ubicacion, 
+                               Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId, Solicitante_Id, Actividad_DVH 
+                        FROM Actividad WHERE Solicitante_Id = @solId ORDER BY Actividad_FechaPublicacion DESC";
+
+            List<SqlParameter> parametros = new List<SqlParameter> { new SqlParameter("@solId", idSolicitante) };
+            DAO dao_824_ec = new DAO();
+            DataSet seta_824_ec = dao_824_ec.ObtenerDataSet(comando_824_ec, parametros);
             List<_824_ecActividad> lista_824_ec = new List<_824_ecActividad>();
 
             if (seta_824_ec.Tables.Count > 0 && seta_824_ec.Tables[0].Rows.Count > 0)
@@ -156,7 +180,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
         private static void ValorizarEntidad_824_ec(_824_ecActividad act_824_ec, DataRow fila_824_ec)
         {
             act_824_ec.Nombre_824_ec = fila_824_ec["Actividad_Nombre"].ToString();
-            act_824_ec.Descripcion_824_ec = fila_824_ec["Actividad_Descripcion"].ToString();
+            act_824_ec.Descripcion_824_ec = fila_824_ec["Actividad_Descripcion"] != DBNull.Value ? fila_824_ec["Actividad_Descripcion"].ToString() : string.Empty;
             act_824_ec.Categoria_824_ec = _824_ecCategoriaDAL.ObtenerPorId_824_ec(Convert.ToInt32(fila_824_ec["Categoria_Id"]));
             act_824_ec.FechaHora_824_ec = Convert.ToDateTime(fila_824_ec["Actividad_FechaHora"]);
             act_824_ec.FechaPublicacion_824_ec = Convert.ToDateTime(fila_824_ec["Actividad_FechaPublicacion"]);
@@ -167,8 +191,18 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             act_824_ec.NivelRequerido_824_ec = (NivelRequerido_824_ec)Convert.ToInt32(fila_824_ec["Actividad_NivelRequerido"]);
             act_824_ec.Estado_824_ec = (EstadoActividad_824_ec)Convert.ToInt32(fila_824_ec["Actividad_Estado"]);
             act_824_ec.DVH_824_ec = fila_824_ec["Actividad_DVH"] != DBNull.Value ? fila_824_ec["Actividad_DVH"].ToString() : null;
-            // Cargar referencia a Usuario Organizador por Id
             act_824_ec.Organizador_824_ec = UsuarioDAL.ObtenerPorId(Convert.ToInt32(fila_824_ec["Usuario_OrganizadorId"]));
+
+            if (fila_824_ec.Table.Columns.Contains("Solicitante_Id") && fila_824_ec["Solicitante_Id"] != DBNull.Value)
+            {
+                int solId = Convert.ToInt32(fila_824_ec["Solicitante_Id"]);
+                act_824_ec.Solicitante824_ec = _824_ecSolicitanteDAL.ObtenerPorId_824_ec(solId);
+            }
+            else
+            {
+                act_824_ec.Solicitante824_ec = null;
+            }
         }
+
     }
 }

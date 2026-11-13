@@ -23,6 +23,7 @@ namespace Ingenieria.De.Software
         internal _824_ecActividad _824_ecActividadEditable { get; set; }
         internal List<_824_ecCategoria> _824_ecCats;
         internal _824_ecBE_Enums.EstadoActividad_824_ec EstadoAnterior { get; set; }
+        private _824_ecSolicitante _solicitanteActual;
 
         public _824_ecFormABMactividad()
         {
@@ -30,8 +31,10 @@ namespace Ingenieria.De.Software
         }
         private void _824_ecFormABMactividad_Load(object sender, EventArgs e)
         {
+            TXTsolicitante.ReadOnly = true;
+
             _824_ecCats = _824_ecCategoriaBLL.Listar_824_ec();
-            CMBcategoria.Items.Clear(); 
+            CMBcategoria.Items.Clear();
             if (_824_ecCats != null)
             {
                 foreach (var cat in _824_ecCats)
@@ -39,7 +42,7 @@ namespace Ingenieria.De.Software
                     CMBcategoria.Items.Add(cat.Nombre_824_ec);
                 }
             }
-            if(_824_ecTipoOperacion != TiposOperacion.Alta)
+            if (_824_ecTipoOperacion != TiposOperacion.Alta && _824_ecActividadEditable != null)
                 EstadoAnterior = _824_ecActividadEditable.Estado_824_ec;
 
             CMBestado.DataSource = Enum.GetValues(typeof(EstadoActividad_824_ec)).Cast<EstadoActividad_824_ec>()
@@ -62,7 +65,6 @@ namespace Ingenieria.De.Software
                     CMBestado.Enabled = false;
                     CMBestado.Visible = false;
                     LBLestado.Visible = false;
-
                     break;
 
                 case Constantes.TiposOperacion.Modificacion:
@@ -92,6 +94,8 @@ namespace Ingenieria.De.Software
                     BTNconfirmar.ForeColor = Color.White;
                     BTNrestablecerCampos.Enabled = false;
                     BTNrestablecerCampos.Visible = false;
+                    BTNbuscarSolicitante.Enabled = false;
+                    BTNbuscarSolicitante.Visible = false;
                     break;
 
                 case Constantes.TiposOperacion.DeSesion:
@@ -111,6 +115,8 @@ namespace Ingenieria.De.Software
                     BTNrestablecerCampos.Visible = false;
                     BTNconfirmar.Enabled = false;
                     BTNconfirmar.Visible = false;
+                    BTNbuscarSolicitante.Enabled = false;
+                    BTNbuscarSolicitante.Visible = false;
                     break;
 
                 default:
@@ -133,6 +139,7 @@ namespace Ingenieria.De.Software
             CMBcategoria.Enabled = false;
             CMBestado.Enabled = false;
             CMBnivel.Enabled = false;
+            BTNbuscarSolicitante.Enabled = false;
         }
         private void _824_ecCargarCampos(_824_ecActividad _824_ecAct)
         {
@@ -145,10 +152,15 @@ namespace Ingenieria.De.Software
             HoraActividad.Value = _824_ecAct.FechaHora_824_ec;
             FechaCaducidad.Value = _824_ecAct.FechaCaducidad_824_ec;
             HoraCaducidad.Value = _824_ecAct.FechaCaducidad_824_ec;
+
             if (_824_ecAct.Categoria_824_ec != null)
                 CMBcategoria.SelectedItem = _824_ecAct.Categoria_824_ec.Nombre_824_ec;
+
             CMBestado.SelectedItem = _824_ecAct.Estado_824_ec;
             CMBnivel.SelectedItem = _824_ecAct.NivelRequerido_824_ec;
+
+            _solicitanteActual = _824_ecAct.Solicitante824_ec;
+            MostrarSolicitanteEnPantalla();
         }
         private void _824_ecLimpiarCampos()
         {
@@ -163,9 +175,24 @@ namespace Ingenieria.De.Software
             CMBestado.SelectedItem = EstadoActividad_824_ec.Abierto;
             CMBestado.Enabled = false;
             CMBnivel.SelectedIndex = 0;
+
+            _solicitanteActual = null;
+            TXTsolicitante.Text = "";
+        }
+        private void MostrarSolicitanteEnPantalla()
+        {
+            if (_solicitanteActual != null)
+            {
+                TXTsolicitante.Text = $"{_solicitanteActual.Apellido_824_ec}, {_solicitanteActual.Nombre_824_ec} ({_solicitanteActual.Documento_824_ec})";
+            }
+            else
+            {
+                TXTsolicitante.Text = "Sin solicitante asignado";
+            }
         }
         #endregion cargar
 
+        //botones
         #region botones
         private void ValorizarEntidad(_824_ecActividad act)
         {
@@ -224,6 +251,9 @@ namespace Ingenieria.De.Software
             {
                 act.Organizador_824_ec = SessionManager.TraerInstancia().usuarioINS;
             }
+
+            // Solicitante
+            act.Solicitante824_ec = _solicitanteActual;
         }
         private void BTNconfirmar_Click(object sender, EventArgs e)
         {
@@ -269,10 +299,9 @@ namespace Ingenieria.De.Software
                             {
                                 MessageBox.Show("Actividad modificada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                                SessionManager.TraerInstancia().RegistrarActividad("Modificación de actividad: " + _824_ecActividadEditable.Nombre_824_ec);
-                                this.Close();
+                            SessionManager.TraerInstancia().RegistrarActividad("Modificación de actividad: " + _824_ecActividadEditable.Nombre_824_ec);
+                            this.Close();
                         }
-
                         break;
 
                     case Constantes.TiposOperacion.Baja:
@@ -291,7 +320,6 @@ namespace Ingenieria.De.Software
                             MessageBox.Show("Actividad eliminada permanentemente con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.Close();
                         }
-
                         break;
                 }
             }
@@ -311,10 +339,7 @@ namespace Ingenieria.De.Software
                             MessageBoxDefaultButton.Button2
             );
 
-            if (advertencia == DialogResult.Yes)
-                return true;
-            else
-                return false;
+            return advertencia == DialogResult.Yes;
         }
         private void BTNcancelar_Click(object sender, EventArgs e)
         {
@@ -324,14 +349,45 @@ namespace Ingenieria.De.Software
         {
             _824_ecCargarCampos(_824_ecActividadEditable);
         }
+        private void BTNbuscarSolicitante_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (_824_ecFormElegirSolicitante fSoli = new _824_ecFormElegirSolicitante())
+                {
+                    if (fSoli.ShowDialog(this) == DialogResult.OK && fSoli.SolicitanteSeleccionado != null)
+                    {
+                        _solicitanteActual = fSoli.SolicitanteSeleccionado;
+                        MostrarSolicitanteEnPantalla();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error al seleccionar solicitante", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         #endregion botones
 
         private void GenerarComprobanteGrupo_824_ec( _824_ecActividad actividad)
         {
-            List<_824_ecPostulacion> participantes = _824_ecPostulacionBLL.ListarCandidatosPorActividad_824_ec(actividad.Id_824_ec)
-                .Where(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado).ToList(); 
+            List<_824_ecPostulacion> postulacionesAceptadas = _824_ecPostulacionBLL.ListarCandidatosPorActividad_824_ec(actividad.Id_824_ec)
+                .Where(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado).ToList();
 
-            // Garantizar la carpeta predeterminada para PDF
+            // Extraer la lista plana de participantes reales (individuales + integrantes de grupos)
+            List<_824_ecParticipante> participantesReales = new List<_824_ecParticipante>();
+            foreach (var post in postulacionesAceptadas)
+            {
+                if (post.ParticipantesAgrupados != null && post.ParticipantesAgrupados.Count > 0)
+                {
+                    participantesReales.AddRange(post.ParticipantesAgrupados);
+                }
+                else if (post.Participante_824_ec != null)
+                {
+                    participantesReales.Add(post.Participante_824_ec);
+                }
+            }
+
             string carpetaDefault = _824_ecDirectivosManejador.ObtenerRutaCarpetaDefault("ReportesPDF");
 
             DialogResult opcion = MessageBox.Show(
@@ -359,19 +415,23 @@ namespace Ingenieria.De.Software
                 contenido.AppendLine("DATOS DE LA ACTIVIDAD");
                 contenido.AppendLine("Actividad: " + actividad.Nombre_824_ec);
                 contenido.AppendLine("Fecha y hora: " + actividad.FechaHora_824_ec);
+                contenido.AppendLine("Ubicación: " + actividad.Ubicacion_824_ec);
                 contenido.AppendLine("Organizador: " + actividad.Organizador_824_ec.NombreUsuario);
+                if (actividad.Solicitante824_ec != null)
+                {
+                    contenido.AppendLine($"Solicitante: {actividad.Solicitante824_ec.Apellido_824_ec}, {actividad.Solicitante824_ec.Nombre_824_ec} (DNI: {actividad.Solicitante824_ec.Documento_824_ec})");
+                }
                 contenido.AppendLine("Cantidad mínima requerida: " + actividad.CantidadMinima_824_ec);
-                contenido.AppendLine("Participantes aceptados: " + participantes.Count);
+                contenido.AppendLine("Participantes aceptados: " + participantesReales.Count);
                 contenido.AppendLine();
 
                 contenido.AppendLine("INTEGRANTES DEL GRUPO");
                 contenido.AppendLine("----------------------------------------");
 
                 int numero = 1;
-
-                foreach (var participante in participantes)
+                foreach (var par in participantesReales)
                 {
-                    contenido.AppendLine(numero + ". " + participante.Candidato_824_ec.NombreUsuario);
+                    contenido.AppendLine($"{numero}. {par.Apellido_824_ec}, {par.Nombre_824_ec} (DNI: {par.Documento_824_ec})");
                     numero++;
                 }
 
@@ -383,7 +443,6 @@ namespace Ingenieria.De.Software
                 {
                     if (opcion == DialogResult.Yes)
                     {
-                        // GUARDADO DIRECTO EN APPDATA
                         string nombreArchivo = $"Comprobante_Grupo_Actividad_{actividad.Id_824_ec}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
                         string rutaFinal = System.IO.Path.Combine(carpetaDefault, nombreArchivo);
 
@@ -399,7 +458,6 @@ namespace Ingenieria.De.Software
                     }
                     else if (opcion == DialogResult.No)
                     {
-                        // VISTA PREVIA TRADICIONAL
                         using (PrintPreviewDialog vistaPrevia = new PrintPreviewDialog())
                         {
                             vistaPrevia.Document = documento;
@@ -413,9 +471,10 @@ namespace Ingenieria.De.Software
             }
             catch (Exception ex)
             {
-                MessageBox.Show( "El grupo se conformó correctamente, pero no se pudo generar el comprobante.\n\n" + ex.Message, "Error al generar comprobante",
+                MessageBox.Show("El grupo se conformó correctamente, pero no se pudo generar el comprobante.\n\n" + ex.Message, "Error al generar comprobante",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
     }
 }

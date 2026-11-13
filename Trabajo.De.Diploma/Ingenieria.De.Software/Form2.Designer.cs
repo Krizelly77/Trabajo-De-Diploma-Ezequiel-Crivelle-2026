@@ -38,11 +38,12 @@
             this.BTNgestUsuarios = new System.Windows.Forms.Button();
             this.BTNmisActividades = new System.Windows.Forms.Button();
             this.BTNverActividades = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BTNnotificaciones = new System.Windows.Forms.Button();
             this.LBLnotificaciones = new System.Windows.Forms.Label();
+            this.BTNmaestros = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +66,7 @@
             this.BTNcerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNcerrar.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNcerrar.ForeColor = System.Drawing.Color.IndianRed;
-            this.BTNcerrar.Location = new System.Drawing.Point(15, 374);
+            this.BTNcerrar.Location = new System.Drawing.Point(15, 399);
             this.BTNcerrar.Name = "BTNcerrar";
             this.BTNcerrar.Size = new System.Drawing.Size(129, 46);
             this.BTNcerrar.TabIndex = 5;
@@ -76,6 +77,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.OliveDrab;
+            this.panel1.Controls.Add(this.BTNmaestros);
             this.panel1.Controls.Add(this.BTNopUsuario);
             this.panel1.Controls.Add(this.BTNidioma);
             this.panel1.Controls.Add(this.BTNgestRolesPerm);
@@ -86,7 +88,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(163, 431);
+            this.panel1.Size = new System.Drawing.Size(163, 457);
             this.panel1.TabIndex = 0;
             // 
             // BTNopUsuario
@@ -96,7 +98,7 @@
             this.BTNopUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNopUsuario.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNopUsuario.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNopUsuario.Location = new System.Drawing.Point(15, 105);
+            this.BTNopUsuario.Location = new System.Drawing.Point(15, 82);
             this.BTNopUsuario.Name = "BTNopUsuario";
             this.BTNopUsuario.Size = new System.Drawing.Size(129, 46);
             this.BTNopUsuario.TabIndex = 0;
@@ -112,7 +114,7 @@
             this.BTNidioma.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNidioma.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNidioma.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNidioma.Location = new System.Drawing.Point(15, 313);
+            this.BTNidioma.Location = new System.Drawing.Point(15, 290);
             this.BTNidioma.Name = "BTNidioma";
             this.BTNidioma.Size = new System.Drawing.Size(129, 46);
             this.BTNidioma.TabIndex = 4;
@@ -128,7 +130,7 @@
             this.BTNgestRolesPerm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNgestRolesPerm.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNgestRolesPerm.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNgestRolesPerm.Location = new System.Drawing.Point(15, 209);
+            this.BTNgestRolesPerm.Location = new System.Drawing.Point(15, 186);
             this.BTNgestRolesPerm.Name = "BTNgestRolesPerm";
             this.BTNgestRolesPerm.Size = new System.Drawing.Size(129, 46);
             this.BTNgestRolesPerm.TabIndex = 2;
@@ -144,7 +146,7 @@
             this.BTNbitacora.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNbitacora.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNbitacora.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNbitacora.Location = new System.Drawing.Point(15, 261);
+            this.BTNbitacora.Location = new System.Drawing.Point(15, 238);
             this.BTNbitacora.Name = "BTNbitacora";
             this.BTNbitacora.Size = new System.Drawing.Size(129, 46);
             this.BTNbitacora.TabIndex = 3;
@@ -160,7 +162,7 @@
             this.BTNgestUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNgestUsuarios.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNgestUsuarios.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNgestUsuarios.Location = new System.Drawing.Point(15, 157);
+            this.BTNgestUsuarios.Location = new System.Drawing.Point(15, 134);
             this.BTNgestUsuarios.Name = "BTNgestUsuarios";
             this.BTNgestUsuarios.Size = new System.Drawing.Size(129, 46);
             this.BTNgestUsuarios.TabIndex = 1;
@@ -176,7 +178,7 @@
             this.BTNmisActividades.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNmisActividades.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNmisActividades.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNmisActividades.Location = new System.Drawing.Point(209, 313);
+            this.BTNmisActividades.Location = new System.Drawing.Point(208, 333);
             this.BTNmisActividades.Name = "BTNmisActividades";
             this.BTNmisActividades.Size = new System.Drawing.Size(300, 46);
             this.BTNmisActividades.TabIndex = 6;
@@ -192,7 +194,7 @@
             this.BTNverActividades.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNverActividades.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNverActividades.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNverActividades.Location = new System.Drawing.Point(547, 313);
+            this.BTNverActividades.Location = new System.Drawing.Point(546, 333);
             this.BTNverActividades.Name = "BTNverActividades";
             this.BTNverActividades.Size = new System.Drawing.Size(300, 46);
             this.BTNverActividades.TabIndex = 7;
@@ -201,23 +203,12 @@
             this.BTNverActividades.UseVisualStyleBackColor = false;
             this.BTNverActividades.Click += new System.EventHandler(this.BTNverActividades_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = global::Ingenieria.De.Software.Properties.Resources.Insoft_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(393, 82);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(262, 191);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label11.Location = new System.Drawing.Point(452, 379);
+            this.label11.Location = new System.Drawing.Point(451, 399);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(138, 29);
             this.label11.TabIndex = 40;
@@ -228,7 +219,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label2.Location = new System.Drawing.Point(263, 27);
+            this.label2.Location = new System.Drawing.Point(262, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(514, 29);
             this.label2.TabIndex = 41;
@@ -241,7 +232,7 @@
             this.BTNnotificaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNnotificaciones.Font = new System.Drawing.Font("Microsoft JhengHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNnotificaciones.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNnotificaciones.Location = new System.Drawing.Point(783, 27);
+            this.BTNnotificaciones.Location = new System.Drawing.Point(782, 47);
             this.BTNnotificaciones.Name = "BTNnotificaciones";
             this.BTNnotificaciones.Size = new System.Drawing.Size(76, 33);
             this.BTNnotificaciones.TabIndex = 6;
@@ -256,17 +247,44 @@
             this.LBLnotificaciones.BackColor = System.Drawing.Color.IndianRed;
             this.LBLnotificaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLnotificaciones.ForeColor = System.Drawing.SystemColors.Control;
-            this.LBLnotificaciones.Location = new System.Drawing.Point(837, 54);
+            this.LBLnotificaciones.Location = new System.Drawing.Point(836, 74);
             this.LBLnotificaciones.Name = "LBLnotificaciones";
             this.LBLnotificaciones.Size = new System.Drawing.Size(14, 16);
             this.LBLnotificaciones.TabIndex = 42;
             this.LBLnotificaciones.Text = "1";
             // 
+            // BTNmaestros
+            // 
+            this.BTNmaestros.BackColor = System.Drawing.Color.YellowGreen;
+            this.BTNmaestros.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNmaestros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNmaestros.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNmaestros.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTNmaestros.Location = new System.Drawing.Point(15, 342);
+            this.BTNmaestros.Name = "BTNmaestros";
+            this.BTNmaestros.Size = new System.Drawing.Size(129, 46);
+            this.BTNmaestros.TabIndex = 6;
+            this.BTNmaestros.Tag = "Permiso_Asignar_Roles";
+            this.BTNmaestros.Text = "Maestros";
+            this.BTNmaestros.UseVisualStyleBackColor = false;
+            this.BTNmaestros.Click += new System.EventHandler(this.BTNmaestros_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = global::Ingenieria.De.Software.Properties.Resources.Insoft_Logo;
+            this.pictureBox1.Location = new System.Drawing.Point(392, 102);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(262, 191);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 431);
+            this.ClientSize = new System.Drawing.Size(880, 457);
             this.Controls.Add(this.LBLnotificaciones);
             this.Controls.Add(this.BTNnotificaciones);
             this.Controls.Add(this.label2);
@@ -303,5 +321,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BTNnotificaciones;
         private System.Windows.Forms.Label LBLnotificaciones;
+        private System.Windows.Forms.Button BTNmaestros;
     }
 }

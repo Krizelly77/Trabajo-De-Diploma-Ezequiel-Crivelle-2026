@@ -16,3 +16,21 @@ Nombre de Usuario: Nico/  Contraseña: 12345 / Permisos:N
 
 Nombre de Usuario: ManGer/  Contraseña: contra / Permisos: Rescate de BD
 
+
+
+
+
+Claves de participantes:
+
+
+
+Julian Perez (58 239 086): Cangrejo
+
+Cosmo Valente (12 345 987): Cuchara
+
+Carlos Gardel (66 778 996): Pato
+
+Pablo Pingo (57 890 667): Peluche
+
+Carla Castillo (45 987 304): Jupiter
+

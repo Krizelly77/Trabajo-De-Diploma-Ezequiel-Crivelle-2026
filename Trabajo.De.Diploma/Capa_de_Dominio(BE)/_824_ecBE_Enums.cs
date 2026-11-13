@@ -32,5 +32,15 @@ namespace Capa_de_Dominio_BE_
             Rechazado = 3, // el organizador rechazo la postulacion del candidato
             Retirado = 4 // el candidato cancelo su postulacion 
         }
+
+        public enum MaestrosNegocia_824_ec 
+        {
+            Activida = 1,
+            Categoria = 2,
+            Postulacion = 3,
+            Notificacion = 4,
+            Participante = 5,
+            Solicitante = 6,
+        }
     }
 }
