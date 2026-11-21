@@ -31,6 +31,7 @@
             this.LBLnombre = new System.Windows.Forms.Label();
             this.BTNcerrar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BTNmaestros = new System.Windows.Forms.Button();
             this.BTNopUsuario = new System.Windows.Forms.Button();
             this.BTNidioma = new System.Windows.Forms.Button();
             this.BTNgestRolesPerm = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.BTNnotificaciones = new System.Windows.Forms.Button();
             this.LBLnotificaciones = new System.Windows.Forms.Label();
-            this.BTNmaestros = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -69,7 +69,7 @@
             this.BTNcerrar.Location = new System.Drawing.Point(15, 399);
             this.BTNcerrar.Name = "BTNcerrar";
             this.BTNcerrar.Size = new System.Drawing.Size(129, 46);
-            this.BTNcerrar.TabIndex = 5;
+            this.BTNcerrar.TabIndex = 6;
             this.BTNcerrar.Text = "Cerrar sesion";
             this.BTNcerrar.UseVisualStyleBackColor = false;
             this.BTNcerrar.Click += new System.EventHandler(this.BTNcerrar_Click);
@@ -90,6 +90,22 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(163, 457);
             this.panel1.TabIndex = 0;
+            // 
+            // BTNmaestros
+            // 
+            this.BTNmaestros.BackColor = System.Drawing.Color.YellowGreen;
+            this.BTNmaestros.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNmaestros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNmaestros.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNmaestros.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTNmaestros.Location = new System.Drawing.Point(15, 342);
+            this.BTNmaestros.Name = "BTNmaestros";
+            this.BTNmaestros.Size = new System.Drawing.Size(129, 46);
+            this.BTNmaestros.TabIndex = 5;
+            this.BTNmaestros.Tag = "Permiso_Asignar_Roles";
+            this.BTNmaestros.Text = "Maestros";
+            this.BTNmaestros.UseVisualStyleBackColor = false;
+            this.BTNmaestros.Click += new System.EventHandler(this.BTNmaestros_Click);
             // 
             // BTNopUsuario
             // 
@@ -181,7 +197,7 @@
             this.BTNmisActividades.Location = new System.Drawing.Point(208, 333);
             this.BTNmisActividades.Name = "BTNmisActividades";
             this.BTNmisActividades.Size = new System.Drawing.Size(300, 46);
-            this.BTNmisActividades.TabIndex = 6;
+            this.BTNmisActividades.TabIndex = 0;
             this.BTNmisActividades.Tag = "Permiso_Crear_Actividad";
             this.BTNmisActividades.Text = "Mis Actividades";
             this.BTNmisActividades.UseVisualStyleBackColor = false;
@@ -197,7 +213,7 @@
             this.BTNverActividades.Location = new System.Drawing.Point(546, 333);
             this.BTNverActividades.Name = "BTNverActividades";
             this.BTNverActividades.Size = new System.Drawing.Size(300, 46);
-            this.BTNverActividades.TabIndex = 7;
+            this.BTNverActividades.TabIndex = 1;
             this.BTNverActividades.Tag = "Permiso_Postularse_Actividad";
             this.BTNverActividades.Text = "Actividades Disponibles";
             this.BTNverActividades.UseVisualStyleBackColor = false;
@@ -235,7 +251,7 @@
             this.BTNnotificaciones.Location = new System.Drawing.Point(782, 47);
             this.BTNnotificaciones.Name = "BTNnotificaciones";
             this.BTNnotificaciones.Size = new System.Drawing.Size(76, 33);
-            this.BTNnotificaciones.TabIndex = 6;
+            this.BTNnotificaciones.TabIndex = 2;
             this.BTNnotificaciones.Tag = "";
             this.BTNnotificaciones.Text = "Campana";
             this.BTNnotificaciones.UseVisualStyleBackColor = false;
@@ -252,22 +268,6 @@
             this.LBLnotificaciones.Size = new System.Drawing.Size(14, 16);
             this.LBLnotificaciones.TabIndex = 42;
             this.LBLnotificaciones.Text = "1";
-            // 
-            // BTNmaestros
-            // 
-            this.BTNmaestros.BackColor = System.Drawing.Color.YellowGreen;
-            this.BTNmaestros.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTNmaestros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTNmaestros.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNmaestros.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNmaestros.Location = new System.Drawing.Point(15, 342);
-            this.BTNmaestros.Name = "BTNmaestros";
-            this.BTNmaestros.Size = new System.Drawing.Size(129, 46);
-            this.BTNmaestros.TabIndex = 6;
-            this.BTNmaestros.Tag = "Permiso_Asignar_Roles";
-            this.BTNmaestros.Text = "Maestros";
-            this.BTNmaestros.UseVisualStyleBackColor = false;
-            this.BTNmaestros.Click += new System.EventHandler(this.BTNmaestros_Click);
             // 
             // pictureBox1
             // 

@@ -49,6 +49,7 @@
             this.LBLactividadSelec = new System.Windows.Forms.Label();
             this.TXTactividadselec = new System.Windows.Forms.TextBox();
             this.BTNactividadnull = new System.Windows.Forms.Button();
+            this.BTNbitacora = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVmaestro)).BeginInit();
             this.SuspendLayout();
@@ -370,11 +371,29 @@
             this.BTNactividadnull.Visible = false;
             this.BTNactividadnull.Click += new System.EventHandler(this.BTNactividadnull_Click);
             // 
+            // BTNbitacora
+            // 
+            this.BTNbitacora.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.BTNbitacora.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNbitacora.Enabled = false;
+            this.BTNbitacora.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNbitacora.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNbitacora.ForeColor = System.Drawing.Color.LightCyan;
+            this.BTNbitacora.Location = new System.Drawing.Point(207, 423);
+            this.BTNbitacora.Name = "BTNbitacora";
+            this.BTNbitacora.Size = new System.Drawing.Size(166, 43);
+            this.BTNbitacora.TabIndex = 47;
+            this.BTNbitacora.Text = "Bitacora de actividades";
+            this.BTNbitacora.UseVisualStyleBackColor = false;
+            this.BTNbitacora.Visible = false;
+            this.BTNbitacora.Click += new System.EventHandler(this.BTNbitacora_Click);
+            // 
             // _824_ecFormABMmaestro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1032, 470);
+            this.Controls.Add(this.BTNbitacora);
             this.Controls.Add(this.BTNactividadnull);
             this.Controls.Add(this.TXTactividadselec);
             this.Controls.Add(this.LBLactividadSelec);
@@ -423,5 +442,6 @@
         private System.Windows.Forms.Label LBLactividadSelec;
         private System.Windows.Forms.TextBox TXTactividadselec;
         private System.Windows.Forms.Button BTNactividadnull;
+        private System.Windows.Forms.Button BTNbitacora;
     }
 }

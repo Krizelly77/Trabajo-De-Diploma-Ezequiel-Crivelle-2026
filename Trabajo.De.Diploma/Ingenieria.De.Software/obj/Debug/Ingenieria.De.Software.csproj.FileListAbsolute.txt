@@ -92,6 +92,6 @@ C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecNotificacionPersonalizada.resources
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecABMparticipantesolicitante.resources
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecFormElegirSolicitante.resources
-C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software.exe.config
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecABMcategoria.resources
 C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecABMnotificacion.resources
+C:\Users\ezequ\OneDrive\Escritorio\SistemaParaArmarParticiparActividades\Trabajo.De.Diploma\Ingenieria.De.Software\obj\Debug\Ingenieria.De.Software._824_ecFormBitacoraActividades.resources

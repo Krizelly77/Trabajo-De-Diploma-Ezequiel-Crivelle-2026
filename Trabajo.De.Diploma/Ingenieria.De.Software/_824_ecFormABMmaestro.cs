@@ -90,6 +90,7 @@ namespace Ingenieria.De.Software
                     NoverActividad(true);
                     ActivarModificar(true);
                     ActivarSerializacion(false);
+                    ActivarBitacora(true);
                     CambiarBotones("Actividad");
                     break;
                 case MaestrosNegocia_824_ec.Categoria:
@@ -97,6 +98,7 @@ namespace Ingenieria.De.Software
                     NoverActividad(false);
                     ActivarModificar(true);
                     ActivarSerializacion(false);
+                    ActivarBitacora(false);
                     CambiarBotones("Categoria");
                     break;
                 case MaestrosNegocia_824_ec.Postulacion:
@@ -105,12 +107,14 @@ namespace Ingenieria.De.Software
                     CambiarBotones("Postulacion");
                     ActivarSerializacion(false);
                     ActivarModificar(false);
+                    ActivarBitacora(false);
                     break;
                 case MaestrosNegocia_824_ec.Notificacion:
                     DGVmaestro.DataSource = NotificacionMae;
                     NoverActividad(false);
                     ActivarModificar(false);
                     ActivarSerializacion(false);
+                    ActivarBitacora(false);
                     CambiarBotones("Notificacion");
                     break;
                 case MaestrosNegocia_824_ec.Participante:
@@ -118,6 +122,7 @@ namespace Ingenieria.De.Software
                     NoverActividad(false);
                     ActivarSerializacion(true);
                     ActivarModificar(true);
+                    ActivarBitacora(false);
                     CambiarBotones("Participante");
                     break;
                 case MaestrosNegocia_824_ec.Solicitante:
@@ -125,6 +130,7 @@ namespace Ingenieria.De.Software
                     NoverActividad(false);
                     ActivarSerializacion(true);
                     ActivarModificar(true);
+                    ActivarBitacora(false);
                     CambiarBotones("Solicitante");
                     break;
             }
@@ -168,6 +174,19 @@ namespace Ingenieria.De.Software
             {
                 BTNmodMae.Visible = false;
                 BTNmodMae.Enabled = false;
+            }
+        }
+        private void ActivarBitacora(bool mostrar)
+        {
+            if (mostrar)
+            {
+                BTNbitacora.Visible = true;
+                BTNbitacora.Enabled = true;
+            }
+            else
+            {
+                BTNbitacora.Visible = false;
+                BTNbitacora.Enabled = false;
             }
         }
         private void ActivarSerializacion(bool mostrar)
@@ -902,6 +921,11 @@ namespace Ingenieria.De.Software
 
         // Botones y otros controles
         #region Botones
+        private void BTNbitacora_Click(object sender, EventArgs e)
+        {
+            _824_ecFormBitacoraActividades frmBitacora = new _824_ecFormBitacoraActividades();
+            frmBitacora.ShowDialog();
+        }
         private void BTNvolver_Click(object sender, EventArgs e)
         {
             this.Close();

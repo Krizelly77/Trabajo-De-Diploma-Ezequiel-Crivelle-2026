@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="_824_ecActividadCambioDAL.cs" />
     <Compile Include="_824_ecActividadDAL.cs" />
     <Compile Include="BitacoraDAL.cs" />
     <Compile Include="DAO.cs" />

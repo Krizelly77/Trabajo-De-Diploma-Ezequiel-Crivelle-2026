@@ -98,7 +98,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
 
             string eliminarPostulaciones = @"DELETE FROM Postulacion WHERE Actividad_Id = @id";
 
-            string eliminarActividad = @"DELETE FROM Actividad WHERE Actividad_Id = @id";
+            string eliminarActividad = @"UPDATE Actividad SET Actividad_Activo = 0 WHERE Actividad_Id = @id";
 
             var comandos = new List<(string comando, List<SqlParameter> parametros)>
             {
@@ -136,7 +136,7 @@ namespace Capa_de_Acceso_a_Datos_DAL_
             string comando_824_ec = @"SELECT Actividad_Id, Actividad_Nombre, Actividad_Descripcion, Categoria_Id, 
                                Actividad_FechaHora, Actividad_FechaPublicacion, Actividad_FechaCaducidad, Actividad_Ubicacion, 
                                Actividad_CantMinima, Actividad_CantMaxima, Actividad_NivelRequerido, Actividad_Estado, Usuario_OrganizadorId, Solicitante_Id, Actividad_DVH 
-                        FROM Actividad ORDER BY Actividad_FechaPublicacion DESC";
+                        FROM Actividad WHERE Actividad_Activo = 1 ORDER BY Actividad_FechaPublicacion DESC";
 
             DAO dao_824_ec = new DAO();
             DataSet seta_824_ec = dao_824_ec.ObtenerDataSet(comando_824_ec);

@@ -51,6 +51,7 @@
     <Compile Include="GestorDeIdioma.cs" />
     <Compile Include="IObservadorDeIdioma.cs" />
     <Compile Include="PermisoBLL.cs" />
+    <Compile Include="_824_ecActividadCambioBLL.cs" />
     <Compile Include="_824_ecCategoriaBLL.cs" />
     <Compile Include="_824_ecDatabaseInitializerBLL.cs" />
     <Compile Include="_824_ecNotificacionBLL.cs" />
