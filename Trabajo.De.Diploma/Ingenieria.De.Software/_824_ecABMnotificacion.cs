@@ -20,7 +20,6 @@ namespace Ingenieria.De.Software
         internal Constantes.TiposOperacion _824_ecTipoOperacion { get; set; }
         internal _824_ecNotificacion _824_ecNotificacionEditable { get; set; }
         private Usuario _824_ecRemitente;
-        private Usuario __824_ecDestinatario;
 
         public _824_ecABMnotificacion()
         {
