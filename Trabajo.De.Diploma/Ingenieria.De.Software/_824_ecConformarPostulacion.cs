@@ -16,7 +16,11 @@ namespace Capa_de_Aplicación_BLL_
 {
     public partial class _824_ecConformarPostulacion : Form
     {
+        internal Constantes.TiposOperacion _824_ecTipoOperacion { get; set; }
+
+        internal _824_ecPostulacion _824_ecPostulacionActual;
         internal _824_ecActividad _824_ecActividadActual;
+        internal bool _824_ecDesdeMaestro = false;
         private List<_824_ecParticipante> ParticipantesRegistrados = new List<_824_ecParticipante>();
         private List<_824_ecParticipante> ParticipantesSeleccionados = new List<_824_ecParticipante>();
         internal List<_824_ecPostulacion> PostulacionesCreadas { get; private set; } = new List<_824_ecPostulacion>(); // para devolverle al form anterior
@@ -26,17 +30,28 @@ namespace Capa_de_Aplicación_BLL_
         }
         private void _824_ecConformarPostulacion_Load(object sender, EventArgs e)
         {
-            if (_824_ecActividadActual == null)
+            
+            if (_824_ecDesdeMaestro == true)
             {
-                MessageBox.Show("No se encontro la actividad seleccionada");
-                this.Close();
+                BTNirABMparti.Visible = false;
+                BTNirABMparti.Enabled = false;
+            }
+            if (_824_ecTipoOperacion == Constantes.TiposOperacion.Alta)
+            {
+                if (_824_ecActividadActual == null)
+                {
+                    MessageBox.Show("No se encontro la actividad seleccionada");
+                    this.Close();
+                }
+                CargarFiltros();
+                CargarGrillaParticipantes_824_ec();
+            }else
+            {
+                _824_ecActividadActual = _824_ecPostulacionActual.Actividad_824_ec;
+                DesactivarCampos();
             }
             CargarLabels();
-            CargarFiltros();
-            CargarGrillaParticipantes_824_ec();
             CargarGrillaParticipantesEnPosts_824_ec();
-
-
         }
 
 
@@ -85,6 +100,72 @@ namespace Capa_de_Aplicación_BLL_
             DGVPartenPost.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGVPartenPost.MultiSelect = false;
             DGVPartenPost.RowHeadersVisible = false;
+
+            if (_824_ecTipoOperacion != Constantes.TiposOperacion.Alta)
+            {
+                CargarParticipantes();
+            }
+        }
+
+        private void CargarParticipantes()
+        {
+            if (_824_ecPostulacionActual.Participante_824_ec == null)
+            {
+                return;
+            }
+            ParticipantesSeleccionados.Add(_824_ecPostulacionActual.Participante_824_ec);
+            if (_824_ecPostulacionActual.ParticipantesAgrupados.Count > 0)
+            {
+                RBTtipoPost3.Checked = true;
+                foreach (var par in _824_ecPostulacionActual.ParticipantesAgrupados)
+                {
+                    ParticipantesSeleccionados.Add(par);
+                }
+            }
+            else 
+            {
+                RBTtipoPost1.Checked = true;
+            }
+            DGVPartenPost.Rows.Clear();
+            foreach (var par in ParticipantesSeleccionados)
+            {
+                DGVPartenPost.Rows.Add(
+                    par.Id_824_ec,
+                    par.PalabraClave_824_ec,
+                    par.Apellido_824_ec,
+                    par.Documento_824_ec
+                );
+            }
+        }
+
+        private void DesactivarCampos()
+        {
+            DGVPartRegistrados.Visible = false;
+            DGVPartRegistrados.Enabled = false;
+            CMBfiltroParticipante.Visible = false;
+            CMBfiltroParticipante.Enabled = false;
+            TXTfiltro.Visible = false;
+            TXTfiltro.Enabled = false;
+            BTNagregarAPost.Visible = false;
+            BTNagregarAPost.Enabled = false;
+            BTNquitarDePost.Visible = false;
+            BTNquitarDePost.Enabled = false;
+            LBLregistrados.Visible = false;
+            LBLfiltros.Visible = false;
+            LBLagregar.Visible = false;
+            LBLquitar.Visible = false;
+            if (_824_ecTipoOperacion == Constantes.TiposOperacion.Baja)
+            {
+                BTNenviarPost.Text = "Eliminar Postulacion";
+            }else
+            {
+                BTNenviarPost.Enabled = false;
+            }
+            BTNirABMparti.Enabled = false;
+            RBTtipoPost1.Enabled = false;
+            RBTtipoPost2.Enabled = false;
+            RBTtipoPost3.Enabled = false;
+            this.Size = new System.Drawing.Size(450, 426);
         }
         #endregion Carga
 
@@ -184,93 +265,111 @@ namespace Capa_de_Aplicación_BLL_
         {
             try
             {
-                if (ParticipantesSeleccionados.Count == 0)
+                if (_824_ecTipoOperacion == Constantes.TiposOperacion.Baja)
                 {
-                    MessageBox.Show("Debe seleccionar al menos un participante para conformar la postulación.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    EliminarActividad();
                 }
-
-                if (RBTtipoPost3.Checked && ParticipantesSeleccionados.Count < 2)
+                else 
                 {
-                    MessageBox.Show("Una postulación grupal requiere al menos 2 participantes.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                Usuario gestorActual = SessionManager.TraerInstancia().usuarioINS;
-                PostulacionesCreadas.Clear();
-
-                // Reegistrar según el modo elegido
-                if (RBTtipoPost1.Checked || RBTtipoPost2.Checked)
-                {
-                    foreach (var part in ParticipantesSeleccionados)
+                    if (ParticipantesSeleccionados.Count == 0)
                     {
-                        _824_ecPostulacion nuevaPost = new _824_ecPostulacion
-                        {
-                            Actividad_824_ec = _824_ecActividadActual,
-                            GestorResponsable_824_ec = gestorActual,
-                            Participante_824_ec = part,
-                            FechaPostulacion_824_ec = DateTime.Now,
-                            Estado_824_ec = EstadoPostulacion_824_ec.Postulado
-                        };
-
-                        _824_ecPostulacionBLL.RegistrarPostulacion_824_ec(nuevaPost);
-                        PostulacionesCreadas.Add(nuevaPost);
+                        MessageBox.Show("Debe seleccionar al menos un participante para conformar la postulación.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
 
-                    string detalleBitacora = RBTtipoPost1.Checked
-                        ? $"Postulacion individual de {PostulacionesCreadas[0].Participante_824_ec.Apellido_824_ec} en {_824_ecActividadActual.Nombre_824_ec}"
-                        : $"Postulacion multiple ({PostulacionesCreadas.Count} candidatos) en {_824_ecActividadActual.Nombre_824_ec}";
-
-                    SessionManager.TraerInstancia().RegistrarActividad(detalleBitacora);
-                }
-                else if (RBTtipoPost3.Checked)
-                {
-                    _824_ecPostulacion postGrupal = new _824_ecPostulacion
+                    if (RBTtipoPost3.Checked && ParticipantesSeleccionados.Count < 2)
                     {
-                        Actividad_824_ec = _824_ecActividadActual,
-                        GestorResponsable_824_ec = gestorActual,
-                        Participante_824_ec = null,
-                        ParticipantesAgrupados = new List<_824_ecParticipante>(ParticipantesSeleccionados),
-                        FechaPostulacion_824_ec = DateTime.Now,
-                        Estado_824_ec = EstadoPostulacion_824_ec.Postulado
-                    };
-
-                    _824_ecPostulacionBLL.RegistrarPostulacion_824_ec(postGrupal);
-                    PostulacionesCreadas.Add(postGrupal);
-                    SessionManager.TraerInstancia().RegistrarActividad($"Postulacion grupal ({ParticipantesSeleccionados.Count} integrantes) en {_824_ecActividadActual.Nombre_824_ec}");
-                }
-
-                // envío de notificaciones 
-                for (int i = 0; i < PostulacionesCreadas.Count; i++)
-                {
-                    var post = PostulacionesCreadas[i];
-                    bool esGrupal = post.ParticipantesAgrupados != null && post.ParticipantesAgrupados.Count > 0;
-
-                    using (_824_ecNotificacionPersonalizada fNotif = new _824_ecNotificacionPersonalizada())
-                    {
-                        fNotif.actividadNotificada = _824_ecActividadActual;
-                        fNotif.esGrupal = esGrupal;
-                        fNotif.indiceActualMultiple = PostulacionesCreadas.Count > 1 ? i + 1 : 0;
-                        fNotif.totalMultiple = PostulacionesCreadas.Count;
-                        fNotif.Participante0s = esGrupal
-                            ? new List<_824_ecParticipante>(post.ParticipantesAgrupados)
-                            : new List<_824_ecParticipante> { post.Participante_824_ec };
-                        fNotif.StartPosition = this.StartPosition;
-                        fNotif.ShowDialog(this);
+                        MessageBox.Show("Una postulación grupal requiere al menos 2 participantes.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
+                    CrearActividad();
                 }
-
-                MessageBox.Show("Postulación registrada con éxito.", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error al registrar postulación", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        #endregion BotonesPrincipales
 
+        private void CrearActividad()
+        {
+            Usuario gestorActual = SessionManager.TraerInstancia().usuarioINS;
+            PostulacionesCreadas.Clear();
+
+            // Reegistrar según el modo elegido
+            if (RBTtipoPost1.Checked || RBTtipoPost2.Checked)
+            {
+                foreach (var part in ParticipantesSeleccionados)
+                {
+                    _824_ecPostulacion nuevaPost = new _824_ecPostulacion
+                    {
+                        Actividad_824_ec = _824_ecActividadActual,
+                        GestorResponsable_824_ec = gestorActual,
+                        Participante_824_ec = part,
+                        FechaPostulacion_824_ec = DateTime.Now,
+                        Estado_824_ec = EstadoPostulacion_824_ec.Postulado
+                    };
+
+                    _824_ecPostulacionBLL.RegistrarPostulacion_824_ec(nuevaPost);
+                    PostulacionesCreadas.Add(nuevaPost);
+                }
+
+                string detalleBitacora = RBTtipoPost1.Checked
+                    ? $"Postulacion individual de {PostulacionesCreadas[0].Participante_824_ec.Apellido_824_ec} en {_824_ecActividadActual.Nombre_824_ec}"
+                    : $"Postulacion multiple ({PostulacionesCreadas.Count} candidatos) en {_824_ecActividadActual.Nombre_824_ec}";
+
+                SessionManager.TraerInstancia().RegistrarActividad(detalleBitacora);
+            }
+            else if (RBTtipoPost3.Checked)
+            {
+                _824_ecPostulacion postGrupal = new _824_ecPostulacion
+                {
+                    Actividad_824_ec = _824_ecActividadActual,
+                    GestorResponsable_824_ec = gestorActual,
+                    Participante_824_ec = null,
+                    ParticipantesAgrupados = new List<_824_ecParticipante>(ParticipantesSeleccionados),
+                    FechaPostulacion_824_ec = DateTime.Now,
+                    Estado_824_ec = EstadoPostulacion_824_ec.Postulado
+                };
+
+                _824_ecPostulacionBLL.RegistrarPostulacion_824_ec(postGrupal);
+                PostulacionesCreadas.Add(postGrupal);
+                SessionManager.TraerInstancia().RegistrarActividad($"Postulacion grupal ({ParticipantesSeleccionados.Count} integrantes) en {_824_ecActividadActual.Nombre_824_ec}");
+            }
+
+            // envío de notificaciones 
+            for (int i = 0; i < PostulacionesCreadas.Count; i++)
+            {
+                var post = PostulacionesCreadas[i];
+                bool esGrupal = post.ParticipantesAgrupados != null && post.ParticipantesAgrupados.Count > 0;
+
+                using (_824_ecNotificacionPersonalizada fNotif = new _824_ecNotificacionPersonalizada())
+                {
+                    fNotif.actividadNotificada = _824_ecActividadActual;
+                    fNotif.esGrupal = esGrupal;
+                    fNotif.indiceActualMultiple = PostulacionesCreadas.Count > 1 ? i + 1 : 0;
+                    fNotif.totalMultiple = PostulacionesCreadas.Count;
+                    fNotif.Participante0s = esGrupal
+                        ? new List<_824_ecParticipante>(post.ParticipantesAgrupados)
+                        : new List<_824_ecParticipante> { post.Participante_824_ec };
+                    fNotif.StartPosition = this.StartPosition;
+                    fNotif.ShowDialog(this);
+                }
+            }
+
+            MessageBox.Show("Postulación registrada con éxito.", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void EliminarActividad()
+        {
+            _824_ecPostulacionBLL.Eliminar_824_ec(_824_ecPostulacionActual);
+            MessageBox.Show("Postulación eliminada con éxito.", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+        #endregion BotonesPrincipales
 
         // Cambiar de tipo de postulacion con radiobutons
         #region RadioButtons

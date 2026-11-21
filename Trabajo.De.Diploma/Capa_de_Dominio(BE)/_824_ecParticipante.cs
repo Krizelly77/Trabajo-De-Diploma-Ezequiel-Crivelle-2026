@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Capa_de_Dominio_BE_
 {
@@ -10,6 +11,7 @@ namespace Capa_de_Dominio_BE_
     {
         private List<_824_ecPostulacion> postulaciones = new List<_824_ecPostulacion>();
 
+        [XmlIgnore]
         public List<_824_ecPostulacion> Postulaciones_824_ec
         {
             get => postulaciones;

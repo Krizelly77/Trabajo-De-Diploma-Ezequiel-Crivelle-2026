@@ -30,10 +30,10 @@
         {
             this.DGVPartRegistrados = new System.Windows.Forms.DataGridView();
             this.DGVPartenPost = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LBLfiltros = new System.Windows.Forms.Label();
             this.CMBfiltroParticipante = new System.Windows.Forms.ComboBox();
             this.TXTfiltro = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LBLregistrados = new System.Windows.Forms.Label();
             this.BTNagregarAPost = new System.Windows.Forms.Button();
             this.BTNquitarDePost = new System.Windows.Forms.Button();
             this.LBLagregar = new System.Windows.Forms.Label();
@@ -42,7 +42,7 @@
             this.RBTtipoPost2 = new System.Windows.Forms.RadioButton();
             this.RBTtipoPost3 = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.PNLprincipal = new System.Windows.Forms.Panel();
             this.BTNirABMparti = new System.Windows.Forms.Button();
             this.BTNvolver = new System.Windows.Forms.Button();
             this.BTNenviarPost = new System.Windows.Forms.Button();
@@ -57,7 +57,7 @@
             this.LBLparti = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPartRegistrados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPartenPost)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.PNLprincipal.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGVPartRegistrados
@@ -76,17 +76,17 @@
             this.DGVPartenPost.Size = new System.Drawing.Size(189, 75);
             this.DGVPartenPost.TabIndex = 1;
             // 
-            // label1
+            // LBLfiltros
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label1.Location = new System.Drawing.Point(544, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 25);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Filtrar por :";
+            this.LBLfiltros.AutoSize = true;
+            this.LBLfiltros.BackColor = System.Drawing.SystemColors.Control;
+            this.LBLfiltros.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLfiltros.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.LBLfiltros.Location = new System.Drawing.Point(544, 43);
+            this.LBLfiltros.Name = "LBLfiltros";
+            this.LBLfiltros.Size = new System.Drawing.Size(116, 25);
+            this.LBLfiltros.TabIndex = 4;
+            this.LBLfiltros.Text = "Filtrar por :";
             // 
             // CMBfiltroParticipante
             // 
@@ -114,17 +114,17 @@
             this.TXTfiltro.TabIndex = 26;
             this.TXTfiltro.TextChanged += new System.EventHandler(this.TXTfiltro_TextChanged);
             // 
-            // label2
+            // LBLregistrados
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label2.Location = new System.Drawing.Point(544, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(279, 29);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "Participantes registrados";
+            this.LBLregistrados.AutoSize = true;
+            this.LBLregistrados.BackColor = System.Drawing.SystemColors.Control;
+            this.LBLregistrados.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLregistrados.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.LBLregistrados.Location = new System.Drawing.Point(544, 8);
+            this.LBLregistrados.Name = "LBLregistrados";
+            this.LBLregistrados.Size = new System.Drawing.Size(279, 29);
+            this.LBLregistrados.TabIndex = 28;
+            this.LBLregistrados.Text = "Participantes registrados";
             // 
             // BTNagregarAPost
             // 
@@ -231,27 +231,27 @@
             this.label6.TabIndex = 38;
             this.label6.Text = "Postulacion para :";
             // 
-            // panel1
+            // PNLprincipal
             // 
-            this.panel1.BackColor = System.Drawing.Color.OliveDrab;
-            this.panel1.Controls.Add(this.BTNirABMparti);
-            this.panel1.Controls.Add(this.BTNvolver);
-            this.panel1.Controls.Add(this.BTNenviarPost);
-            this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.LBLmin);
-            this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.LBLmax);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.LBLacti);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.BTNverDetalle);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.ForeColor = System.Drawing.SystemColors.Control;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(230, 387);
-            this.panel1.TabIndex = 39;
+            this.PNLprincipal.BackColor = System.Drawing.Color.OliveDrab;
+            this.PNLprincipal.Controls.Add(this.BTNirABMparti);
+            this.PNLprincipal.Controls.Add(this.BTNvolver);
+            this.PNLprincipal.Controls.Add(this.BTNenviarPost);
+            this.PNLprincipal.Controls.Add(this.label13);
+            this.PNLprincipal.Controls.Add(this.LBLmin);
+            this.PNLprincipal.Controls.Add(this.label11);
+            this.PNLprincipal.Controls.Add(this.label10);
+            this.PNLprincipal.Controls.Add(this.LBLmax);
+            this.PNLprincipal.Controls.Add(this.label8);
+            this.PNLprincipal.Controls.Add(this.LBLacti);
+            this.PNLprincipal.Controls.Add(this.label6);
+            this.PNLprincipal.Controls.Add(this.BTNverDetalle);
+            this.PNLprincipal.Dock = System.Windows.Forms.DockStyle.Left;
+            this.PNLprincipal.ForeColor = System.Drawing.SystemColors.Control;
+            this.PNLprincipal.Location = new System.Drawing.Point(0, 0);
+            this.PNLprincipal.Name = "PNLprincipal";
+            this.PNLprincipal.Size = new System.Drawing.Size(230, 387);
+            this.PNLprincipal.TabIndex = 39;
             // 
             // BTNirABMparti
             // 
@@ -416,7 +416,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1025, 387);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.PNLprincipal);
             this.Controls.Add(this.RBTtipoPost3);
             this.Controls.Add(this.RBTtipoPost2);
             this.Controls.Add(this.RBTtipoPost1);
@@ -425,10 +425,10 @@
             this.Controls.Add(this.LBLagregar);
             this.Controls.Add(this.BTNquitarDePost);
             this.Controls.Add(this.BTNagregarAPost);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.LBLregistrados);
             this.Controls.Add(this.TXTfiltro);
             this.Controls.Add(this.CMBfiltroParticipante);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LBLfiltros);
             this.Controls.Add(this.DGVPartenPost);
             this.Controls.Add(this.DGVPartRegistrados);
             this.Name = "_824_ecConformarPostulacion";
@@ -436,8 +436,8 @@
             this.Load += new System.EventHandler(this._824_ecConformarPostulacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGVPartRegistrados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPartenPost)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.PNLprincipal.ResumeLayout(false);
+            this.PNLprincipal.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -447,10 +447,10 @@
 
         private System.Windows.Forms.DataGridView DGVPartRegistrados;
         private System.Windows.Forms.DataGridView DGVPartenPost;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LBLfiltros;
         private System.Windows.Forms.ComboBox CMBfiltroParticipante;
         private System.Windows.Forms.TextBox TXTfiltro;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LBLregistrados;
         private System.Windows.Forms.Button BTNagregarAPost;
         private System.Windows.Forms.Button BTNquitarDePost;
         private System.Windows.Forms.Label LBLagregar;
@@ -459,7 +459,7 @@
         private System.Windows.Forms.RadioButton RBTtipoPost2;
         private System.Windows.Forms.RadioButton RBTtipoPost3;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel PNLprincipal;
         private System.Windows.Forms.Label LBLacti;
         private System.Windows.Forms.Label LBLmax;
         private System.Windows.Forms.Label label8;

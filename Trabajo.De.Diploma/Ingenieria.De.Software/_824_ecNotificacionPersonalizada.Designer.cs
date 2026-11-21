@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
+            this.LBLtitulo = new System.Windows.Forms.Label();
             this.LBLremiDesti = new System.Windows.Forms.Label();
             this.TXBmensaje = new System.Windows.Forms.TextBox();
             this.BTNenviarNotper = new System.Windows.Forms.Button();
@@ -41,24 +41,24 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.OliveDrab;
-            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.LBLtitulo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(483, 57);
             this.panel1.TabIndex = 0;
             // 
-            // label7
+            // LBLtitulo
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.OliveDrab;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(3, 9);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(455, 42);
-            this.label7.TabIndex = 40;
-            this.label7.Text = "Notificacion personalizada";
+            this.LBLtitulo.AutoSize = true;
+            this.LBLtitulo.BackColor = System.Drawing.Color.OliveDrab;
+            this.LBLtitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLtitulo.ForeColor = System.Drawing.SystemColors.Control;
+            this.LBLtitulo.Location = new System.Drawing.Point(3, 9);
+            this.LBLtitulo.Name = "LBLtitulo";
+            this.LBLtitulo.Size = new System.Drawing.Size(455, 42);
+            this.LBLtitulo.TabIndex = 40;
+            this.LBLtitulo.Text = "Notificacion personalizada";
             // 
             // LBLremiDesti
             // 
@@ -154,7 +154,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label LBLtitulo;
         private System.Windows.Forms.Label LBLremiDesti;
         private System.Windows.Forms.TextBox TXBmensaje;
         private System.Windows.Forms.Button BTNenviarNotper;

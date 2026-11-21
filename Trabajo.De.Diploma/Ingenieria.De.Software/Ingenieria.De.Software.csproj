@@ -47,6 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="_824_ecABMcategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_824_ecABMcategoria.Designer.cs">
+      <DependentUpon>_824_ecABMcategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_824_ecABMnotificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_824_ecABMnotificacion.Designer.cs">
+      <DependentUpon>_824_ecABMnotificacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="_824_ecABMparticipantesolicitante.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +177,12 @@
     <Compile Include="_824_ecNotificacionPersonalizada.Designer.cs">
       <DependentUpon>_824_ecNotificacionPersonalizada.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="_824_ecABMcategoria.resx">
+      <DependentUpon>_824_ecABMcategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_824_ecABMnotificacion.resx">
+      <DependentUpon>_824_ecABMnotificacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="_824_ecABMparticipantesolicitante.resx">
       <DependentUpon>_824_ecABMparticipantesolicitante.cs</DependentUpon>
     </EmbeddedResource>

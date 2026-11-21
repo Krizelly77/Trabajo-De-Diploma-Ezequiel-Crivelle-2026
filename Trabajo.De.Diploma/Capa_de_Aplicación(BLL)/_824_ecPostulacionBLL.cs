@@ -175,9 +175,9 @@ namespace Capa_de_Aplicación_BLL_
                 .Where(p => p.Estado_824_ec == EstadoPostulacion_824_ec.Aceptado)
                 .Sum(p => (p.ParticipantesAgrupados != null && p.ParticipantesAgrupados.Count > 0) ? p.ParticipantesAgrupados.Count: 1);
         }
-        public static int Eliminar_824_ec(int idPostulacion)
+        public static int Eliminar_824_ec(_824_ecPostulacion pos)
         {
-            int resultado = _824_ecPostulacionDAL.Eliminar_824_ec(idPostulacion);
+            int resultado = _824_ecPostulacionDAL.Eliminar_824_ec(pos);
             LlamarAlDigitoVerificador(resultado);
             return resultado;
         }

@@ -21,6 +21,18 @@ namespace Capa_de_Aplicación_BLL_
 
             return resultado;
         }
+        public static int Eliminar_824_ec(_824_ecCategoria categoria_824_ec)
+        {
+            if (_824_ecCategoriaDAL.VerificarQueNoSeUsoEnActividad(categoria_824_ec))
+            {
+                int resultado = _824_ecCategoriaDAL.Eliminar_824_ec(categoria_824_ec);
+                LlamarAlDigitoVerificador(resultado);
+
+                return resultado;
+            }
+            throw new Exception("No se puede eliminar la categoría porque ya fue utilizada en una o más actividades.");
+        }
+
 
         private static void LlamarAlDigitoVerificador(int resultado)
         {

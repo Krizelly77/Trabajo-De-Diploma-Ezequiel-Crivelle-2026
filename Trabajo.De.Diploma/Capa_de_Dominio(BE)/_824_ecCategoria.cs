@@ -8,6 +8,12 @@ namespace Capa_de_Dominio_BE_
 {
     public class _824_ecCategoria : IVerificable
     { //categoria para las actividades, podria necesitar un abm
+
+        public _824_ecCategoria(int id)
+        {
+            Id_824_ec = id;
+        }
+        public _824_ecCategoria() { }
         public int Id_824_ec { get; set; }
         public string Nombre_824_ec { get; set; }
         public string Descripcion_824_ec { get; set; }

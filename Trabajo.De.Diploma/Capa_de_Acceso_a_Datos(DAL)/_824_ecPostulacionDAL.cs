@@ -79,13 +79,25 @@ namespace Capa_de_Acceso_a_Datos_DAL_
 
         public static int Eliminar_824_ec(int idpostulacion)
         {
-            if (idpostulacion == 0 || idpostulacion <= 0) return 0;
+            if (idpostulacion <= 0) return 0;
 
             DAO dao_824_ec = new DAO();
-            string comando = @"DELETE FROM Participante WHERE Postulacion_Id = @id";
-            List<SqlParameter> parametros = new List<SqlParameter> { new SqlParameter("@id", idpostulacion) };
+            string eliminarRelaciones = @"DELETE FROM Postulacion_Participante WHERE Postulacion_Id = @id";
+            string eliminarPostulacion = @"DELETE FROM Postulacion WHERE Postulacion_Id = @id";
 
-            return dao_824_ec.EjecutarNonQuery(comando, parametros);
+            var comandos = new List<(string comando, List<SqlParameter> parametros)>
+            {
+                (eliminarRelaciones, new List<SqlParameter> { new SqlParameter("@id", idpostulacion) }),
+                (eliminarPostulacion, new List<SqlParameter> { new SqlParameter("@id", idpostulacion) })
+            };
+
+            return dao_824_ec.EjecutarTransaccion(comandos);
+        }
+
+        public static int Eliminar_824_ec(_824_ecPostulacion pos)
+        {
+            if (pos == null) return 0;
+            return Eliminar_824_ec(pos.Id_824_ec);
         }
 
         private static void GuardarParticipantesAgrupados_824_ec(_824_ecPostulacion pos)

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace Ingenieria.De.Software
 {
@@ -170,8 +171,12 @@ namespace Ingenieria.De.Software
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
                         List<Usuario> listaDeserializada = _824_ecSerializadorBLL.DeserializarUsuariosXML(openFileDialog.FileName);
-                        PoblarGrilla(listaDeserializada);
-                        MessageBox.Show("Datos deserializados y cargados en la grilla correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        List<Usuario> listaFiltrada = SeleccionarCantidadFilasDeserializadas(listaDeserializada);
+                        if (listaFiltrada != null && listaFiltrada.Count > 0)
+                        {
+                            PoblarGrilla(listaFiltrada);
+                            MessageBox.Show($"Se cargaron {listaFiltrada.Count} usuario(s) en la grilla correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }
             }
@@ -179,6 +184,59 @@ namespace Ingenieria.De.Software
             {
                 MessageBox.Show($"Error al deserializar: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private List<T> SeleccionarCantidadFilasDeserializadas<T>(List<T> listaDeserializada)
+        {
+            if (listaDeserializada == null || listaDeserializada.Count == 0)
+            {
+                MessageBox.Show("El archivo XML no contiene registros.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return null;
+            }
+
+            DialogResult respuesta = MessageBox.Show(
+                $"El archivo contiene {listaDeserializada.Count} registros.\n\n" +
+                "¿Desea deserializar y cargar TODOS los registros?\n\n" +
+                "- 'Sí': Cargar todos los registros.\n" +
+                "- 'No': Especificar una cantidad determinada de filas.\n" +
+                "- 'Cancelar': Anular la operación.",
+                "Opciones de Deserialización",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            if (respuesta == DialogResult.Yes)
+            {
+                return listaDeserializada;
+            }
+            else if (respuesta == DialogResult.No)
+            {
+                string input = Interaction.InputBox(
+                    $"Ingrese la cantidad de filas a cargar (entre 1 y {listaDeserializada.Count}):",
+                    "Cantidad de filas a deserializar",
+                    listaDeserializada.Count.ToString());
+
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    return null;
+                }
+
+                if (int.TryParse(input.Trim(), out int cantidad) && cantidad > 0)
+                {
+                    if (cantidad > listaDeserializada.Count)
+                    {
+                        MessageBox.Show($"La cantidad ingresada ({cantidad}) supera el total disponible ({listaDeserializada.Count}). Se cargarán todos los registros disponibles.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cantidad = listaDeserializada.Count;
+                    }
+                    return listaDeserializada.Take(cantidad).ToList();
+                }
+                else
+                {
+                    MessageBox.Show("El valor ingresado no es un número entero positivo válido. Operación cancelada.", "Valor Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return null;
+                }
+            }
+
+            return null;
         }
 
         private void BTNlimpiar_Click(object sender, EventArgs e)

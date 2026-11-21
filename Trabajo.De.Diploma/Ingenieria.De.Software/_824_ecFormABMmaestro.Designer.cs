@@ -46,6 +46,9 @@
             this.BTNserializar = new System.Windows.Forms.Button();
             this.BTNverMae = new System.Windows.Forms.Button();
             this.DGVmaestro = new System.Windows.Forms.DataGridView();
+            this.LBLactividadSelec = new System.Windows.Forms.Label();
+            this.TXTactividadselec = new System.Windows.Forms.TextBox();
+            this.BTNactividadnull = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVmaestro)).BeginInit();
             this.SuspendLayout();
@@ -75,7 +78,7 @@
             this.LBLnombre.Name = "LBLnombre";
             this.LBLnombre.Size = new System.Drawing.Size(191, 33);
             this.LBLnombre.TabIndex = 2;
-            this.LBLnombre.Text = "AMB maestro";
+            this.LBLnombre.Text = "ABM maestro";
             // 
             // BTNmaeSol
             // 
@@ -180,7 +183,7 @@
             this.BTNmodMae.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNmodMae.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNmodMae.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNmodMae.Location = new System.Drawing.Point(9, 170);
+            this.BTNmodMae.Location = new System.Drawing.Point(9, 160);
             this.BTNmodMae.Name = "BTNmodMae";
             this.BTNmodMae.Size = new System.Drawing.Size(172, 56);
             this.BTNmodMae.TabIndex = 4;
@@ -196,7 +199,7 @@
             this.BTNcrearMae.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNcrearMae.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNcrearMae.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNcrearMae.Location = new System.Drawing.Point(9, 108);
+            this.BTNcrearMae.Location = new System.Drawing.Point(9, 222);
             this.BTNcrearMae.Name = "BTNcrearMae";
             this.BTNcrearMae.Size = new System.Drawing.Size(172, 56);
             this.BTNcrearMae.TabIndex = 3;
@@ -212,7 +215,7 @@
             this.BTNeliminarMae.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNeliminarMae.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNeliminarMae.ForeColor = System.Drawing.Color.IndianRed;
-            this.BTNeliminarMae.Location = new System.Drawing.Point(9, 294);
+            this.BTNeliminarMae.Location = new System.Drawing.Point(9, 346);
             this.BTNeliminarMae.Name = "BTNeliminarMae";
             this.BTNeliminarMae.Size = new System.Drawing.Size(172, 56);
             this.BTNeliminarMae.TabIndex = 5;
@@ -228,9 +231,9 @@
             this.BTNvolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNvolver.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNvolver.ForeColor = System.Drawing.Color.OliveDrab;
-            this.BTNvolver.Location = new System.Drawing.Point(9, 410);
+            this.BTNvolver.Location = new System.Drawing.Point(9, 423);
             this.BTNvolver.Name = "BTNvolver";
-            this.BTNvolver.Size = new System.Drawing.Size(172, 56);
+            this.BTNvolver.Size = new System.Drawing.Size(172, 43);
             this.BTNvolver.TabIndex = 13;
             this.BTNvolver.Text = "Volver al menu";
             this.BTNvolver.UseVisualStyleBackColor = false;
@@ -303,7 +306,7 @@
             this.BTNverMae.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNverMae.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNverMae.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTNverMae.Location = new System.Drawing.Point(9, 232);
+            this.BTNverMae.Location = new System.Drawing.Point(9, 284);
             this.BTNverMae.Name = "BTNverMae";
             this.BTNverMae.Size = new System.Drawing.Size(172, 56);
             this.BTNverMae.TabIndex = 26;
@@ -321,12 +324,60 @@
             this.DGVmaestro.Name = "DGVmaestro";
             this.DGVmaestro.Size = new System.Drawing.Size(818, 357);
             this.DGVmaestro.TabIndex = 27;
+            this.DGVmaestro.SelectionChanged += new System.EventHandler(this.DGVmaestro_SelectionChanged);
+            // 
+            // LBLactividadSelec
+            // 
+            this.LBLactividadSelec.AutoSize = true;
+            this.LBLactividadSelec.Enabled = false;
+            this.LBLactividadSelec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLactividadSelec.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.LBLactividadSelec.Location = new System.Drawing.Point(5, 60);
+            this.LBLactividadSelec.Name = "LBLactividadSelec";
+            this.LBLactividadSelec.Size = new System.Drawing.Size(181, 20);
+            this.LBLactividadSelec.TabIndex = 44;
+            this.LBLactividadSelec.Text = "Actividad Seleccionada :";
+            this.LBLactividadSelec.Visible = false;
+            // 
+            // TXTactividadselec
+            // 
+            this.TXTactividadselec.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.TXTactividadselec.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TXTactividadselec.Enabled = false;
+            this.TXTactividadselec.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXTactividadselec.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.TXTactividadselec.Location = new System.Drawing.Point(9, 83);
+            this.TXTactividadselec.Name = "TXTactividadselec";
+            this.TXTactividadselec.Size = new System.Drawing.Size(172, 22);
+            this.TXTactividadselec.TabIndex = 45;
+            this.TXTactividadselec.Visible = false;
+            // 
+            // BTNactividadnull
+            // 
+            this.BTNactividadnull.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.BTNactividadnull.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNactividadnull.Enabled = false;
+            this.BTNactividadnull.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNactividadnull.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNactividadnull.ForeColor = System.Drawing.Color.IndianRed;
+            this.BTNactividadnull.Location = new System.Drawing.Point(9, 111);
+            this.BTNactividadnull.Name = "BTNactividadnull";
+            this.BTNactividadnull.Size = new System.Drawing.Size(172, 43);
+            this.BTNactividadnull.TabIndex = 46;
+            this.BTNactividadnull.Tag = "";
+            this.BTNactividadnull.Text = "quitar seleccion";
+            this.BTNactividadnull.UseVisualStyleBackColor = false;
+            this.BTNactividadnull.Visible = false;
+            this.BTNactividadnull.Click += new System.EventHandler(this.BTNactividadnull_Click);
             // 
             // _824_ecFormABMmaestro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1032, 470);
+            this.Controls.Add(this.BTNactividadnull);
+            this.Controls.Add(this.TXTactividadselec);
+            this.Controls.Add(this.LBLactividadSelec);
             this.Controls.Add(this.DGVmaestro);
             this.Controls.Add(this.BTNverMae);
             this.Controls.Add(this.BTNcargar);
@@ -345,6 +396,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVmaestro)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -368,5 +420,8 @@
         private System.Windows.Forms.Button BTNserializar;
         private System.Windows.Forms.Button BTNverMae;
         private System.Windows.Forms.DataGridView DGVmaestro;
+        private System.Windows.Forms.Label LBLactividadSelec;
+        private System.Windows.Forms.TextBox TXTactividadselec;
+        private System.Windows.Forms.Button BTNactividadnull;
     }
 }
